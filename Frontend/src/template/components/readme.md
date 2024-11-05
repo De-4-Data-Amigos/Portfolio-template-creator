@@ -1,0 +1,1 @@
+This folder is for different templates, users can add to their website. This isn't for our website's components.

@@ -1,0 +1,1 @@
+This folder is for different utility functions. This isn't for template, if template need some util function, copy/create it in the template/util folder.
