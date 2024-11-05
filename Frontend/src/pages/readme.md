@@ -1,0 +1,1 @@
+This folder is for pages that our website uses. This isn't for template pages.

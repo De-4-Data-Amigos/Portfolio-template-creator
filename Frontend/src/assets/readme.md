@@ -1,0 +1,1 @@
+This folder is for any assets that our website needs or uses. This isn't for asssets user/customers can use.

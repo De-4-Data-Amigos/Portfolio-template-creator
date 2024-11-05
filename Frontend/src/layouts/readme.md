@@ -1,0 +1,1 @@
+This folder is for any layouts that our website uses. This isn't for template layouts.

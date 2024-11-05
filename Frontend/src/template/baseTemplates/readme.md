@@ -1,0 +1,1 @@
+This folder is for templates users/customers can choose between. So this is before users have changed anything. This isn't for saved or published templates.

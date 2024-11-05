@@ -1,0 +1,1 @@
+This folder is for any assets that the templates uses, eg. css or images. This isn't for assets for our websites assets.
