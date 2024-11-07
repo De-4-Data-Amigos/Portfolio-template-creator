@@ -29,4 +29,21 @@ describe(Counter, () => {
         countValue = Number(getByTestId("count").textContent);
         expect(countValue).toEqual(initialValue+1);
     });
+
+    // Decrement test
+    // This one should pass
+    it("counter should be decremented by one, when the button is clicked", () => {
+        const initialValue = 0;
+
+        const { getByTestId, getByRole } = render(<Counter initialCounter={initialValue} />);
+        const decrementBttn = getByRole("button", {name: "Decrement"});
+
+        var countValue = Number(getByTestId("count").textContent);
+        expect(countValue).toEqual(initialValue);
+
+        fireEvent.click(decrementBttn);
+
+        countValue = Number(getByTestId("count").textContent);
+        expect(countValue).toEqual(initialValue-1);
+    });
 })
