@@ -1,6 +1,8 @@
-Modeller og diagrammer:
-- Klassediagram
-- Robusthed Diagram
-- Sekvensdiagram
-- Domænemodel
-- Component Interaction Model
+
+# Models and Diagrams:
+
+- [ ] Class Diagram
+- [ ] Robustness Diagram
+- [ ] Sequence Diagram
+- [x] Domain Model
+- [ ] Component Interaction Model
