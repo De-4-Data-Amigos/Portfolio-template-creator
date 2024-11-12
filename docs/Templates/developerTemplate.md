@@ -15,3 +15,13 @@ Herunder er der nogen spørgsmål vi skal have svaret på, så når vi bygger vo
 
 - Vil du gerne kunne opdatere din portfolio let, eller foretrækker du at have en statisk version, der kun ændres sjældent?
 
+besvarelse kort:
+
+billede og info om sig selv, plus link til links til projects man har lavet, relavanet info. Projekter man har lavet. 
+about me side, til at kunne "sælge sig selv".
+
+mulitple swimlances, hver er en kategori, som sporg, 
+hvor hver ting indholder for eksempel et projekter
+f.eks. antal commits osv. 
+github component med editable text.
+kompetance fokuset. 
