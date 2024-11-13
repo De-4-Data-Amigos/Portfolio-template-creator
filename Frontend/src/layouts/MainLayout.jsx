@@ -1,12 +1,16 @@
 import {Outlet} from 'react-router-dom'
+import Header from '../components/Header'
 
 function MainLayout() {
     return(
-        <div>
-            {/* HEADER */}
-            <Outlet/>
-            {/* FOOTER */}
-        </div>
+        <>
+            <div>
+                {/* HEADER */}
+                <Header/>
+                <Outlet/>
+                {/* FOOTER */}
+            </div>
+        </>
     );    
 }
 
