@@ -12,6 +12,9 @@ function App() {
           { 
             /* Leave for now, to see how to do different routing things
             <Route path="about" element={<About/>}/>
+
+
+            Remember to add links to navbar as well
             */
           }
         </Route>
