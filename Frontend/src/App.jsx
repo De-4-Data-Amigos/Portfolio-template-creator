@@ -1,13 +1,14 @@
 import './assets/App.css'
 import MainLayout from './layouts/MainLayout';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import Frontpage from './pages/Frontpage';
 
 function App() {
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<MainLayout/>}>
-          <Route index element={<p>WIP</p>} />
+          <Route index element= {<Frontpage/>} />
           <Route path="*" element={<p>Page Not Found</p>} /> 
           { 
             /* Leave for now, to see how to do different routing things
