@@ -1,21 +1,19 @@
 import React from 'react';
+import { MouseParallaxContainer, MouseParallaxChild } from 'react-parallax-mouse';
+import WaveCanvas from '../components/WaveCanvas';  // Husk at importere WaveCanvas
 
 function Frontpage() {
-  return (
-    <div>
-      <h1>Welcome to Our Website!</h1>
-      <p>This is the front page of your site. You can add more content here to introduce your site or highlight key features.</p>
-      {/*  */}
-      <section>
-        <h2>News and Updates</h2>
-        <p>Stay tuned for updates, announcements, and more exciting news!</p>
-      </section>
-      <section>
-        <h2>Contact Us</h2>
-        <p>Have questions? Reach out to us through our contact page.</p>
-      </section>
-    </div>
-  );
+    return (
+        <MouseParallaxContainer className="parallax-container" resetOnLeave>
+            <MouseParallaxChild factorX={0.02} factorY={0.04} updateStyles={{ zIndex: 1 }}>
+                <WaveCanvas />
+            </MouseParallaxChild>
+            <div style={{ position: 'relative', zIndex: 2, padding: '20px', color: 'white', textAlign: 'center' }}>
+                <h1>Welcome to Our Website!</h1>
+                <p>This is the front page of your site. Feel free to explore!</p>
+            </div>
+        </MouseParallaxContainer>
+    );
 }
 
 export default Frontpage;
