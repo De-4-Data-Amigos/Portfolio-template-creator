@@ -1,5 +1,25 @@
 .GridContainer {
-    border-color: red;
-    border-style: solid;
-    border-width: 1px;
+
+    min-width: 100%;
+    min-height: 100%;
+    
+    display: flex;
+    flex-direction: row;
+}
+
+.GridColumn{
+    background-color: red;
+    min-width: calc(100% / attr(data-columns));
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.GridRow{
+    background-color: blue;
+    max-width: calc(100% / attr(data-columns));
+    max-height: calc(100% / attr(data-rows));
+    padding: .5vh .5vw;
+    margin: .15vh .15vw;
 }
