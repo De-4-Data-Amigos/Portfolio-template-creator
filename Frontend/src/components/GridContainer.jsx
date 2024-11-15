@@ -2,7 +2,7 @@ import * as React from 'react';
 import GridColumn from "../components/GridColumn";
 import GridRow from "../components/GridRow";
 
-//import '../assets/GridContainer.css'
+import '../assets/GridContainer.css'
 
 function GridContainer({columns, rows, children}) {
 
