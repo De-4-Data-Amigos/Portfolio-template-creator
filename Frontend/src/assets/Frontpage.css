@@ -1,0 +1,63 @@
+.frontpage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: white; /* Sætter tekstfarven for hele containeren til hvid */
+    height: 100vh; /* Gør containeren så høj som viewporten */
+}
+
+.welcome-title {
+    margin-bottom: 20px;
+    font-size: 32px; /* Større skriftstørrelse for mere fremtræden titel */
+    font-weight: bold; /* Gør skriften fed for at stå ud */
+}
+
+.content-container {
+    display: flex;
+    align-items: center; /* Centrerer børnene vertikalt */
+    justify-content: space-around; /* Fordeler børnene jævnt på tværs af containeren */
+    gap: 20px;
+    width: 80%; /* Tilpasser bredden til at være lidt mindre end fuld bredde for bedre layout */
+    margin-top: 20px; /* Tilføjer lidt margin på toppen for at skabe afstand til titlen */
+}
+
+.boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.box {
+    background-color: #4b4b4b;
+    color: white;
+    padding: 60px 40px; /* Øger padding for at gøre knapperne større og mere indbydende */
+    text-align: center;
+    min-width: 300px;
+    border-radius: 10px; /* Tilføjer afrundede hjørner for et blødere look */
+    text-decoration: none;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Tilføjer skygge for dybdeeffekt */
+    transition: all 0.3s ease; /* Glat overgang for hover-effekter */
+    
+}
+
+.box:hover {
+    background-color: #1f1f1f; /* Mørkere blå når musen holdes over */
+    transform: scale(1.05); /* Forstørrer knappen en smule ved hover for dynamisk effekt */
+    color: rgb(0, 47, 255); /* Bekræfter at tekstfarven forbliver hvid under hover */
+
+}
+
+.text-box {
+    background-color: #f8f9fa;
+    border: none; /* Fjerner border for et renere look */
+    padding: 40px;
+    width: 300px;
+    min-height: 300px;
+    font-size: 16px; /* Større tekst for bedre læsbarhed */
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Ensartet skyggeeffekt som knapperne */
+    border-radius: 10px; /* Ensartede afrundede hjørner */
+}

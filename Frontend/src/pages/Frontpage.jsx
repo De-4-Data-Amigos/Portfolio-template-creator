@@ -1,18 +1,25 @@
 import React from 'react';
-import { MouseParallaxContainer, MouseParallaxChild } from 'react-parallax-mouse';
-import WaveCanvas from '../components/WaveCanvas';  // Husk at importere WaveCanvas
+import { Link } from 'react-router-dom';
+import '../assets/Frontpage.css'; // Sørg for at denne linje matcher placeringen af din CSS-fil
 
 function Frontpage() {
     return (
-        <MouseParallaxContainer className="parallax-container" resetOnLeave>
-            <MouseParallaxChild factorX={0.02} factorY={0.04} updateStyles={{ zIndex: 1 }}>
-                <WaveCanvas />
-            </MouseParallaxChild>
-            <div style={{ position: 'relative', zIndex: 2, padding: '20px', color: 'white', textAlign: 'center' }}>
-                <h1>Welcome to Our Website!</h1>
-                <p>This is the front page of your site. Feel free to explore!</p>
+        <div className="frontpage-container">
+            <h1 className="welcome-title">
+                Velkommen til DIN portfølje
+                                                                                
+
+            </h1>
+            <div className="content-container">
+                <div className="boxes">
+                    <Link to="/editor" className="box link-box">LAV DIN PORTFOLIE</Link>
+                    <Link to="/contact" className="box link-box">BRUG FOR HJÆLP?</Link>
+                </div>
+                <div className="text-box">
+                    <p>Dette er en fyldetekst, der kan indeholde information om siden eller andet relevant indhold for besøgende. Brug denne sektion til at give en kort introduktion eller velkomstbesked.</p>
+                </div>
             </div>
-        </MouseParallaxContainer>
+        </div>
     );
 }
 
