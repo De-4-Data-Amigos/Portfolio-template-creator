@@ -1,0 +1,142 @@
+/* Center login-komponenten */
+.login-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Wrapper for loginformularen */
+.login-form-wrapper {
+    width: 60%;
+    padding: 5em;
+    background-color: #ffffff;
+    border-radius: 50px;
+}
+
+/* Avatar-styling */
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom:1em;
+}
+
+/* lock-styling */
+.avatar {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0e0e0e;
+}
+
+
+/* Styling for input-felterne */
+.input-field {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: #060606;
+    background-color: white; 
+   
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 6px;
+}
+.input-field:invalid + .error-message {
+    display: block;
+}
+
+/* Password-ikon-styling 
+.input-field:focus {
+    border-color: #3f51b5; 
+    outline: none;
+}*/
+
+/* Styling for Remember me*/
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: #3f51b5; 
+}
+
+.remember-label {
+    font-size: 16px;
+    color: #4a4848;
+}
+
+/* login button */
+.button {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 1em;
+    font-size: 1em;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #2da233;
+}
+
+.link-button {
+    text-align: center;
+    color: #3f51b5;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+ 
+.link-button:hover {
+    text-decoration: underline;
+}
+
+/* Icon styling */
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Error message */
+.error-message {
+    display: none;
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+}
+
+
+/* Styling for required fields */
+.required {
+  color: red;  
+  font-weight: bold; 
+  margin-left: 2px;
+}
