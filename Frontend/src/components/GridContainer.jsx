@@ -52,8 +52,6 @@ function GridContainer({columns, rows, children}) {
     });
     
     const clickHandler = (e) => {
-        const clickedElement = e.target.children[0]; 
-        const isEmpty = !!clickedElement.attributes["data-grid-empty"] && Boolean(clickedElement.attributes["data-grid-empty"].value);
         const clickedPos = clickedElement.attributes["data-pos"].value;
         if(!selectedGridPos){
             if(!isEmpty){
@@ -62,10 +60,31 @@ function GridContainer({columns, rows, children}) {
             return;
         }
         if(selectedGridPos == clickedPos){
-            setSelectedGridPos(null);
+            ;
             return;
         }
-        changePositionOfElement(selectedGridPos, clickedPos);
+        setSelectedGridPos(null);
+    };
+    
+    const onDragStart = (e) => {
+        console.log("onDragStart", e);
+        const dragElement = e.target.children[0];
+        const isEmpty = !!dragElement.attributes["data-grid-empty"] && Boolean(dragElement.attributes["data-grid-empty"].value);
+        const startDragPos = dragElement.attributes["data-pos"].value;
+        if(isEmpty){
+            return;
+        }
+        setSelectedGridPos(startDragPos);
+    };
+    const onDrop = (e) => {
+        console.log("onDrop", e);
+        const dropTargetElement = e.target.children[0]; 
+        const startDragPos = dropTargetElement.attributes["data-pos"].value;
+        changePositionOfElement(selectedGridPos, startDragPos);
+        setSelectedGridPos(null);
+    };
+    const onDropEnd = (e) => {
+        console.log("onDragEnd", e);
         setSelectedGridPos(null);
     };
 
@@ -76,17 +95,33 @@ function GridContainer({columns, rows, children}) {
             for(let j = 0; j < amountOfRows; j++){
                 const isSelecting = !!(selectedGridPos);
                 let isSelected = false;
-                let element = (<div data-pos={`${i},${j}`} data-grid-empty={true}></div>);
+                let isEmpty = true;
+                let element = (<div data-pos={`${i},${j}`} data-grid-empty={isEmpty}></div>);
                 array.forEach((child) => {
                     const location = child.props["data-pos"];
                     if(location == `${i},${j}`){
                         element = child;
                         isSelected = location == selectedGridPos;
+                        isEmpty = false;
                     }
                 });
-                rows.push(<GridRow isSelecting={isSelecting} isSelected={isSelected} onClick={clickHandler} key={Math.random()} data-rows={amountOfRows} data-columns={amountOfColumns}>{element}</GridRow>);
+                rows.push(
+                <GridRow 
+                    isSelecting={isSelecting} 
+                    isSelected={isSelected} 
+                    draggable={!isEmpty}
+
+                    onDragEnd={onDropEnd}
+                    onDragStart={onDragStart}                    
+                    onDrop={onDrop}
+
+                    key={`gridRow-${i}-${j}`} 
+                    data-rows={amountOfRows} 
+                    data-columns={amountOfColumns}
+                >{element}</GridRow>
+            );
             }
-            columns.push(<GridColumn key={Math.random()}>{rows}</GridColumn>);
+            columns.push(<GridColumn key={`gridColumn-${i}`}>{rows}</GridColumn>);
         }
         return columns;        
     };
