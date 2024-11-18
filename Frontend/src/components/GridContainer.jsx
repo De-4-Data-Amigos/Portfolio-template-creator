@@ -5,9 +5,7 @@ import GridRow from "../components/GridRow";
 
 import '../assets/GridContainer.css'
 
-function GridContainer({columns, rows, children}) {
-    //TODO: make use of useeffect for reloading grid
-    
+function GridContainer({columns, rows, children}) {    
     const amountOfColumns = columns;
     const amountOfRows = rows;
 
@@ -16,7 +14,7 @@ function GridContainer({columns, rows, children}) {
     const amountOfChildren = childrenArray.length;
     const maxAmountOfChildren = amountOfColumns * amountOfRows;
     
-    const [selectedGridElement, setSelectedGridElement] = useState(null);
+    const [selectedGridPos, setSelectedGridPos] = useState(null);
     
     if(amountOfChildren > maxAmountOfChildren){
         throw new Error(`GridContainer has more Children than allowed. Got: ${amountOfChildren}, expected: ${maxAmountOfChildren}`);
@@ -54,18 +52,21 @@ function GridContainer({columns, rows, children}) {
     });
     
     const clickHandler = (e) => {
-        const clickedElement = e.target.children[0];     
+        const clickedElement = e.target.children[0]; 
+        const isEmpty = !!clickedElement.attributes["data-grid-empty"] && Boolean(clickedElement.attributes["data-grid-empty"].value);
         const clickedPos = clickedElement.attributes["data-pos"].value;
-        if(!selectedGridElement){
-            setSelectedGridElement(clickedElement);
+        if(!selectedGridPos){
+            if(!isEmpty){
+                setSelectedGridPos(clickedPos);
+            }
             return;
         }
-        if(selectedGridElement.attributes["data-pos"].value == clickedPos){
-            setSelectedGridElement(null);
+        if(selectedGridPos == clickedPos){
+            setSelectedGridPos(null);
             return;
         }
-        changePositionOfElement(selectedGridElement.attributes["data-pos"].value, clickedPos);
-        setSelectedGridElement(null);
+        changePositionOfElement(selectedGridPos, clickedPos);
+        setSelectedGridPos(null);
     };
 
     const makeColumns = (array) => {
@@ -73,21 +74,23 @@ function GridContainer({columns, rows, children}) {
         for(let i = 0; i < amountOfColumns; i++){
             const rows = []
             for(let j = 0; j < amountOfRows; j++){
-                let element = (<p data-pos={`${i},${j}`}>{i},{j}</p>);
+                const isSelecting = !!(selectedGridPos);
+                let isSelected = false;
+                let element = (<div data-pos={`${i},${j}`} data-grid-empty={true}></div>);
                 array.forEach((child) => {
                     const location = child.props["data-pos"];
                     if(location == `${i},${j}`){
                         element = child;
+                        isSelected = location == selectedGridPos;
                     }
                 });
-                rows.push(<GridRow onClick={clickHandler} key={Math.random()} data-rows={amountOfRows} data-columns={amountOfColumns}>{element}</GridRow>);
+                rows.push(<GridRow isSelecting={isSelecting} isSelected={isSelected} onClick={clickHandler} key={Math.random()} data-rows={amountOfRows} data-columns={amountOfColumns}>{element}</GridRow>);
             }
             columns.push(<GridColumn key={Math.random()}>{rows}</GridColumn>);
         }
         return columns;        
     };
     
-    //const [grid, setGrid] = React.useState(makeColumns(childrenArray));
     let grid = makeColumns(childrenArray);
     const changePositionOfElement = (oldPos, newPos) => {
         let oldElement;
