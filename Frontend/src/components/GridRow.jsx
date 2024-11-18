@@ -1,8 +1,8 @@
 import React from "react";
 
-function GridRow({children}) {
+function GridRow({onClick, children}) {
     return (
-        <div className="GridRow" data-testid="GridRow">
+        <div onClick={onClick} className="GridRow" data-testid="GridRow">
             {children}
         </div>
     );
