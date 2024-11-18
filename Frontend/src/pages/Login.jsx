@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import facade from '../utils/apiFacade';
 import '../assets/login.css';
 import lockIcon from '../assets/icon/lock.png';
 
-
 function LoginPage({ onLogin }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  const [errors, setErrors] = useState({ email: "", password: "", login: "" });
+  const [errors, setErrors] = useState({ username: "", password: "", login: "" });
+  const navigate = useNavigate();
 
   const performLogin = (evt) => {
     evt.preventDefault();
-    console.log("Login button clicked"); // For at sikre, at funktionen bliver kaldt
-    if (errors.email || errors.password) {
+    console.log("Login button clicked");
+
+    // Hvis der er fejl, lad ikke brugeren logge ind
+    if (errors.username || errors.password) {
       console.log("Validation error:", errors);
       return;
     }
@@ -21,11 +24,15 @@ function LoginPage({ onLogin }) {
       .then(() => {
         console.log("Login successful");
         setErrors({ ...errors, login: "" });
-        onLogin();
+        onLogin(); // kald onLogin når login er succesfuldt
+        navigate("/"); 
       })
-      .catch(() => {
-        console.log("Login failed");
-        setErrors({ ...errors, login: "Login failed. Please check your credentials." });
+      .catch((err) => {
+        console.log("Login failed", err);
+        setErrors({
+          ...errors,
+          login: "Login failed. Please check your credentials." // Sæt fejlmeddelelse
+        });
       });
   };
 
@@ -33,14 +40,19 @@ function LoginPage({ onLogin }) {
     const { id, value } = evt.target;
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    // Validering af email
     if (id === "username" && !emailPattern.test(value)) {
-      setErrors((prevErrors) => ({ ...prevErrors, email: "Email must be a valid email" }));
-    } else if (id === "password" && value.length < 8) {
+      setErrors((prevErrors) => ({ ...prevErrors, username: "Email must be a valid email" }));
+    } 
+    // Validering af password
+    else if (id === "password" && value.length < 8) {
       setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 8 characters" }));
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
+    } 
+    else {
+      setErrors((prevErrors) => ({ ...prevErrors, [id]: "" })); // Fjern fejlmeddelelse
     }
 
+    // Opdater login credentials state
     setLoginCredentials({ ...loginCredentials, [id]: value });
   };
 
@@ -60,12 +72,12 @@ function LoginPage({ onLogin }) {
               className="input-field"
               placeholder="Email *"
               type="email"
-              required
               id="username"
               value={loginCredentials.username}
               onChange={handleValidation}
+              required
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.username && <span className="error-message">{errors.username}</span>}
           </div>
 
           <div className="input-group" style={{ position: "relative" }}>
@@ -73,11 +85,11 @@ function LoginPage({ onLogin }) {
               className="input-field"
               placeholder="Password *"
               type="password"
-              required
               id="password"
               minLength="8"
               value={loginCredentials.password}
               onChange={handleValidation}
+              required
             />
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
@@ -88,10 +100,13 @@ function LoginPage({ onLogin }) {
           </div>
 
           <button className="button" type="submit">Log In</button>
+
           {errors.login && <span className="error-message">{errors.login}</span>}
 
-          <button className="link-button">Forgot Password?</button>
-          <button className="link-button">Don't have an account?</button>
+          <div className="link-group">
+            <button type="button" className="link-button">Forgot Password?</button>
+            <button type="button" className="link-button">Don't have an account?</button>
+          </div>
         </form>
       </div>
     </div>

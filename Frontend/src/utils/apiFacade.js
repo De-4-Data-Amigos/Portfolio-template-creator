@@ -43,7 +43,7 @@ const login = (user, password) => {
      }
    }
    if (addToken && loggedIn()) {
-     opts.headers["Authorization"] = `Bearer ${getToken()}`;
+     opts.headers["Authorization"] = `Baerer ${getToken()}`;
    }
    if (body) {
      opts.body = JSON.stringify(body);

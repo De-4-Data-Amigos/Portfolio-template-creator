@@ -2,30 +2,26 @@ import './assets/App.css'
 import MainLayout from './layouts/MainLayout';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import { useState } from 'react';
-import apiFacade from './utils/apiFacade';
-import Login from './pages/Login';
+import Login from './pages/Login';  // Antag, at du har en LoginPage
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const login = (username, password) => {
-    apiFacade.login(username, password)
-      .then(() => setLoggedIn(true))
-      .catch(err => console.error("Login failed: ", err));
+  const logout = () => {
+    setLoggedIn(false);  // Sætter loggedIn til false
   }
 
-  const logout = () => {
-    apiFacade.logout();
-    setLoggedIn(false);
+  const login = () => {
+    setLoggedIn(true);  // Sætter loggedIn til true efter succesfuldt login
   }
 
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<MainLayout loggedIn={loggedIn} login={login} logout={logout}/>}>
+         <Route path="/" element={<MainLayout loggedIn={loggedIn} logout={logout} />}>
           <Route index element={<p>WIP</p>} />
           <Route path="*" element={<p>Page Not Found</p>} /> 
-          <Route path="login" element={<Login />} />
+          <Route path="login" element={<Login onLogin={login} />} />
           { 
             /* Leave for now, to see how to do different routing things
             <Route path="about" element={<About/>}/>
