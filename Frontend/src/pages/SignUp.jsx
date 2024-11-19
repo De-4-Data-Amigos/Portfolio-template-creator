@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import facade from "../utils/apiFacade";
-import "../assets/login.css";
+import "../assets/signup.css";
 import lockIcon from '../assets/icon/lock.png';
 
 function SignPage() {
-  const init = { username: "", password: "", role: "user" }; // Rolle er nu hardcoded som 'user'
+  const init = { username: "", password: "", confirmPassword: "", firstName: "", lastName: "", role: "user" }; // Rolle er hardcoded som 'user'
   const [signupCredentials, setSignupCredentials] = useState(init);
-  const [errors, setErrors] = useState({ username: "", password: "", signup: "" });
+  const [errors, setErrors] = useState({ username: "", password: "", confirmPassword: "", signup: "" });
 
   const performSignup = async (evt) => {
     evt.preventDefault();
     console.log("Signup button clicked");
 
     // Tjek om der er fejl i inputfelterne
-    if (errors.username || errors.password || !signupCredentials.role) {
+    if (errors.username || errors.password || errors.confirmPassword || !signupCredentials.role) {
       console.log("Validation error:", errors);
-      return; // Stoppe udførelsen, hvis der er fejl
+      return; // Stop udførelsen, hvis der er fejl
+    }
+
+    if (signupCredentials.password !== signupCredentials.confirmPassword) {
+      setErrors({ ...errors, confirmPassword: "Passwords do not match." });
+      return;
     }
 
     try {
@@ -36,9 +41,11 @@ function SignPage() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (id === "username" && !emailPattern.test(value)) {
-      setErrors((prevErrors) => ({ ...prevErrors, email: "Email must be valid." }));
+      setErrors((prevErrors) => ({ ...prevErrors, username: "Email must be valid." }));
     } else if (id === "password" && value.length < 8) {
       setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 8 characters long." }));
+    } else if (id === "confirmPassword" && value !== signupCredentials.password) {
+      setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "Passwords do not match." }));
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
     }
@@ -47,7 +54,7 @@ function SignPage() {
   };
 
   return (
-    <div className="login-container">
+    <div className="name-container">
       <div className="login-form-wrapper">
         <div className="avatar-container">
           <div className="avatar">
@@ -57,6 +64,30 @@ function SignPage() {
         <h2 className="login-title">Sign Up</h2>
 
         <form onSubmit={performSignup}>
+          <div className="name-container">
+            <div className="input-group">
+              <input
+                className="input-field"
+                placeholder="First Name"
+                type="text"
+                id="firstName"
+                value={signupCredentials.firstName}
+                onChange={(e) => setSignupCredentials({ ...signupCredentials, firstName: e.target.value })}
+              />
+            </div>
+
+            <div className="input-group">
+              <input
+                className="input-field"
+                placeholder="Last Name"
+                type="text"
+                id="lastName"
+                value={signupCredentials.lastName}
+                onChange={(e) => setSignupCredentials({ ...signupCredentials, lastName: e.target.value })}
+              />
+            </div>
+          </div>
+
           <div className="input-group">
             <input
               className="input-field"
@@ -67,7 +98,7 @@ function SignPage() {
               value={signupCredentials.username}
               onChange={handleValidation}
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.username && <span className="error-message">{errors.username}</span>}
           </div>
 
           <div className="input-group">
@@ -84,8 +115,18 @@ function SignPage() {
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
 
-          {/* Dropdown for role er fjernet, da vi hardcoder 'user' som rolle */}
-          <input type="hidden" value={signupCredentials.role} />
+          <div className="input-group">
+            <input
+              className="input-field"
+              placeholder="Confirm Password *"
+              type="password"
+              required
+              id="confirmPassword"
+              value={signupCredentials.confirmPassword}
+              onChange={handleValidation}
+            />
+            {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
+          </div>
 
           <button className="button" type="submit">Sign Up</button>
           {errors.signup && <span className="error-message">{errors.signup}</span>}
