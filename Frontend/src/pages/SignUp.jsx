@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import facade from "../utils/apiFacade";
 import "../assets/signup.css";
 import lockIcon from '../assets/icon/lock.png';
+import { Link } from "react-router-dom";
 
 function SignPage() {
   const init = { username: "", password: "", confirmPassword: "", firstName: "", lastName: "", role: "user" };
@@ -58,13 +59,13 @@ function SignPage() {
 
   return (
     <div className="name-container">
-      <div className="login-form-wrapper">
-        <div className="avatar-container">
-          <div className="avatar">
+      <div className="sign-form-wrapper">
+        <div className="form-container">
+          <div className="form">
             <img src={lockIcon} alt="Lock icon" className="icon" />
           </div>
         </div>
-        <h2 className="login-title">Sign Up</h2>
+        <h2 className="sign-title">Sign Up</h2>
 
         <form onSubmit={performSignup}>
           {/* Navn felter */}
@@ -128,6 +129,7 @@ function SignPage() {
           </div>
 
           <button className="button" type="submit">Sign Up</button>
+          <p className="signin">Already have an account? <Link to="/login">Login</Link></p>
           {errors.signup && <span className="error-message">{errors.signup}</span>}
         </form>
       </div>
