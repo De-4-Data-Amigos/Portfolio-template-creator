@@ -1,23 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../assets/Frontpage.css'; // Sørg for at denne linje matcher placeringen af din CSS-fil
+import '../assets/Frontpage.css'; 
 
 function Frontpage() {
     return (
         <div className="frontpage-container">
-            <h1 className="welcome-title">
-                Velkommen til DIN portfølje
-                                                                                
-
-            </h1>
-            <div className="content-container">
-                <div className="boxes">
-                    <Link to="/editor" className="box link-box">LAV DIN PORTFOLIE</Link>
-                    <Link to="/contact" className="box link-box">BRUG FOR HJÆLP?</Link>
-                </div>
-                <div className="text-box">
-                    <p>Dette er en fyldetekst, der kan indeholde information om siden eller andet relevant indhold for besøgende. Brug denne sektion til at give en kort introduktion eller velkomstbesked.</p>
-                </div>
+            <div className="background-image"></div>
+            <div className="text-box">
+                <h1 className="welcome-title">Lav nemt en professionel hjemmeside</h1>
+                <p className="description">
+                    Nemt træk & placer-værktøj til at tilpasse billeder, tekst og design – uden brug for kodning.
+                </p>
+                <p className="description">
+                    Vælg dit eget domæne og få sikker hosting til din hjemmeside.
+                </p>
+                <button className="cta-button">Kom i gang</button>
             </div>
         </div>
     );
