@@ -1,75 +1,68 @@
-/* Fjern margin og padding fra hele siden */
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Forhindrer horisontal scrolling */
-    height: 100%; /* Sørger for, at containeren fylder hele skærmhøjden */
-}
-
-/* Containeren */
-.frontpage-container {
-    position: relative;
-    height: 100vh; /* Fylder hele skærmhøjden */
-    width: 100vw; /* Fylder hele skærmbredden */
-    overflow: hidden; /* Forhindrer scroll */
-}
-
-/* Baggrundsbilledet */
-.background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw; /* Sørger for, at billedet fylder hele bredden */
-    height: 100vh; /* Sørger for, at billedet fylder hele højden */
-    background: url('../assets/dame.webp');
-    background-size: cover; /* Skaler billedet korrekt til skærmen */
-    z-index: -1; /* Sørger for, at billedet er bag teksten */
-}
-
-/* Tekstboks */
-.text-box {
-    position: absolute;
-    top: 50%; /* Centrerer boksen vertikalt */
-    right: 10%; /* Placerer boksen til højre */
-    transform: translateY(-50%); /* Justerer for at centrerer vertikalt */
-    background-color: rgba(0, 0, 0, 0.6); /* Sort baggrund med lav opacitet */
-    color: white;
-    padding: 30px;
-    border-radius: 10px; /* Afrundede hjørner */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tilføjer skygge */
-    max-width: 400px;
-}
-
-/* Titel */
-.welcome-title {
-    font-size: 32px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* Beskrivelse */
-.description {
-    font-size: 18px;
-    margin-bottom: 20px;
+.frontpage {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  
+  .content-box {
+    background-color: rgba(52, 67, 78, 0.9);
+    width: 40%;
+    max-height: 100%;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+  }
+  
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+  
+  .main-header {
+    font-size: 2.5rem;
+    font-family: "Myriad Pro", sans-serif;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+    font-family: Arial, sans-serif;
+    margin-top: 1.5rem;
+  }
+  
+  .section p {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
     line-height: 1.6;
-}
-
-/* Knap */
-.cta-button {
-    display: inline-block;
-    background-color: #007BFF;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-button {
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #007bff;
     border: none;
+    padding: 0.8rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.cta-button:hover {
+    margin-top: auto;
+  }
+  
+  .cta-button:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
-}
+  }
+  

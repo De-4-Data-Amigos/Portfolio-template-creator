@@ -1,22 +1,33 @@
-import React from 'react';
-import '../assets/Frontpage.css'; 
+import React from "react";
+import { Link } from "react-router-dom"; // Importér Link fra React Router
+import dameImage from "../assets/dame.png";
+import "../assets/Frontpage.css";
 
-function Frontpage() {
-    return (
-        <div className="frontpage-container">
-            <div className="background-image"></div>
-            <div className="text-box">
-                <h1 className="welcome-title">Lav nemt en professionel hjemmeside</h1>
-                <p className="description">
-                    Nemt træk & placer-værktøj til at tilpasse billeder, tekst og design – uden brug for kodning.
-                </p>
-                <p className="description">
-                    Vælg dit eget domæne og få sikker hosting til din hjemmeside.
-                </p>
-                <button className="cta-button">Kom i gang</button>
-            </div>
+const Frontpage = () => {
+  return (
+    <div className="frontpage" style={{ backgroundImage: `url(${dameImage})` }}>
+      <div className="content-box">
+        <h1 className="main-header">Lav nemt din egen professionelle hjemmeside</h1>
+        
+        <div className="section">
+          <h2 className="sub-header">Nemt træk og placer overalt!</h2>
+          <p>Tilpas din hjemmeside med lige præcis hvad DU vil!</p>
         </div>
-    );
-}
+        
+        <div className="section">
+          <h2 className="sub-header">Dit eget domæne</h2>
+          <p>Du får dit helt eget personlige domæne, så din hjemmeside tilhører 100% dig!</p>
+        </div>
+        
+        <div className="section">
+          <h2 className="sub-header">Sikker hosting</h2>
+          <p>Som kunde hos os er du garanteret at din personlige hjemmeside altid er tilgængelig!</p>
+        </div>
+        
+        <Link to="/editor" className="cta-button">Kom i gang</Link>
+      </div>
+    </div>
+  );
+};
 
 export default Frontpage;
