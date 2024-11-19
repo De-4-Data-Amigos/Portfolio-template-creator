@@ -68,8 +68,9 @@ function SignPage() {
             <div className="input-group">
               <input
                 className="input-field"
-                placeholder="First Name"
+                placeholder="First Name *"
                 type="text"
+                required
                 id="firstName"
                 value={signupCredentials.firstName}
                 onChange={(e) => setSignupCredentials({ ...signupCredentials, firstName: e.target.value })}
@@ -79,8 +80,9 @@ function SignPage() {
             <div className="input-group">
               <input
                 className="input-field"
-                placeholder="Last Name"
+                placeholder="Last Name *"
                 type="text"
+                required
                 id="lastName"
                 value={signupCredentials.lastName}
                 onChange={(e) => setSignupCredentials({ ...signupCredentials, lastName: e.target.value })}
