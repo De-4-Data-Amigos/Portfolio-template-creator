@@ -4,53 +4,56 @@ import "../assets/signup.css";
 import lockIcon from '../assets/icon/lock.png';
 
 function SignPage() {
-  const init = { username: "", password: "", confirmPassword: "", firstName: "", lastName: "", role: "user" }; // Rolle er hardcoded som 'user'
+  const init = { username: "", password: "", confirmPassword: "", firstName: "", lastName: "", role: "user" };
   const [signupCredentials, setSignupCredentials] = useState(init);
   const [errors, setErrors] = useState({ username: "", password: "", confirmPassword: "", signup: "" });
 
+  const handleValidation = (evt) => {
+    const { id, value } = evt.target;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // Validering afhængig af hvilket inputfelt der ændres
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: id === "username" && !emailPattern.test(value) ? "Email must be valid." :
+            id === "password" && value.length < 8 ? "Password must be at least 8 characters long." :
+            id === "confirmPassword" && value !== signupCredentials.password ? "Passwords do not match." : ""
+    }));
+
+    setSignupCredentials({ ...signupCredentials, [id]: value });
+  };
+
   const performSignup = async (evt) => {
     evt.preventDefault();
-    console.log("Signup button clicked");
 
-    // Tjek om der er fejl i inputfelterne
-    if (errors.username || errors.password || errors.confirmPassword || !signupCredentials.role) {
-      console.log("Validation error:", errors);
-      return; // Stop udførelsen, hvis der er fejl
+    // Samler alle fejl i et array
+    const errorMessages = [];
+    if (errors.username) errorMessages.push(errors.username);
+    if (errors.password) errorMessages.push(errors.password);
+    if (errors.confirmPassword) errorMessages.push(errors.confirmPassword);
+
+    // Hvis der er fejl, vis dem som en alert
+    if (errorMessages.length > 0) {
+      alert(`Please fix the following errors:\n- ${errorMessages.join("\n- ")}`);
+      return;
     }
 
+    // Hvis passwords ikke matcher
     if (signupCredentials.password !== signupCredentials.confirmPassword) {
-      setErrors({ ...errors, confirmPassword: "Passwords do not match." });
+      alert("Passwords do not match.");
+      setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "Passwords do not match." }));
       return;
     }
 
     try {
-      // Send credentials til backend med rollen som 'user'
       await facade.signup(signupCredentials.username, signupCredentials.password, signupCredentials.role);
       console.log("Signup successful");
       setErrors({ ...errors, signup: "" });
       alert("User created successfully! You can now log in.");
     } catch (err) {
       console.log("Signup failed", err);
-      console.log("Full error details:", err.response ? err.response.data : err.message);
       setErrors({ ...errors, signup: `Signup failed: ${err.response ? err.response.data : err.message}` });
     }
-  };
-
-  const handleValidation = (evt) => {
-    const { id, value } = evt.target;
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (id === "username" && !emailPattern.test(value)) {
-      setErrors((prevErrors) => ({ ...prevErrors, username: "Email must be valid." }));
-    } else if (id === "password" && value.length < 8) {
-      setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 8 characters long." }));
-    } else if (id === "confirmPassword" && value !== signupCredentials.password) {
-      setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "Passwords do not match." }));
-    } else {
-      setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
-    }
-
-    setSignupCredentials({ ...signupCredentials, [id]: value });
   };
 
   return (
@@ -64,32 +67,24 @@ function SignPage() {
         <h2 className="login-title">Sign Up</h2>
 
         <form onSubmit={performSignup}>
+          {/* Navn felter */}
           <div className="name-container">
-            <div className="input-group">
-              <input
-                className="input-field"
-                placeholder="First Name *"
-                type="text"
-                required
-                id="firstName"
-                value={signupCredentials.firstName}
-                onChange={(e) => setSignupCredentials({ ...signupCredentials, firstName: e.target.value })}
-              />
-            </div>
-
-            <div className="input-group">
-              <input
-                className="input-field"
-                placeholder="Last Name *"
-                type="text"
-                required
-                id="lastName"
-                value={signupCredentials.lastName}
-                onChange={(e) => setSignupCredentials({ ...signupCredentials, lastName: e.target.value })}
-              />
-            </div>
+            {["firstName", "lastName"].map((field) => (
+              <div className="input-group" key={field}>
+                <input
+                  className="input-field"
+                  placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)} *`}
+                  type="text"
+                  required
+                  id={field}
+                  value={signupCredentials[field]}
+                  onChange={handleValidation}
+                />
+              </div>
+            ))}
           </div>
 
+          {/* Email felt */}
           <div className="input-group">
             <input
               className="input-field"
@@ -103,6 +98,7 @@ function SignPage() {
             {errors.username && <span className="error-message">{errors.username}</span>}
           </div>
 
+          {/* Password felt */}
           <div className="input-group">
             <input
               className="input-field"
@@ -117,6 +113,7 @@ function SignPage() {
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
 
+          {/* Confirm Password felt */}
           <div className="input-group">
             <input
               className="input-field"
