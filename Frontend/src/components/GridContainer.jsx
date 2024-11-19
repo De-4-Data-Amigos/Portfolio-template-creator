@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GridColumn from "../components/GridColumn";
 import GridRow from "../components/GridRow";
 
@@ -15,6 +15,11 @@ function GridContainer({columns, rows, children}) {
     const maxAmountOfChildren = amountOfColumns * amountOfRows;
     
     const [selectedGridPos, setSelectedGridPos] = useState(null);
+    const [targetGridPos, setTargetGridPos] = useState(null);
+
+    useEffect(() => {
+        setChildrenArray(React.Children.toArray(children))
+    }, [children]);
     
     if(amountOfChildren > maxAmountOfChildren){
         throw new Error(`GridContainer has more Children than allowed. Got: ${amountOfChildren}, expected: ${maxAmountOfChildren}`);
@@ -50,22 +55,7 @@ function GridContainer({columns, rows, children}) {
         }
         existingLocations.push(position);
     });
-    
-    const clickHandler = (e) => {
-        const clickedPos = clickedElement.attributes["data-pos"].value;
-        if(!selectedGridPos){
-            if(!isEmpty){
-                setSelectedGridPos(clickedPos);
-            }
-            return;
-        }
-        if(selectedGridPos == clickedPos){
-            ;
-            return;
-        }
-        setSelectedGridPos(null);
-    };
-    
+       
     const onDragStart = (e) => {
         console.log("onDragStart", e);
         const dragElement = e.target.children[0];
@@ -82,12 +72,22 @@ function GridContainer({columns, rows, children}) {
         const startDragPos = dropTargetElement.attributes["data-pos"].value;
         changePositionOfElement(selectedGridPos, startDragPos);
         setSelectedGridPos(null);
+        setTargetGridPos(null);
     };
-    const onDropEnd = (e) => {
+    const onDragEnd = (e) => {
         console.log("onDragEnd", e);
         setSelectedGridPos(null);
     };
-
+    const onDragEnter = (e) => {
+        console.log("onDragEnter", e);
+        const enterTargetElement = !!e.target.children ? e.target.children[0] : e.target; 
+        const enterTargetPos = enterTargetElement.attributes["data-pos"].value;
+        setTargetGridPos(enterTargetPos);
+        console.log("onDragEnter target", targetGridPos);
+    };
+    const onDragLeave = (e) => {
+        console.log("onDragLeave", e);
+    };
     const makeColumns = (array) => {
         const columns = [];
         for(let i = 0; i < amountOfColumns; i++){
@@ -96,6 +96,7 @@ function GridContainer({columns, rows, children}) {
                 const isSelecting = !!(selectedGridPos);
                 let isSelected = false;
                 let isEmpty = true;
+                let isTarget = false;
                 let element = (<div data-pos={`${i},${j}`} data-grid-empty={isEmpty}></div>);
                 array.forEach((child) => {
                     const location = child.props["data-pos"];
@@ -105,14 +106,18 @@ function GridContainer({columns, rows, children}) {
                         isEmpty = false;
                     }
                 });
+                isTarget = `${i},${j}` == targetGridPos;
                 rows.push(
                 <GridRow 
                     isSelecting={isSelecting} 
                     isSelected={isSelected} 
+                    isTarget={isTarget}
                     draggable={!isEmpty}
 
-                    onDragEnd={onDropEnd}
-                    onDragStart={onDragStart}                    
+                    onDragEnd={onDragEnd}
+                    onDragStart={onDragStart}
+                    onDragEnter={onDragEnter}
+                    onDragLeave={onDragLeave}                 
                     onDrop={onDrop}
 
                     key={`gridRow-${i}-${j}`} 
