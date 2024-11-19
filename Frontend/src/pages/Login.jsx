@@ -105,7 +105,12 @@ function LoginPage({ onLogin }) {
 
           <div className="link-group">
             <button type="button" className="link-button">Forgot Password?</button>
-            <button type="button" className="link-button">Don't have an account?</button>
+            <button
+        className="link-button"
+        onClick={() => navigate("/sign")} // Navigér til registreringssiden
+      >
+        Don't have an account?
+      </button>
           </div>
         </form>
       </div>

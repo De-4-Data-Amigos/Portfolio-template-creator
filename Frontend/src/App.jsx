@@ -3,6 +3,7 @@ import MainLayout from './layouts/MainLayout';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import { useState } from 'react';
 import Login from './pages/Login';  // Antag, at du har en LoginPage
+import SignPage from './pages/SignUp';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<p>WIP</p>} />
           <Route path="*" element={<p>Page Not Found</p>} /> 
           <Route path="login" element={<Login onLogin={login} />} />
+          <Route path="sign" element={<SignPage />} />
           { 
             /* Leave for now, to see how to do different routing things
             <Route path="about" element={<About/>}/>
