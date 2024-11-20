@@ -24,10 +24,8 @@ const Frontpage = () => {
           <p>Som kunde hos os er du garanteret at din personlige hjemmeside altid er tilgængelig!</p>
         </div>
         
-        <Link to="/editor">
-          <button>
-            <span>Kom i gang!</span>
-          </button>
+        <Link to="/editor" className="frontpage-button">
+          <span>Kom i gang!</span>
         </Link>
       </div>
     </div>

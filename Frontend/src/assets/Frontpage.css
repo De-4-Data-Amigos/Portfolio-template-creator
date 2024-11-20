@@ -50,19 +50,8 @@
     margin-bottom: 1.5rem;
   }
   
-  .cta-button {
-    font-size: 1.2rem;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: auto;
-  }
-  
-  button {
+
+  .frontpage-button {
     position: relative;
     display: flex;
     justify-content: center;
@@ -76,7 +65,7 @@
     border: none;
   }
   
-  button:after {
+  .frontpage-button:after {
     content: " ";
     width: 0%;
     height: 100%;
@@ -86,13 +75,13 @@
     right: 0;
   }
   
-  button:hover::after {
+  .frontpage-button:hover::after {
     right: auto;
     left: 0;
     width: 100%;
   }
   
-  button span {
+  .frontpage-button span {
     text-align: center;
     text-decoration: none;
     width: 100%;
@@ -100,12 +89,12 @@
     color: #fff;
     font-size: 1.125em;
     font-weight: 700;
-    letter-spacing: 0.1em; 
+    letter-spacing: 0.1em;
     z-index: 20;
     transition: all 0.3s ease-in-out;
-  }  
+  }
   
-  button:hover span {
+  .frontpage-button:hover span {
     color: #183153;
     animation: scaleUp 0.3s ease-in-out;
   }
@@ -114,11 +103,9 @@
     0% {
       transform: scale(1);
     }
-  
     50% {
       transform: scale(0.95);
     }
-  
     100% {
       transform: scale(1);
     }
