@@ -1,0 +1,133 @@
+/* Center login-komponenten */
+.name-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Kan justeres */
+}
+
+/* Wrapper for */
+.sign-form-wrapper {
+    width: 60%;
+    padding: 3em;
+    background-color: rgba(52, 67, 78, 0.8);
+    border-radius: 50px;
+    border: 4px solid #020202;
+
+}
+
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom:0em;
+}
+
+
+.form {
+    background-color:  #0000003c;
+    border-radius: 100%;
+    padding: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.sign-title {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0c0c0c;
+}
+
+
+/* Styling for input-felterne */
+.input-field {
+    width: 100%;
+    padding: 15px;
+    margin: 6px 0;
+    border: 1px solid #000000;
+    border-radius: 100px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #000000;
+    background-color: rgb(255, 255, 255); 
+   
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 6px;
+}
+.input-field:invalid + .error-message {
+    display: block;
+}
+
+/* login button */
+.button {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 2em;
+    font-size: 1em;
+    color: white;
+    background-color: #0000009e;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0d46cb;
+}
+
+.link-button {
+    text-align: center;
+    color: #ebe1e193;
+    font-size: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Error message */
+
+.error-message {
+    display: none;
+    font-size: 12px;
+    color: rgb(233, 194, 3);
+    margin-top: 5px;
+    font-weight: bold; 
+}
+
+
+/* Styling for required fields */
+.required {
+  color: rgb(233, 194, 3);  
+  font-weight: bold; 
+  margin-left: 2px;
+}
+
+
+/* Icon styling */
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+/* Error message */
+.error-message {
+    display: none;
+    font-size: 12px;
+    color: rgb(233, 194, 3);
+    margin-top: 5px;
+    font-weight: bold; 
+}
+
+
+/* Styling for required fields */
+.required {
+  color: rgb(233, 194, 3);  
+  font-weight: bold; 
+  margin-left: 2px;
+}
