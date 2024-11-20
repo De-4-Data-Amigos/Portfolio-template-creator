@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Importér Link fra React Router
+import { Link } from "react-router-dom";
 import dameImage from "../assets/dame.png";
 import "../assets/Frontpage.css";
 
@@ -24,7 +24,20 @@ const Frontpage = () => {
           <p>Som kunde hos os er du garanteret at din personlige hjemmeside altid er tilgængelig!</p>
         </div>
         
-        <Link to="/editor" className="cta-button">Kom i gang</Link>
+        <Link to="/editor" className="cta-button">
+          <button alt="Kom i gang!">
+            <i>K</i>
+            <i>o</i>
+            <i>m</i>
+            <i>&nbsp;</i>
+            <i>i</i>
+            <i>&nbsp;</i>
+            <i>g</i>
+            <i>a</i>
+            <i>n</i>
+            <i>g</i>
+          </button>
+        </Link>
       </div>
     </div>
   );
