@@ -139,4 +139,19 @@ describe(GridContainer, () => {
         };
         expect(invalidposition).toThrow(Error);
     });
+
+    it("grid item gets moved correctly", () => {
+        const columns = 3;
+        const rows = 3;
+
+        const { getAllByTestId, getByTestId } = render(
+            <GridContainer columns={columns} rows={rows}>
+                <p data-pos='0,0' data-testid='component1'></p>
+                <p data-pos='1,1' data-testid='component2'></p>
+            </GridContainer>
+        );
+        const comp1 = getByTestId("component1").parentElement;
+        const comp2 = getByTestId("component2").parentElement;
+        //comp1.
+    });
 });
