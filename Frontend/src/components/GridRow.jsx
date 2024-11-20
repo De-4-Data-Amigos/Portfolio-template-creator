@@ -12,7 +12,7 @@ function GridRow({
             isSelected, 
             isTarget, 
             draggable,
-            /* MISC */
+        /* MISC */
             children
         }) 
         {
