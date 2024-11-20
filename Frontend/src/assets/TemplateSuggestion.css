@@ -1,0 +1,130 @@
+.frontpage {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  
+  .content-box {
+    background-color: rgba(52, 67, 78, 0.9);
+    width: 40%;
+    max-height: 100%;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+  }
+  
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+  
+  .main-header {
+    font-size: 2.5rem;
+    font-family: "Myriad Pro", sans-serif;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+    font-family: Arial, sans-serif;
+    margin-top: 1.5rem;
+  }
+  
+  .section p {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-button {
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto;
+  }
+  
+  .cta-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .temp-suggest-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #183153;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+  }
+  
+  .temp-suggest-button:after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    background: white;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+  }
+  
+  .temp-suggest-button:hover::after {
+    right: auto;
+    left: 0;
+    width: 100%;
+  }
+  
+  .temp-suggest-button span {
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    padding: 18px 25px;
+    color: #fff;
+    font-size: 1.125em;
+    font-weight: 700;
+    letter-spacing: 0.1em; 
+    z-index: 20;
+    transition: all 0.3s ease-in-out;
+  }  
+  
+  .temp-suggest-button:hover span {
+    color: #183153;
+    animation: scaleUp 0.3s ease-in-out;
+  }
+  
+  @keyframes scaleUp {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(0.95);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
