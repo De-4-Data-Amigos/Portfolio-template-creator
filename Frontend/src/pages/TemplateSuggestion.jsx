@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import maleDev from "../assets/maleDev.png";
-import "../assets/Frontpage.css";
-import ButtonRow from "../components/ButtonRow";
+import "../assets/TemplateSuggestion.css";
 
 const TemplateSuggestion = () => {
     return (
@@ -11,18 +10,25 @@ const TemplateSuggestion = () => {
                 <h2 className="sub-header"></h2>
 
                 <div>
-                <h2 className="sub-header">Choose a template to proceed</h2>
-                <button>Personal Trainer</button>
-                <button>Medical Staff</button>
-                <button>Developer</button>
+                    <h2 className="sub-header"><i>Choose a template to proceed</i></h2>
+
+                    {/* Link to skal rettes til korrekt flow */}
+
+                    <Link to="/editor" className="temp-suggest-button">
+                        <span>Personal Trainer</span>
+                    </Link>
+
+                    <Link to="/editor" className="temp-suggest-button">
+                        <span>Medical Staff</span>
+                    </Link>
+
+                    <Link to="/editor" className="temp-suggest-button">
+                        <span>Developer</span>
+                    </Link>
                 </div>
 
-                <h4>More templates coming soon!</h4>
-
-                <Link to="/editor" className="styled-button">Test</Link>
-
-
-
+                <h4><i>More templates coming soon..</i></h4>
+                
             </div>
         </div>
     );

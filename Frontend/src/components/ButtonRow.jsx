@@ -1,3 +1,4 @@
+//Kan slettes, brugte bare til test af knapper
 import React from 'react';
 
 const ButtonRow = () => {
