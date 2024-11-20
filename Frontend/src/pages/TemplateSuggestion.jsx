@@ -12,7 +12,7 @@ const TemplateSuggestion = () => {
                 <div>
                     <h2 className="sub-header"><i>Choose a template to proceed</i></h2>
 
-                    {/* Link to skal rettes til korrekt flow */}
+                    {/* Link til skal rettes til korrekt flow */}
 
                     <Link to="/editor" className="temp-suggest-button">
                         <span>Personal Trainer</span>
@@ -28,7 +28,7 @@ const TemplateSuggestion = () => {
                 </div>
 
                 <h4><i>More templates coming soon..</i></h4>
-                
+
             </div>
         </div>
     );
