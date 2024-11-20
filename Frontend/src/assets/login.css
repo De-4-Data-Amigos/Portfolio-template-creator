@@ -80,60 +80,98 @@
 
 .remember-label {
     font-size: 14px;
-    color: #242424;
+    color: #ddd3d3;
  
 }
 
 /* login button */
-.button {
+.login-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #183153;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+  }
+  
+  .login-button:after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    background: white;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+  }
+  
+  .login-button:hover::after {
+    right: auto;
+    left: 0;
     width: 100%;
-    padding: 0.8em;
-    margin-top: 2em;
-    font-size: 1em;
-    color: white;
-    background-color: #0000009e;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #0d46cb;
-}
-
-.link-button {
+  }
+  
+  .login-button span {
     text-align: center;
-    color: #ebe1e193;
-    font-size: 14px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+    text-decoration: none;
+    width: 100%;
+    padding: 18px 25px;
+    color: #fff;
+    font-size: 1.125em;
+    font-weight: 700;
+    letter-spacing: 0.1em; 
+    z-index: 20;
+    transition: all 0.3s ease-in-out;
+  }  
+  
+  .login-button:hover span {
+    color: #d81e7b;
+    animation: scaleUp 0.3s ease-in-out;
+  }
 
- 
-.link-button:hover {
-    text-decoration: underline;
-}
-
-/* Icon styling */
-.icon {
-    width: 24px;
-    height: 24px;
-}
-
-/* Error message */
-.error-message {
-    display: none;
-    font-size: 12px;
-    color: rgb(233, 194, 3);
-    margin-top: 5px;
-    font-weight: bold; 
-}
-
-
-/* Styling for required fields */
-.required {
-  color: rgb(233, 194, 3);  
-  font-weight: bold; 
-  margin-left: 2px;
-}
+  /* lavet til at få "forgot" og "dont have" side om side */
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+  }
+  
+  .checkbox-group input {
+    margin-right: 5px;
+  }
+  
+  .checkbox-group label {
+    font-size: 16px;
+    margin-right: 70px;
+  }
+  
+  .login-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .link-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  @keyframes scaleUp {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(0.95);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }

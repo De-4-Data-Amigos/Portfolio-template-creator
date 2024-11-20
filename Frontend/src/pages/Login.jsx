@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import facade from '../utils/apiFacade';
 import '../assets/login.css';
+import Office from "../assets/Office.png";
 import lockIcon from '../assets/icon/lock.png';
 
 function LoginPage({ onLogin }) {
@@ -25,7 +26,7 @@ function LoginPage({ onLogin }) {
         console.log("Login successful");
         setErrors({ ...errors, login: "" });
         onLogin(); // kald onLogin når login er succesfuldt
-        navigate("/"); 
+        navigate("/");
       })
       .catch((err) => {
         console.log("Login failed", err);
@@ -43,11 +44,11 @@ function LoginPage({ onLogin }) {
     // Validering af email
     if (id === "username" && !emailPattern.test(value)) {
       setErrors((prevErrors) => ({ ...prevErrors, username: "Email must be a valid email" }));
-    } 
+    }
     // Validering af password
     else if (id === "password" && value.length < 8) {
       setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 8 characters" }));
-    } 
+    }
     else {
       setErrors((prevErrors) => ({ ...prevErrors, [id]: "" })); // Fjern fejlmeddelelse
     }
@@ -57,17 +58,13 @@ function LoginPage({ onLogin }) {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-wrapper">
-        <div className="avatar-container">
-          <div className="avatar">
-            <img src={lockIcon} alt="Lock icon" className="icon" />
-          </div>
-        </div>
-        <h2 className="login-title">Log In</h2>
+    <div className="frontpage" style={{ backgroundImage: `url(${Office})` }}>
+      <div className="content-box">
+        <h2 className="sub-header"><i></i></h2>
 
-        <form onSubmit={performLogin}>
+        <form onSubmit={performLogin} className="login-form">
           <div className="input-group">
+            <h2><p>Login</p></h2>
             <input
               className="input-field"
               placeholder="Email *"
@@ -77,10 +74,12 @@ function LoginPage({ onLogin }) {
               onChange={handleValidation}
               required
             />
-            {errors.username && <span className="error-message">{errors.username}</span>}
+            {errors.username && (
+              <span className="error-message">{errors.username}</span>
+            )}
           </div>
 
-          <div className="input-group" style={{ position: "relative" }}>
+          <div className="input-group">
             <input
               className="input-field"
               placeholder="Password *"
@@ -91,26 +90,39 @@ function LoginPage({ onLogin }) {
               onChange={handleValidation}
               required
             />
-            {errors.password && <span className="error-message">{errors.password}</span>}
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
           </div>
 
-          <div className="checkbox-group">
-            <input type="checkbox" id="remember-me" />
-            <label htmlFor="remember-me" className="remember-label">Remember Me</label>
+
+          <div
+            className="checkbox-group"
+            style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '300px', marginRight: '40px' }}>
+            <input type="checkbox" id="remember-me" style={{ marginRight: '5px' }}  
+            />
+            <label htmlFor="remember-me" style={{ fontSize: '16px', marginRight: '70px' }}>
+              Remember Me
+            </label>
           </div>
 
-          <button className="button" type="submit">Log In</button>
-
+          <button className="login-button" type="submit">
+            Log In
+          </button>
           {errors.login && <span className="error-message">{errors.login}</span>}
-
-          <div className="link-group">
-            <button type="button" className="link-button">Forgot Password?</button>
-            <button type="button" className="link-button">Don't have an account?</button>
-          </div>
         </form>
+
+        <div className="link-group">
+          <button type="button" className="login-button">
+            Forgot Password?
+          </button>
+          <button type="button" className="login-button">
+            Don't have an account?
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;

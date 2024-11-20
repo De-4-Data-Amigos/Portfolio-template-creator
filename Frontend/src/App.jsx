@@ -23,7 +23,7 @@ function App() {
       <>
          <Route path="/" element={<MainLayout loggedIn={loggedIn} logout={logout} />}>
           <Route index element= {<Frontpage/>} />
-          <Route path='template-suggestion' element={<TemplateSuggestion/>} />
+          <Route path="template-suggestion" element={<TemplateSuggestion/>} />
           <Route path="*" element={<p>Page Not Found</p>} /> 
           <Route path="login" element={<Login onLogin={login} />} />
           { 
