@@ -24,18 +24,9 @@ const Frontpage = () => {
           <p>Som kunde hos os er du garanteret at din personlige hjemmeside altid er tilgængelig!</p>
         </div>
         
-        <Link to="/editor" className="cta-button">
-          <button alt="Kom i gang!">
-            <i>K</i>
-            <i>o</i>
-            <i>m</i>
-            <i>&nbsp;</i>
-            <i>i</i>
-            <i>&nbsp;</i>
-            <i>g</i>
-            <i>a</i>
-            <i>n</i>
-            <i>g</i>
+        <Link to="/editor">
+          <button>
+            <span>Kom i gang!</span>
           </button>
         </Link>
       </div>
