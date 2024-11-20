@@ -5,6 +5,7 @@ import Frontpage from './pages/Frontpage';
 import { useState } from 'react';
 import Login from './pages/Login';  // Antag, at du har en LoginPage
 import SignPage from './pages/SignUp';
+import EditorLayout from './layouts/EditorLayout';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -34,7 +35,7 @@ function App() {
             */
           }
         </Route>
-        <Route path='/editor' >
+        <Route path="/editor" element={<EditorLayout loggedIn={loggedIn} logout={logout} />}>
           <Route index element={<p>editor</p>} />
         </Route>
       </>
