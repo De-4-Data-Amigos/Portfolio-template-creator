@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import maleDev from "../assets/maleDev.png";
-import "../assets/TemplateSuggestion.css";
+import "../assets/Frontpage.css";
 import ButtonRow from "../components/ButtonRow";
 
 const TemplateSuggestion = () => {
@@ -12,7 +12,9 @@ const TemplateSuggestion = () => {
 
                 <div>
                 <h2 className="sub-header">Choose a template to proceed</h2>
-                    <ButtonRow />                    
+                <button>Personal Trainer</button>
+                <button>Medical Staff</button>
+                <button>Developer</button>
                 </div>
 
                 <h4>More templates coming soon!</h4>
