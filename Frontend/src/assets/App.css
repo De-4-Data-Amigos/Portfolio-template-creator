@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: local("JetBrainsMono"), url(https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "JetBrainsMono Bold";
+  src: local("JetBrainsMono Bold"), url(https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts/patched-fonts/JetBrainsMono/Ligatures/Bold/JetBrainsMonoNerdFont-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "JetBrainsMono Italic";
+  src: local("JetBrainsMono Italic"), url(https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts/patched-fonts/JetBrainsMono/Ligatures/Italic/JetBrainsMonoNerdFont-Italic.ttf) format("truetype");
+}
