@@ -24,7 +24,7 @@ const Frontpage = () => {
           <p>Som kunde hos os er du garanteret at din personlige hjemmeside altid er tilgængelig!</p>
         </div>
         
-        <Link to="/editor" className="cta-button">Kom i gang</Link>
+        <Link to="/template-suggestion" className="cta-button">Kom i gang</Link>
       </div>
     </div>
   );

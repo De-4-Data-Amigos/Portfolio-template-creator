@@ -10,7 +10,7 @@ function App() {
       <>
         <Route path="/" element={<MainLayout/>}>
           <Route index element= {<Frontpage/>} />
-          <Route path="test" element={<TemplateSuggestion/>} /> 
+          <Route path='template-suggestion' element={<TemplateSuggestion/>} /> 
 
           <Route path="*" element={<p>Page Not Found</p>} /> 
           { 
