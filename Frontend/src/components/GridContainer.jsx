@@ -5,7 +5,8 @@ import GridRow from "../components/GridRow";
 
 import '../assets/GridContainer.css'
 
-function GridContainer({columns, rows, children}) {    
+function GridContainer({columns, rows, children}) { 
+    console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
     const amountOfColumns = columns;
     const amountOfRows = rows;
 
@@ -99,11 +100,13 @@ function GridContainer({columns, rows, children}) {
                 let isTarget = false;
                 let element = (<div data-pos={`${i},${j}`} data-grid-empty={isEmpty}></div>);
                 array.forEach((child) => {
-                    const location = child.props["data-pos"];
-                    if(location == `${i},${j}`){
-                        element = child;
-                        isSelected = location == selectedGridPos;
-                        isEmpty = false;
+                    if(child){
+                        const location = child.props["data-pos"];
+                        if(location == `${i},${j}`){
+                            element = child;
+                            isSelected = location == selectedGridPos;
+                            isEmpty = false;
+                        }
                     }
                 });
                 isTarget = `${i},${j}` == targetGridPos;
