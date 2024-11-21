@@ -4,6 +4,8 @@ import facade from '../utils/apiFacade';
 import '../assets/login.css';
 import Office from "../assets/Office.png";
 import lockIcon from '../assets/icon/lock.png';
+import "../assets/login.css";
+
 
 function LoginPage({ onLogin }) {
   const init = { username: "", password: "" };
@@ -58,70 +60,77 @@ function LoginPage({ onLogin }) {
   };
 
   return (
-    <div className="frontpage" style={{ backgroundImage: `url(${Office})` }}>
-      <div className="content-box">
-        <h2 className="sub-header"><i></i></h2>
+<div class="frontpage" style={{ backgroundImage: `url(${Office})` }}>
+  <div class="content-box">
+    <h2 class="sub-header"><i></i></h2>
 
-        <form onSubmit={performLogin} className="login-form">
-          <div className="input-group">
-            <h2><p>Login</p></h2>
-            <input
-              className="input-field"
-              placeholder="Email *"
-              type="email"
-              id="username"
-              value={loginCredentials.username}
-              onChange={handleValidation}
-              required
-            />
-            {errors.username && (
-              <span className="error-message">{errors.username}</span>
-            )}
-          </div>
-
-          <div className="input-group">
-            <input
-              className="input-field"
-              placeholder="Password *"
-              type="password"
-              id="password"
-              minLength="8"
-              value={loginCredentials.password}
-              onChange={handleValidation}
-              required
-            />
-            {errors.password && (
-              <span className="error-message">{errors.password}</span>
-            )}
-          </div>
-
-
-          <div
-            className="checkbox-group"
-            style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '300px', marginRight: '40px' }}>
-            <input type="checkbox" id="remember-me" style={{ marginRight: '5px' }}  
-            />
-            <label htmlFor="remember-me" style={{ fontSize: '16px', marginRight: '70px' }}>
-              Remember Me
-            </label>
-          </div>
-
-          <button className="login-button" type="submit">
-            Log In
-          </button>
-          {errors.login && <span className="error-message">{errors.login}</span>}
-        </form>
-
-        <div className="link-group">
-          <button type="button" className="login-button">
-            Forgot Password?
-          </button>
-          <button type="button" className="login-button">
-            Don't have an account?
-          </button>
-        </div>
+    <form onSubmit="{performLogin}" class="login-form">
+      <div class="input-group">
+        <h2><p>Login</p></h2>
+        <input
+          class="input-field"
+          placeholder="Email *"
+          type="email"
+          id="username"
+          value=""
+          onChange="{handleValidation}"
+          required
+        />
+        <xsl:if test="errors.username">
+          <span class="error-message">
+            <xsl:value-of select="errors.username" />
+          </span>
+        </xsl:if>
       </div>
+
+      <div class="input-group">
+        <input
+          class="input-field"
+          placeholder="Password *"
+          type="password"
+          id="password"
+          minLength="8"
+          value=""
+          onChange="{handleValidation}"
+          required
+        />
+        <xsl:if test="errors.password">
+          <span class="error-message">
+            <xsl:value-of select="errors.password" />
+          </span>
+        </xsl:if>
+      </div>
+
+      <div class="options-group">
+        <div class="checkbox-container">
+          <input type="checkbox" id="remember-me" />
+          <label for="remember-me">Remember Me</label>
+        </div>
+
+        <button class="login-button" type="submit">
+          Log In
+        </button>
+      </div>
+
+      <xsl:if test="errors.login">
+        <span class="error-message">
+          <xsl:value-of select="errors.login" />
+        </span>
+      </xsl:if>
+    </form>
+
+    <div class="link-group">
+      <button type="button" class="login-button">
+        Forgot Password?
+      </button>
+      <button type="button" class="login-button">
+        Don't have an account?
+      </button>
     </div>
+  </div>
+</div>
+
+
   );
 };
 
