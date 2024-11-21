@@ -1,4 +1,5 @@
 import './assets/App.css'
+import GridContainer from './components/GridContainer';
 import MainLayout from './layouts/MainLayout';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Frontpage from './pages/Frontpage';
