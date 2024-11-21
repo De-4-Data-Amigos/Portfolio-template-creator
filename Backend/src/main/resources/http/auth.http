@@ -37,8 +37,8 @@ POST {{url}}/auth/login
 Content-Type: application/json
 
 {
-  "username": "admin1",
-  "password": "admin"
+  "username": "John@gmail.com",
+  "password": "123456789"
 }
 
 > {% client.global.set("token", response.body.token); %}
