@@ -54,12 +54,12 @@ Vi har valgt Java, fordi det er det sprog, vi har lært mest om under vores udda
 
 •	Ulemper: 
 -	Python mangler Java’s ydeevne og skalerbarhed til store, komplekse systemer.
-Node.js:
+#### Node.js:
 •	Fordele:  
 -	Node.js er hurtigt og letvægt, hvilket gør det ideelt til applikationer med mange samtidige forbindelser, som realtidsapplikationer.
 •	Ulemper: 
 -	Mangler den samme robusthed og stabilitet som Java i enterprise-niveau applikationer.
-C#:
+#### C#:
 •	Fordele:  
 -	C# er meget populært inden for enterprise og er godt integreret med Microsoft-økosystemet. Det tilbyder stærk typning og høj ydeevne.
 
@@ -76,6 +76,7 @@ Vi har valgt Javalin, fordi det er letvægt og simpelt, og vi har tidligere erfa
 -	Kræver minimal opsætning.
 •	Ulemper:       
 -	Begrænset funktionalitet sammenlignet med Spring Boot.
+
 •	Alternativ: Spring Boot og Tomcat
 
 #### Tomcat:
@@ -108,6 +109,7 @@ Begge biblioteker bruges til JSON-håndtering, som vi allerede kender fra tidlig
 
 •	Ulemper: 
 -	At bruge begge biblioteker kan virke overflødigt, hvis vi kun har brug for én løsning.
+
 •	Alternativ: Moshi
 
 #### Moshi
@@ -150,8 +152,12 @@ Vi har tidligere brugt disse biblioteker til at skrive tests i undervisningen. D
 
 •	Ulemper: 
 -	Kræver ekstra tid og ressourcer.
-•	Alternativer: 
--	Spock Framework (mere læsbar syntaks, men kræver Groovy).
+
+•	Alternativer: Spock Framework
+
+#### Spock Framework
+•	Fordele:  
+- Mere læsbar syntaks, men kræver Groovy
 
 # Frontend
 
@@ -176,6 +182,7 @@ JavaScript er standarden inden for frontend-udvikling og giver os mulighed for a
 
 •	Ulemper: 
 -	Kræver mere opsætning og har en stejlere læringskurve.
+- Testcontainers kræver at docker virker og kører for at teste.
 
 #### Python
 
@@ -197,7 +204,7 @@ React var et naturligt valg for os, da vi har erfaring med det fra tidligere pro
 •	Ulemper:
 -	Stejl indlæringskurve: For nye udviklere kan det være udfordrende at forstå begreber som state management og props.
 -	Behov for ekstra værktøjer: Vi skal bruge ekstra værktøjer som React Router til routing og Redux eller Context API til state management, hvilket kan være en udfordring.
-•	Alternativer: Angular og Vue.js
+•	Alternativer: Angular og Vue.js mm.
 
 
 #### Angular:
@@ -226,12 +233,13 @@ Jest er et kraftfuldt testframework, der gør det let at skrive og køre tests.
 -	Hurtigt og simpelt at bruge.
 -	Understøtter snapshot tests, som er nyttige til React-komponenter.
 
-Testing Library
-Hvorfor vi bruger det:
+## Testing Library
+### Hvorfor vi bruger det:
 Testing Library bruges til at teste React-komponenter og sikrer, at de opfører sig som forventet i forskellige scenarier.
 
 •	Fordele: 
 -	Fokus på test af brugeroplevelsen frem for implementeringen.
+
 •	Ulemper: 
 -	Kan være lidt langsommere end andre testværktøjer.
 
@@ -251,22 +259,29 @@ Vite er en moderne build-tool der er hurtig og effektiv til udvikling af JavaScr
 -	Læringskurve: Selvom det er nemt at komme i gang med kan nogle af de mere avancerede konfigurationer være komplekse for nybegyndere.
 -	Ikke så udbredt som Webpack: Færre tutorials og community support sammenlignet med ældre værktøjer som Webpack.
 -	Kompatibilitet: Ældre browsere eller projekter kan kræve ekstra opsætning for at fungere korrekt med Vite.
+
 •	Alternativer: Create React App (CRA), Webpack og Parcel
 
 ### Create React App (CRA):
+
 •	Fordele: 
 -	Standardværktøjet til hurtigt at opsætte React-projekter med minimal opsætning.
+
 •	Ulemper: 
 -	Langsommere byggetider og mindre fleksibilitet sammenlignet med Vite.
+
 ### Webpack:
+
 •	Fordele: 
 -	Et kraftfuldt og udbredt bundling-tool med mange funktioner og stor tilpasningsevne.
+
 •	Ulemper: 
 -	Kræver mere opsætning og kan være langsommere i udviklingsfasen.
 
 ### Parcel:
 •	Fordele: 
 -	Letvægt og enkel at bruge, med minimal konfiguration og hurtige byggetider.
+
 •	Ulemper: 
 -	Ikke altid lige så hurtigt eller fleksibelt som Vite især for større projekter.
 
