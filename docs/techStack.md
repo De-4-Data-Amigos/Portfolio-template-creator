@@ -34,7 +34,7 @@ Vi har valgt PostgreSQL som vores database, da vi har arbejdet med det tidligere
 
 
 ## Java med JDK 17
-Hvorfor vi bruger det:
+#### Hvorfor vi bruger det:
 Vi har valgt Java, fordi det er det sprog, vi har lært mest om under vores uddannelse, og som vi føler os mest komfortable med. Valget af JDK 17, som er en LTS-version (Long-Term Suppor) sikrer stabilitet og understøttelse på længere sigt. Java er desuden ideelt til at bygge komplekse backend-systemer, hvor skalerbarhed og ydeevne er vigtige.
 
 •	Fordele:
@@ -120,7 +120,7 @@ Begge biblioteker bruges til JSON-håndtering, som vi allerede kender fra tidlig
 -	Mindre community og færre ressourcer til fejlsøgning og hjælp.
 
 ## Lombok
-Hvorfor vi bruger det:
+#### Hvorfor vi bruger det:
 Lombok sparer os tid ved at generere kode som getters, setters og constructors automatisk. Det er noget, vi er vant til fra tidligere projekter.
 
 •	Fordele: 
