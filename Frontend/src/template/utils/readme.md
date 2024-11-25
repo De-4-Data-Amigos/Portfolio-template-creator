@@ -1,0 +1,1 @@
+This folder is for any js utility functions. It can be a copy from any from our website. 

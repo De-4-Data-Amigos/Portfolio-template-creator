@@ -6,3 +6,7 @@ Victor Christensen
 Rasmus Tornby Arendt
 Marcus Løbel
 Deniz Sonmes
+
+
+
+# npm install react-parallax-mouse

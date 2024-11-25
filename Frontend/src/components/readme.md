@@ -1,0 +1,1 @@
+This folder is for any components that our website needs. This isn't for components user/customers can use.
