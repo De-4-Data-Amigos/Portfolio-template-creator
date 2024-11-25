@@ -146,12 +146,18 @@ describe(GridContainer, () => {
 
         const { getAllByTestId, getByTestId } = render(
             <GridContainer columns={columns} rows={rows}>
-                <p data-pos='0,0' data-testid='component1'></p>
-                <p data-pos='1,1' data-testid='component2'></p>
+                <p data-pos='0,0' data-testid='component1'>comp1</p>
+                <p data-pos='1,1' data-testid='component2'>comp2</p>
             </GridContainer>
         );
-        const comp1 = getByTestId("component1").parentElement;
-        const comp2 = getByTestId("component2").parentElement;
-        //comp1.
+        const comp1Parent = getByTestId("component1").parentElement;
+        const comp2Parent = getByTestId("component2").parentElement;
+
+        fireEvent.dragStart(comp1Parent, { target: comp1Parent });
+        fireEvent.dragEnter(comp1Parent, { target: comp2Parent });
+        fireEvent.dragOver(comp1Parent, { target: comp2Parent});
+        fireEvent.drop(comp2Parent, { target:comp1Parent});
+        const movedComponet = comp1Parent.firstChild;
+        expect(movedComponet.textContent).toEqual('comp2');
     });
 });
