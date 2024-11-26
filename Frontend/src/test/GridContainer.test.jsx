@@ -150,8 +150,11 @@ describe(GridContainer, () => {
                 <p data-pos='1,1' data-testid='component2'></p>
             </GridContainer>
         );
-        const comp1 = getByTestId("component1").parentElement;
-        const comp2 = getByTestId("component2").parentElement;
-        //comp1.
+        const comp1Parent = getByTestId("component1").parentElement;
+        const comp2Parent = getByTestId("component2").parentElement;
+        expect(fireEvent.dragStart(comp1Parent, { target: comp1Parent })).toEqual(true);
+        expect(fireEvent.drop(comp2Parent, { target: comp2Parent })).toEqual(true);
+        const movedComponet = getByTestId("component1");
+        expect(movedComponet).toHaveAttribute('data-pos', '1,1');
     });
 });
