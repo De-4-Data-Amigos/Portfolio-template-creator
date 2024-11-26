@@ -17,7 +17,7 @@ function Editorpage() {
         for (let i = 0; i < columns; i++) {
             for (let j = 0; j < rows; j++) {
                 if(!gridChildren[`${i},${j}`]){
-                    setGridChildren(gridChildren.set(`${i},${j}`, <p key={`component-${i},${j}`} data-pos={`${i},${j}`}>test</p>));
+                    setGridChildren(gridChildren.set(`${i},${j}`, <p key={`component-${i},${j}`} data-pos={`${i},${j}`}>test-{i},{j}</p>));
                 }
             }
         }
@@ -30,7 +30,7 @@ function Editorpage() {
             }}
         >
 
-            <button onClick={addComponent} >add p tag</button>
+            <button onClick={addComponent}>add p tag</button>
             <GridContainer columns={columns} rows={rows}>
                 {childrenArray}
             </GridContainer>
