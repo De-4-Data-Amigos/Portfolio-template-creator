@@ -59,12 +59,12 @@ function LoginPage({ onLogin }) {
   return (
     <div className="login-container">
       <div className="login-form-wrapper">
-        <div className="avatar-container">
-          <div className="avatar">
+        <div className="form-container">
+          <div className="form">
             <img src={lockIcon} alt="Lock icon" className="icon" />
           </div>
         </div>
-        <h2 className="login-title">Log In</h2>
+        <h2 className="login">Log In</h2>
 
         <form onSubmit={performLogin}>
           <div className="input-group">
@@ -105,7 +105,12 @@ function LoginPage({ onLogin }) {
 
           <div className="link-group">
             <button type="button" className="link-button">Forgot Password?</button>
-            <button type="button" className="link-button">Don't have an account?</button>
+            <button
+        className="link-button"
+        onClick={() => navigate("/sign")} // Navigér til registreringssiden
+      >
+        Don't have an account?
+      </button>
           </div>
         </form>
       </div>
