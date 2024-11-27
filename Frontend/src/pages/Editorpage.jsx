@@ -29,7 +29,7 @@ function Editorpage() {
         }
         setChildrenArray(Array.from(gridChildren, ([key, value]) => (value)));
     };
-    
+    /* TODO: doesnt always remove the children correctly from the array */
     const removeComponent = (removedPos) => {
         let tempmap = gridChildren;
         if(tempmap.delete(removedPos)){
