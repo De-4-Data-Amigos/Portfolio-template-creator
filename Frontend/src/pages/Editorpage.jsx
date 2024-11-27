@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { cloneElement, useState } from "react";
 import GridContainer from "../components/GridContainer";
 
 function Editorpage() {
 
     const columns = 3;
     const rows = 3;
+    const maxComponentAmount = columns * rows;
+
+    const [componentAmount, setComponentAmount] = useState(0);
 
     const [gridChildren, setGridChildren] = useState(new Map());
 
@@ -13,11 +16,18 @@ function Editorpage() {
     /* TODO: only add one element, at the first availible space. */
     /* TODO: Try with a test component. */
 
-    const addComponent = () => {
-        for (let i = 0; i < columns; i++) {
-            for (let j = 0; j < rows; j++) {
-                if(!gridChildren[`${i},${j}`]){
-                    setGridChildren(gridChildren.set(`${i},${j}`, <p key={`component-${i},${j}`} data-pos={`${i},${j}`}>test-{i},{j}</p>));
+    const addComponent = (comp) => {
+        if(componentAmount == maxComponentAmount){
+            return;
+        }        
+        addloop: {
+            for (let i = 0; i < columns; i++) {
+                for (let j = 0; j < rows; j++) {
+                    if(!gridChildren.get(`${i},${j}`)){
+                        comp = cloneElement(comp, {"data-pos" : `${i},${j}`, key: `gridComponent-${i},${j}`})
+                        setGridChildren(gridChildren.set(`${i},${j}`, comp));
+                        break addloop;
+                    }
                 }
             }
         }
@@ -30,7 +40,7 @@ function Editorpage() {
             }}
         >
 
-            <button onClick={addComponent}>add p tag</button>
+            <button onClick={() => addComponent(<p>test</p>)}>add p tag</button>
             <GridContainer columns={columns} rows={rows}>
                 {childrenArray}
             </GridContainer>
