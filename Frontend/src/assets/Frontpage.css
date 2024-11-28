@@ -58,6 +58,7 @@
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
+  @front-faceJetBrainsMono {
     font-family: "JetBrainsMono", monospace; /* Normal JetBrains Mono */
     font-size: 1rem;
     font-weight: normal;
