@@ -32,7 +32,7 @@
     --margin-size-w: .15vw;
     --margin-size-h: .15vh;
     --border-width: .1em;
-
+    
     overflow: hidden;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -59,4 +59,35 @@
     overflow-y : auto;
     overflow-x: hidden;
     scrollbar-width:thin;
+}
+
+.GridDeleteZone{
+    --border-width: .2em;
+    display: flex;
+    align-items: center;
+    opacity: 70;
+    background-color: rgb(180, 10, 10);
+    height: auto;
+    
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    
+    margin-left: -2vw;
+    border: var(--border-width);
+    border-color: red;
+    border-style: solid;
+    border-radius: .5em;
+    opacity: .05;
+
+    transition: opacity .5s;
+}
+
+.GridDeleteZone:hover{
+    opacity: 1;
+}
+
+
+.GridDeleteZoneText {
+    transform: rotate(90deg);
+    text-align: center;
 }
