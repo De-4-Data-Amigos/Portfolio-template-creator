@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import manwomanoffice from '../assets/manwomanoffice.png';
 
 function SignUpPage() {
+
   const init = { username: "", password: "", confirmPassword: "", firstName: "", lastName: "", role: "user" };
   const [signupCredentials, setSignupCredentials] = useState(init);
   const [errors, setErrors] = useState({ username: "", password: "", confirmPassword: "", signup: "" });
@@ -20,6 +21,7 @@ function SignUpPage() {
       [id]: id === "username" && !emailPattern.test(value) ? "Email must be valid." :
         id === "password" && value.length < 8 ? "Password must be at least 8 characters long." :
           id === "confirmPassword" && value !== signupCredentials.password ? "Passwords do not match." : ""
+
     }));
 
     setSignupCredentials({ ...signupCredentials, [id]: value });
@@ -76,6 +78,7 @@ function SignUpPage() {
           </div>
 
           {/* Name fields */}
+   
           <div className="name-container">
             {["firstName", "lastName"].map((field) => (
               <div className="input-group" key={field}>
@@ -91,8 +94,9 @@ function SignUpPage() {
               </div>
             ))}
           </div>
-
+          
           {/* Email field */}
+
           <div className="input-group">
             <input
               className="input-field"
@@ -107,6 +111,7 @@ function SignUpPage() {
           </div>
 
           {/* Password field */}
+
           <div className="input-group">
             <input
               className="input-field"
@@ -121,7 +126,9 @@ function SignUpPage() {
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
 
+
           {/* Confirm Password field */}
+
           <div className="input-group">
             <input
               className="input-field"
@@ -144,6 +151,7 @@ function SignUpPage() {
           <p className="signin">
             Already have an account? <Link to="/login">Login</Link>
           </p>
+
           {errors.signup && <span className="error-message">{errors.signup}</span>}
         </form>
       </div>
@@ -152,3 +160,5 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
+
+

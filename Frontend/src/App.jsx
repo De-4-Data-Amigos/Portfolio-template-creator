@@ -1,4 +1,5 @@
 import './assets/App.css'
+import GridContainer from './components/GridContainer';
 import MainLayout from './layouts/MainLayout';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Frontpage from './pages/Frontpage';
@@ -6,6 +7,9 @@ import TemplateSuggestion from './pages/TemplateSuggestion';
 import { useState } from 'react';
 import Login from './pages/Login';  // Antag, at du har en LoginPage
 import SignPage from './pages/SignUp';
+
+import EditorLayout from './layouts/EditorLayout';
+
 
 
 function App() {
@@ -28,6 +32,7 @@ function App() {
           <Route path="*" element={<p>Page Not Found</p>} /> 
           <Route path="login" element={<Login onLogin={login} />} />
           <Route path="registration" element={<SignPage />} />
+
           { 
             /* Leave for now, to see how to do different routing things
             <Route path="about" element={<About/>}/>
@@ -35,7 +40,7 @@ function App() {
             */
           }
         </Route>
-        <Route path='/editor' >
+        <Route path="/editor" element={<EditorLayout loggedIn={loggedIn} logout={logout} />}>
           <Route index element={<p>editor</p>} />
         </Route>
       </>

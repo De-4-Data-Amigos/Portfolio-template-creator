@@ -1,0 +1,62 @@
+.GridContainer {
+
+    min-width: 100%;
+    min-height: 100%;
+
+    width: 95vw;
+    height: 95vh;
+    margin: 2.5vh 2.5vw;
+    
+    display: flex;
+    flex-direction: row;
+}
+
+.GridColumn{
+    /*
+    background-color: red;
+    min-width: calc(100% / attr(data-columns));
+    min-height: 100%;
+    */
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.GridRow::-webkit-scrollbar {
+    display: none;
+}
+
+.GridRow{
+    --margin-size-w: .15vw;
+    --margin-size-h: .15vh;
+    --border-width: .1em;
+
+    overflow: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    background-color:  rgba(52, 67, 78, 0.8);
+    border-radius: .5em;
+    border-width: var(--border-width);
+    border-style: dotted;
+    border-color: transparent;
+    /*
+    width: calc(100% / attr(data-columns));
+    height: calc(100% / attr(data-rows));
+    padding: .5vh .5vw;
+    */
+    
+    height: calc(100% - (calc(var(--margin-size-h) * 2)));
+    width: calc(100% - (calc(var(--margin-size-w) * 2)));
+    min-width: 1vw;
+    min-height: 1vh;
+    margin: var(--margin-size-h) var(--margin-size-w);
+}
+
+.GridRow:hover{
+    border-color: whitesmoke;
+    overflow-y : auto;
+    overflow-x: hidden;
+    scrollbar-width:thin;
+}

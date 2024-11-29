@@ -38,6 +38,9 @@
   text-align: center;
   margin-bottom: 20px;
   color: #0e0e0e;
+}
+
+
 /* Avatar-styling */
 .form-container {
     display: flex;
@@ -96,10 +99,12 @@
 
 /* Checkbox and label group */
 .checkbox-group {
+
   display: flex;
   align-items: center;
   gap: 8px;
   margin-right: 40px;
+
 }
 
 /* Checkbox styling */
@@ -204,6 +209,7 @@
 .link-group {
   display: flex;
   gap: 10px;
+
 }
 
 .remember-label {
