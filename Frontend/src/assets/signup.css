@@ -15,6 +15,16 @@
 
 }
 
+/* Move the form upwards by using margin-top */
+.login-form {
+    margin-top: -40px; /* Use a negative value to move the form upwards */
+  }
+  
+  /* Alternatively, you could use padding */
+  .login-form {
+    padding-bottom: 200px; /* Add padding to move content upwards */
+  }
+  
 
 .form-container {
     display: flex;
