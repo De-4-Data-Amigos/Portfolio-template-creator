@@ -20,7 +20,7 @@ class UserControllerTest {
 
     private static final String constUsername = "newuser@gmail.com";
     private static final String constPassword = "newpassword";
-    private static final String constRole = "newuser";
+    private static final String constRole = "user";
 
     @BeforeAll
     static void beforeAll() {
