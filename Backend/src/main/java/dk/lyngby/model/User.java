@@ -3,6 +3,7 @@ package dk.lyngby.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.Serial;
@@ -15,6 +16,7 @@ import java.util.Set;
 @NamedQueries(@NamedQuery(name = "User.deleteAllRows", query = "DELETE from User"))
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
 
     @Serial

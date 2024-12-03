@@ -22,16 +22,4 @@ public class Populate {
             em.getTransaction().commit();
         }
     }
-
-    @NotNull
-    private static Set<User> getCalRooms() {
-
-        return null;
-    }
-
-    @NotNull
-    private static Set<Role> getHilRooms() {
-
-        return null;
-    }
 }
