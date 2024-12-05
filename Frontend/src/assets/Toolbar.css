@@ -1,0 +1,43 @@
+.toolbar-container {
+    display: flex;
+    flex-direction: column; /* Ændret fra vandret til lodret */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Mere afstand mellem elementerne */
+    padding: 20px;
+    background-color: #f8f8f8;
+  }
+  
+  .toolbar-option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #85cfff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: white;
+  }
+  
+  .toolbar-option:hover {
+    background-color: #e0f4ff;
+  }
+  
+  .toolbar-option.selected {
+    background-color: #85cfff;
+  }
+  
+  .toolbar-icon {
+    font-size: 30px;
+  }
+  
+  .toolbar-label {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #333;
+    font-weight: bold;
+  }
+  
