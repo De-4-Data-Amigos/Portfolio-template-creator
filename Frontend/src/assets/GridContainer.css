@@ -32,7 +32,7 @@
     --margin-size-w: .15vw;
     --margin-size-h: .15vh;
     --border-width: .1em;
-
+    
     overflow: hidden;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -59,4 +59,104 @@
     overflow-y : auto;
     overflow-x: hidden;
     scrollbar-width:thin;
+}
+
+.GridDeleteZone{
+    --border-width: .2em;
+    display: flex;
+    align-items: center;
+    opacity: 70;
+    background-color: rgb(180, 10, 10);
+    height: auto;
+    
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    
+    margin-left: -2vw;
+    border: var(--border-width);
+    border-color: red;
+    border-style: solid;
+    border-radius: .5em;
+    opacity: .05;
+
+    transition: opacity .5s;
+}
+
+.GridDeleteZone:hover{
+    opacity: 1;
+}
+
+.GridDeleteZoneText {
+    transform: rotate(90deg);
+    text-align: center;
+}
+/* For navbar containeren */
+.navbar-container {
+    display: flex;
+    flex-direction: column; /* Gør plads til både navbar og delete zone */
+    align-items: center;
+    margin-top: 2.5vh;
+}
+
+/* Navbar layout */
+.navbar {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px; 
+    justify-content: center; 
+    align-items: center;
+    padding: 10px 30px; 
+    background-color:  rgba(52, 67, 78, 0.8); 
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+}
+
+
+.navbar-item {
+    padding: 10px 20px; 
+    background-color:  rgba(52, 67, 78, 0.8); 
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.navbar-item:hover {
+    background-color: #1abc9c; 
+    transform: scale(1.05);
+}
+
+
+.navbar-item:active {
+    background-color: #16a085; 
+}
+
+.delete-zone-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 2px dashed red;
+    padding: 20px;
+    margin-top: 20px;
+    width: 10%;
+    border-radius: .5em;
+    opacity: 0.15;
+    transition: opacity 0.3s ease;
+}
+
+
+.delete-zone-navbar:hover {
+    opacity: 1;
+}
+
+
+.delete-navbarText {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
 }
