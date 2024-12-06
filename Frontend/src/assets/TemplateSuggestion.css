@@ -40,15 +40,6 @@
   .section h2 {
     font-size: 1.5rem;
     font-family: Arial, sans-serif;
-    font-family: "ModernSans", sans-serif; /* Brug den nye skrifttype */
-    margin-bottom: 1.5rem;
-  }
-  
-  
-  .section h2 {
-    font-family: "JetBrainsMono Bold", monospace; /* Fed JetBrains Mono */
-    font-size: 1.5rem;
-    font-weight: bold;
     margin-top: 1.5rem;
   }
   
@@ -58,26 +49,24 @@
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
-  @front-faceJetBrainsMono {
-    font-family: "JetBrainsMono", monospace; /* Normal JetBrains Mono */
-    font-size: 1rem;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+  
+  .cta-button {
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto;
   }
-  @font-face {
-    font-family: "ModernSans";
-    src: url("../assets/ModernSans-Light.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+  
+  .cta-button:hover {
+    background-color: #0056b3;
   }
-
   
-  
-
-  
-
-  .frontpage-button {
+  .template-suggest-button {
     position: relative;
     display: flex;
     justify-content: center;
@@ -89,9 +78,10 @@
     overflow: hidden;
     cursor: pointer;
     border: none;
+    margin: 10px;
   }
   
-  .frontpage-button:after {
+  .template-suggest-button:after {
     content: " ";
     width: 0%;
     height: 100%;
@@ -101,13 +91,13 @@
     right: 0;
   }
   
-  .frontpage-button:hover::after {
+  .template-suggest-button:hover::after {
     right: auto;
     left: 0;
     width: 100%;
   }
   
-  .frontpage-button span {
+  .template-suggest-button span {
     text-align: center;
     text-decoration: none;
     width: 100%;
@@ -115,12 +105,12 @@
     color: #fff;
     font-size: 1.125em;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.1em; 
     z-index: 20;
     transition: all 0.3s ease-in-out;
-  }
+  }  
   
-  .frontpage-button:hover span {
+  .template-suggest-button:hover span {
     color: #183153;
     animation: scaleUp 0.3s ease-in-out;
   }
@@ -129,11 +119,12 @@
     0% {
       transform: scale(1);
     }
+  
     50% {
       transform: scale(0.95);
     }
+  
     100% {
       transform: scale(1);
     }
   }
-  

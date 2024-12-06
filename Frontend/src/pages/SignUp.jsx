@@ -3,8 +3,10 @@ import facade from "../utils/apiFacade";
 import "../assets/signup.css";
 import lockIcon from '../assets/icon/lock.png';
 import { Link } from "react-router-dom";
+import manwomanoffice from '../assets/manwomanoffice.png';
 
-function SignPage() {
+function SignUpPage() {
+
   const init = { username: "", password: "", confirmPassword: "", firstName: "", lastName: "", role: "user" };
   const [signupCredentials, setSignupCredentials] = useState(init);
   const [errors, setErrors] = useState({ username: "", password: "", confirmPassword: "", signup: "" });
@@ -17,8 +19,9 @@ function SignPage() {
     setErrors((prevErrors) => ({
       ...prevErrors,
       [id]: id === "username" && !emailPattern.test(value) ? "Email must be valid." :
-            id === "password" && value.length < 8 ? "Password must be at least 8 characters long." :
-            id === "confirmPassword" && value !== signupCredentials.password ? "Passwords do not match." : ""
+        id === "password" && value.length < 8 ? "Password must be at least 8 characters long." :
+          id === "confirmPassword" && value !== signupCredentials.password ? "Passwords do not match." : ""
+
     }));
 
     setSignupCredentials({ ...signupCredentials, [id]: value });
@@ -58,17 +61,24 @@ function SignPage() {
   };
 
   return (
-    <div className="name-container">
-      <div className="sign-form-wrapper">
-        <div className="form-container">
-          <div className="form">
-            <img src={lockIcon} alt="Lock icon" className="icon" />
-          </div>
-        </div>
-        <h2 className="sign-title">Sign Up</h2>
+    <div className="frontpage" style={{ backgroundImage: `url(${manwomanoffice})` }}>
+      <div className="content-box">
+        <h2 className="sub-header"><i></i></h2>
 
-        <form onSubmit={performSignup}>
-          {/* Navn felter */}
+        <form onSubmit={performSignup} className="login-form">
+          <div className="input-group">
+            <h2><p>Sign Up</p></h2>
+          </div>
+
+          {/* Avatar/lock icon */}
+          <div className="avatar-container">
+            <div className="avatar">
+              <img src={lockIcon} alt="Lock icon" className="icon" />
+            </div>
+          </div>
+
+          {/* Name fields */}
+   
           <div className="name-container">
             {["firstName", "lastName"].map((field) => (
               <div className="input-group" key={field}>
@@ -84,8 +94,9 @@ function SignPage() {
               </div>
             ))}
           </div>
+          
+          {/* Email field */}
 
-          {/* Email felt */}
           <div className="input-group">
             <input
               className="input-field"
@@ -99,7 +110,8 @@ function SignPage() {
             {errors.username && <span className="error-message">{errors.username}</span>}
           </div>
 
-          {/* Password felt */}
+          {/* Password field */}
+
           <div className="input-group">
             <input
               className="input-field"
@@ -114,7 +126,9 @@ function SignPage() {
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
 
-          {/* Confirm Password felt */}
+
+          {/* Confirm Password field */}
+
           <div className="input-group">
             <input
               className="input-field"
@@ -128,8 +142,16 @@ function SignPage() {
             {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
           </div>
 
-          <button className="button" type="submit">Sign Up</button>
-          <p className="signin">Already have an account? <Link to="/login">Login</Link></p>
+          {/* Submit button */}
+          <button className="login-button" type="submit">
+            Sign Up
+          </button>
+
+          {/* Link to login */}
+          <p className="signin">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+
           {errors.signup && <span className="error-message">{errors.signup}</span>}
         </form>
       </div>
@@ -137,4 +159,6 @@ function SignPage() {
   );
 }
 
-export default SignPage;
+export default SignUpPage;
+
+
