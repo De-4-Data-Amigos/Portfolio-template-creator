@@ -1,6 +1,7 @@
 package dk.lyngby.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.Objects;
 @NamedQueries(@NamedQuery(name = "Role.deleteAllRows", query = "DELETE from Role"))
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Role implements Serializable {
 
     @Serial

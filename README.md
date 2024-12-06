@@ -4,6 +4,9 @@ Repository for our final semester project. The project itself is a portfolio-tem
 # Team members
 Deniz Sonmes
 
+
+
+
 Marcus Løbel
 
 Rasmus Tornby Arendt
