@@ -1,3 +1,4 @@
+import React from "react";
 function GridDeleteZone({onDrop}) {
     return (
         <div
