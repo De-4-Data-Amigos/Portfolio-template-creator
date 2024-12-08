@@ -8,28 +8,28 @@ function NavbarContainer({ links, onUpdateLinks }) {
     };
 
     const handleDragOver = (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
     };
 
     const handleDrop = (index) => {
         if (draggedIndex === null || draggedIndex === index) return;
 
-      
+
         const updatedLinks = [...links];
         const [draggedItem] = updatedLinks.splice(draggedIndex, 1);
         updatedLinks.splice(index, 0, draggedItem);
 
-        onUpdateLinks(updatedLinks); 
-        setDraggedIndex(null); 
+        onUpdateLinks(updatedLinks);
+        setDraggedIndex(null);
     };
 
     const handleDelete = () => {
         if (draggedIndex !== null) {
-           
+            
             const updatedLinks = [...links];
-            updatedLinks.splice(draggedIndex, 1); 
+            updatedLinks.splice(draggedIndex, 1);
             onUpdateLinks(updatedLinks);
-            setDraggedIndex(null); 
+            setDraggedIndex(null);
         }
     };
 
@@ -49,7 +49,7 @@ function NavbarContainer({ links, onUpdateLinks }) {
                     </div>
                 ))}
             </nav>
-           
+
             <div
                 className="delete-zone-navbar"
                 onDrop={handleDelete}

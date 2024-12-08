@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarItem from "./NavbarItem";
 
-function Navbar({ links }) {
+function Navbar({ links = [] }) { 
     return (
         <div className="Navbar">
             {links.map((link) => (
