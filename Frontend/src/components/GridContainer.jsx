@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import GridColumn from "../components/GridColumn";
 import GridRow from "../components/GridRow";
-import GridDeleteZone from "../components/GridDeleteZone";
-import Navbar from './Navbar';
 import '../assets/GridContainer.css';
 
 function GridContainer({columns, rows, onRemove, children}) { 
@@ -190,11 +188,9 @@ function GridContainer({columns, rows, onRemove, children}) {
     return(
         <>
             <div className="GridContainer">
-            <Navbar data-pos="0,0" draggable={true} />
-
-                {grid}
+            {grid}
             </div>
-            <GridDeleteZone onDrop={onDropDeleteZone}/>
+            
         </>
     );
 }

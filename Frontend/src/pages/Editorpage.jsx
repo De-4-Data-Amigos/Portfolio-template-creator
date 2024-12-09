@@ -1,5 +1,6 @@
 import { useState, cloneElement } from "react";
 import GridContainer from "../components/GridContainer";
+import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
 import "../assets/GridContainer.css";
 
@@ -11,14 +12,28 @@ function EditorPage() {
     const [componentAmount, setComponentAmount] = useState(0);
     const [gridChildren, setGridChildren] = useState(new Map());
     const [childrenArray, setChildrenArray] = useState([]);
-    const [navbarLinks, setNavbarLinks] = useState([]);
+    const [navbarLinks, setNavbarLinks] = useState(new Map());
 
     
     const addNavbarLink = (text, href) => {
-        const newLink = { id: Date.now(), text, href };
-        setNavbarLinks((prevLinks) => [...prevLinks, newLink]);
+        let tempMap = new Map(navbarLinks);
+        addloop: {
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 1; j++) {
+                    const pos = `${i},${j}`;
+                    if (!tempMap.has(pos)) {
+                        const newLink = { id: Date.now(), text, href, pos };
+                        tempMap.set(pos, newLink);
+                        break addloop;
+                        
+                    }
+                }
+        
+            }
+       }
+       setNavbarLinks(tempMap);
+    
     };
-
    
     const addComponent = (comp) => {
         if (componentAmount === maxComponentAmount) {
@@ -73,10 +88,18 @@ function EditorPage() {
         setNavbarLinks(updatedLinks);
     };
 
+    const onDropDeleteZone = (event) => {
+       /* event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const [x, y] = data.split(",");
+        const position = `${x},${y}`;
+        removeComponent(position); */
+    }
+
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
            
-            <NavbarContainer links={navbarLinks} onUpdateLinks={updateNavbarLinks} />
+            <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks} />
             
             {/* Grid-container sektion */}
             <div style={{ display: "flex", flexDirection: "column", marginTop: "30px" }}>
@@ -88,6 +111,7 @@ function EditorPage() {
                     <GridContainer columns={columns} rows={rows} onRemove={removeComponent}>
                         {childrenArray}
                     </GridContainer>
+                    <GridDeleteZone onDrop={onDropDeleteZone}/>
                 </div>
             </div>
         </div>
