@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import GridContainer from "./GridContainer";
 
-function NavbarContainer({ links, onUpdateLinks }) {
+function NavbarContainer({ linkMap, onUpdateLinks }) {
+    const links = Array.from(linkMap.values());
+
     const [draggedIndex, setDraggedIndex] = useState(null);
+
 
     const handleDragStart = (index) => {
         setDraggedIndex(index);
@@ -36,9 +40,11 @@ function NavbarContainer({ links, onUpdateLinks }) {
     return (
         <div className="navbar-container">
             <nav className="navbar">
+                <GridContainer columns={4} rows={1}>
                 {links.map((link, index) => (
                     <div
                         key={link.id}
+                        data-pos={link.pos}
                         draggable
                         onDragStart={() => handleDragStart(index)}
                         onDragOver={handleDragOver}
@@ -48,6 +54,7 @@ function NavbarContainer({ links, onUpdateLinks }) {
                         {link.text}
                     </div>
                 ))}
+                </GridContainer>
             </nav>
 
             <div
