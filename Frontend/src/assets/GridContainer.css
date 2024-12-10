@@ -5,7 +5,6 @@
 
     width: 95vw;
     height: 95vh;
-    margin: 2.5vh 2.5vw;
     
     display: flex;
     flex-direction: row;
@@ -13,6 +12,7 @@
 
 .GridColumn{
     /*
+    margin: 2.5vh 2.5vw;
     background-color: red;
     min-width: calc(100% / attr(data-columns));
     min-height: 100%;
@@ -71,7 +71,6 @@
     margin-top: 2.5vh;
     margin-bottom: 2.5vh;
     
-    margin-left: -2vw;
     border: var(--border-width);
     border-color: red;
     border-style: solid;
@@ -86,7 +85,9 @@
 }
 
 .GridDeleteZoneText {
+    /*
     transform: rotate(90deg);
+    */
     text-align: center;
 }
 /* For navbar containeren */
@@ -101,16 +102,20 @@
 .navbar {
     display: flex;
     flex-direction: row; 
-    max-height: 5vh;
+    height: 5vh;
     gap: 20px; 
     justify-content: center; 
     align-items: center;
-    padding: 10px 30px; 
     background-color:  rgba(52, 67, 78, 0.8); 
-    border-radius: 50px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     width: 100%;
+    overflow: hidden;
+    border-radius: .5em;
+    
+    /*
+    padding: 10px 30px; 
     height: 100%;
+    */
 }
 
 
