@@ -8,12 +8,17 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test-v": "jest",
+    "test": "jest --reporters jest-silent-reporter"
   },
   "dependencies": {
     "babel-jest": "^29.7.0",
-    "frontend": "file:",
+ 
+  
+
     "identity-obj-proxy": "^3.0.0",
+    "jest-silent-reporter": "^0.6.0",
+
     "p5": "^1.11.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

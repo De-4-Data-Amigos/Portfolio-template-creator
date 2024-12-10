@@ -7,7 +7,7 @@ import TemplateSuggestion from './pages/TemplateSuggestion';
 import { useState } from 'react';
 import Login from './pages/Login';  // Antag, at du har en LoginPage
 import SignUpPage from './pages/SignUp';
-
+import EditorPage from './pages/Editorpage';
 import EditorLayout from './layouts/EditorLayout';
 
 
@@ -41,7 +41,7 @@ function App() {
           }
         </Route>
         <Route path="/editor" element={<EditorLayout loggedIn={loggedIn} logout={logout} />}>
-          <Route index element={<p>editor</p>} />
+          <Route index element={<EditorPage />} />
         </Route>
       </>
     )
