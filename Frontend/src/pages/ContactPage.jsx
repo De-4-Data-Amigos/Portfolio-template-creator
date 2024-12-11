@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../assets/contact.css";
-import Contact from "../assets/Contact.png";
+import Contact from "../assets/contact.png";
 
 function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
