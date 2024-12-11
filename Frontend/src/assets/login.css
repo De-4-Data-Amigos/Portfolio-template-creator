@@ -38,6 +38,9 @@
   text-align: center;
   margin-bottom: 20px;
   color: #0e0e0e;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase; 
+  letter-spacing: 1.5px; 
 }
 
 
@@ -67,7 +70,7 @@
     color: #ffffff;
     font-family: "JetBrainsMono Bold", monospace;
     text-transform: uppercase; 
-    
+}
 
 
 /* Styling for input fields */
