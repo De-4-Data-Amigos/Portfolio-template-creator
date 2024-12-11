@@ -3,7 +3,10 @@
   max-width: 1280px;
   margin: 0 auto;
   */
-  margin: 2.5vh 2.5vw;
+  margin: var(--margin-height) var(--margin-width);
+
+  --margin-height:  2.5vh;
+  --margin-width:  2.5vw;
 
   text-align: center;
 }
