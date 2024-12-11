@@ -36,11 +36,14 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
             setDraggedIndex(null);
         }
     };
-
+    const gridStyle = {
+        height: '100%',
+        margin: 0
+    };
     return (
         <div className="navbar-container">
             <nav className="navbar">
-                <GridContainer columns={4} rows={1}>
+                <GridContainer columns={4} rows={1} style={gridStyle}>
                 {links.map((link, index) => (
                     <div
                         key={link.id}
