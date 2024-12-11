@@ -19,6 +19,8 @@ function Header({ loggedIn, logout }) {
         ) : (
           <a onClick={() => clickHandler("/login")}>Login</a>
         )}
+        <a onClick={() => clickHandler("/contact")}>Contact</a>
+        
       </nav>
       <i className="NavIndicator"></i>
     </div>

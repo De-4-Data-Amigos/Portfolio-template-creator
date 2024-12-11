@@ -1,0 +1,120 @@
+
+.contact-container {
+   background-color: rgba(52, 67, 78, 0.9);
+    width: 40%;
+    max-height: 100%;
+    padding: 2vh;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+}
+.contact-title { 
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-family: "JetBrainsMono Bold", monospace;
+  text-transform: uppercase; 
+  letter-spacing: 1.5px; 
+}
+
+   /* Styling for input fields */
+  .input-field {
+    width: 100%;
+    padding: 20px;
+    margin: 6px 0;
+    border: 1px solid #000000;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: #000000;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  /* Input group container */
+  .input-group {
+    position: relative;
+    margin-bottom: 5px;
+  
+  }
+  
+  /* Display error message when input is invalid */
+  .input-field:invalid + .error-message {
+    display: block;
+  }
+
+  
+  /* Styling for send button */
+  .send-button {
+    position: relative;
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    align-items: center;
+    border-radius: 50px;
+    background: #183153;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+  }
+  
+  /* Hover effect for send button */
+  .send-button:after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    background: white;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+  }
+  
+  /* Change background on hover */
+  .send-button:hover::after {
+    right: auto;
+    left: 0;
+    width: 100%;
+  }
+  
+ 
+  
+  /* Scale up animation */
+  @keyframes scaleUp {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+
+  
+  
+  /* Error message */
+  .error-message {
+      display: none;
+      font-size: 12px;
+      color: rgb(233, 194, 3);
+      margin-top: 5px;
+      font-weight: bold; 
+  }
+    
+  
+  /* Styling for required fields */
+  .required {
+    color: rgb(233, 194, 3);  
+    font-weight: bold; 
+    margin-left: 2px;
+  }
