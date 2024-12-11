@@ -33,14 +33,16 @@
 }
 
 
-.sign-title {
-    font-size: 35px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #0c0c0c;
+.sign-title  {
+font-size: 25px;
+font-weight: bold;
+text-align: center;
+margin-bottom: 20px;
+color: #0e0e0e;
+font-family: "Montserrat", sans-serif; /* Tilføj en flot skrifttype */
+text-transform: uppercase; /* Hvis du vil have teksten i store bogstaver */
+letter-spacing: 1.5px; /* Gør teksten mere læselig */
 }
-
 
 /* Styling for input-felterne */
 .input-field {
