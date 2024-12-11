@@ -3,8 +3,8 @@
     min-width: 100%;
     min-height: 100%;
 
-    width: 95vw;
-    height: 95vh;
+    width: var(--max-width);
+    height: var(--max-height);
     
     display: flex;
     flex-direction: row;

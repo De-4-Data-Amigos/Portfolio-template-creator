@@ -8,7 +8,7 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
-  width: calc(100vw - calc(var(--margin-width) * 2));
+  width: var(--max-width);
   display: flex;
   justify-content: flex-end;
   overflow: hidden;
