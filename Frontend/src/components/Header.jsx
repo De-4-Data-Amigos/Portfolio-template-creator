@@ -9,6 +9,7 @@ function Header({ loggedIn, logout }) {
   }
 
   return (
+
     <div className="Header">
       <nav className="NavBar">
         {/* Navigation links */}
@@ -24,6 +25,7 @@ function Header({ loggedIn, logout }) {
       </nav>
       <i className="NavIndicator"></i>
     </div>
+
   );
 }
 

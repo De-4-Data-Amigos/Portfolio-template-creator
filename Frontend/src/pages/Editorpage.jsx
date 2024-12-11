@@ -96,6 +96,7 @@ function EditorPage() {
         removeComponent(position); */
     }
 
+
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
            

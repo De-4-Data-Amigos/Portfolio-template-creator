@@ -4,7 +4,7 @@ import GridColumn from "../components/GridColumn";
 import GridRow from "../components/GridRow";
 import '../assets/GridContainer.css';
 
-function GridContainer({columns, rows, onRemove, children}) { 
+function GridContainer({columns, rows, onRemove, children, style}) { 
     console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
     const amountOfColumns = columns;
     const amountOfRows = rows;
@@ -186,12 +186,9 @@ function GridContainer({columns, rows, onRemove, children}) {
 
 
     return(
-        <>
-            <div className="GridContainer">
+        <div style={style} className="GridContainer">
             {grid}
-            </div>
-            
-        </>
+        </div>
     );
 }
 

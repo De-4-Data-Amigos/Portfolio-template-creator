@@ -23,7 +23,6 @@ function App() {
   const login = () => {
     setLoggedIn(true);  // Sætter loggedIn til true efter succesfuldt login
   }
-
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
