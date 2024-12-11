@@ -2,11 +2,9 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import GridColumn from "../components/GridColumn";
 import GridRow from "../components/GridRow";
-import GridDeleteZone from "../components/GridDeleteZone";
+import '../assets/GridContainer.css';
 
-import '../assets/GridContainer.css'
-
-function GridContainer({columns, rows, onRemove, children}) { 
+function GridContainer({columns, rows, onRemove, children, style}) { 
     console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
     const amountOfColumns = columns;
     const amountOfRows = rows;
@@ -21,7 +19,7 @@ function GridContainer({columns, rows, onRemove, children}) {
     const [targetGridPos, setTargetGridPos] = useState(null);
 
     useEffect(() => {
-        setChildrenArray(React.Children.toArray(children))
+        setChildrenArray(React.Children.toArray(children));
     }, [children]);
     
     if(amountOfChildren > maxAmountOfChildren){
@@ -58,7 +56,7 @@ function GridContainer({columns, rows, onRemove, children}) {
         }
         existingLocations.push(position);
     });
-       
+    
     const onDragStart = (e) => {
         console.log("onDragStart", e);
         const dragElement = e.target.children[0];
@@ -94,7 +92,7 @@ function GridContainer({columns, rows, onRemove, children}) {
         const enterTargetPos = enterTargetElement.attributes["data-pos"].value;
         setTargetGridPos(enterTargetPos);
         console.log("onDragEnter target", targetGridPos);
-    };
+        };
     const onDragLeave = (e) => {
         console.log("onDragLeave", e);
     };
@@ -120,23 +118,23 @@ function GridContainer({columns, rows, onRemove, children}) {
                 });
                 isTarget = `${i},${j}` == targetGridPos;
                 rows.push(
-                <GridRow 
-                    isSelecting={isSelecting} 
-                    isSelected={isSelected} 
-                    isTarget={isTarget}
-                    draggable={!isEmpty}
+                    <GridRow 
+                        isSelecting={isSelecting} 
+                        isSelected={isSelected} 
+                        isTarget={isTarget}
+                        draggable={!isEmpty}
 
-                    onDragEnd={onDragEnd}
-                    onDragStart={onDragStart}
-                    onDragEnter={onDragEnter}
-                    onDragLeave={onDragLeave}                 
-                    onDrop={onDrop}
+                        onDragEnd={onDragEnd}
+                        onDragStart={onDragStart}
+                        onDragEnter={onDragEnter}
+                        onDragLeave={onDragLeave}                 
+                        onDrop={onDrop}
 
-                    key={`gridRow-${i}-${j}`} 
-                    data-rows={amountOfRows} 
-                    data-columns={amountOfColumns}
-                >{element}</GridRow>
-            );
+                        key={`gridRow-${i}-${j}`} 
+                        data-rows={amountOfRows} 
+                        data-columns={amountOfColumns}
+                    >{element}</GridRow>
+                );
             }
             columns.push(<GridColumn key={`gridColumn-${i}`}>{rows}</GridColumn>);
         }
@@ -181,19 +179,16 @@ function GridContainer({columns, rows, onRemove, children}) {
         });
         setChildrenArray(temp);
 
-        //setGrid(makeColumns(childrenArray));
+         //setGrid(makeColumns(childrenArray));
         grid = makeColumns(childrenArray);
     };
 
 
-    
+
     return(
-        <>
-            <div className="GridContainer">
-                {grid}
-            </div>
-            <GridDeleteZone onDrop={onDropDeleteZone}/>
-        </>
+        <div style={style} className="GridContainer">
+            {grid}
+        </div>
     );
 }
 
