@@ -29,6 +29,10 @@ const login = (user, password) => {
       .then(handleHttpErrors)
       .then(res => {setToken(res.token) })
 }
+const signup = (username, password, role) => {
+  const options = makeOptions("POST", true, { username, password, role });
+  return fetch(URL + "auth/register", options).then(handleHttpErrors);
+}
   const fetchData = () => {
     const options = makeOptions("GET", true);
     return fetch(URL+"ptc/", options)
@@ -57,6 +61,7 @@ const login = (user, password) => {
      loggedIn,
      login,
      logout,
+     signup,
      fetchData
  }
 }

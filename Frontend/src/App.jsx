@@ -1,10 +1,16 @@
 import './assets/App.css'
+import GridContainer from './components/GridContainer';
 import MainLayout from './layouts/MainLayout';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Frontpage from './pages/Frontpage';
 import TemplateSuggestion from './pages/TemplateSuggestion';
 import { useState } from 'react';
 import Login from './pages/Login';  // Antag, at du har en LoginPage
+import SignUpPage from './pages/SignUp';
+import EditorPage from './pages/Editorpage';
+import EditorLayout from './layouts/EditorLayout';
+import ContactPage from './pages/ContactPage';
+
 
 
 function App() {
@@ -17,15 +23,17 @@ function App() {
   const login = () => {
     setLoggedIn(true);  // Sætter loggedIn til true efter succesfuldt login
   }
-
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
          <Route path="/" element={<MainLayout loggedIn={loggedIn} logout={logout} />}>
           <Route index element= {<Frontpage/>} />
-          <Route path='template-suggestion' element={<TemplateSuggestion/>} />
+          <Route path="template-suggestion" element={<TemplateSuggestion/>} />
           <Route path="*" element={<p>Page Not Found</p>} /> 
           <Route path="login" element={<Login onLogin={login} />} />
+          <Route path="registration" element={<SignUpPage />} />
+          <Route path="contact" element={<ContactPage />} />
+
           { 
             /* Leave for now, to see how to do different routing things
             <Route path="about" element={<About/>}/>
@@ -33,8 +41,8 @@ function App() {
             */
           }
         </Route>
-        <Route path='/editor' >
-          <Route index element={<p>editor</p>} />
+        <Route path="/editor" element={<EditorLayout loggedIn={loggedIn} logout={logout} />}>
+          <Route index element={<EditorPage />} />
         </Route>
       </>
     )

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import dameImage from "../assets/dame.png";
 import "../assets/Frontpage.css";
+import "../assets/App.css";
+
 
 const Frontpage = () => {
   return (

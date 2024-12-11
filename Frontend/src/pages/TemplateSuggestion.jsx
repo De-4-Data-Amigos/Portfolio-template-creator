@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import maleDev from "../assets/maleDev.png";
 import "../assets/TemplateSuggestion.css";
+import "../assets/Frontpage.css";
 
 const TemplateSuggestion = () => {
     return (
@@ -14,15 +15,15 @@ const TemplateSuggestion = () => {
 
                     {/* Link til skal rettes til korrekt flow */}
 
-                    <Link to="/editor" className="temp-suggest-button">
+                    <Link to="/editor" className="template-suggest-button">
                         <span>Personal Trainer</span>
                     </Link>
 
-                    <Link to="/editor" className="temp-suggest-button">
+                    <Link to="/editor" className="template-suggest-button">
                         <span>Medical Staff</span>
                     </Link>
 
-                    <Link to="/editor" className="temp-suggest-button">
+                    <Link to="/editor" className="template-suggest-button">
                         <span>Developer</span>
                     </Link>
                 </div>

@@ -1,3 +1,5 @@
+/* Some of the roles in here and in Frontpage.css, were in conflict with eachother */
+/*
 .frontpage {
     background-size: cover;
     background-position: center;
@@ -49,7 +51,7 @@
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
-  
+  */
   .cta-button {
     font-size: 1.2rem;
     font-family: Arial, sans-serif;
@@ -66,7 +68,7 @@
     background-color: #0056b3;
   }
   
-  .temp-suggest-button {
+  .template-suggest-button {
     position: relative;
     display: flex;
     justify-content: center;
@@ -81,7 +83,7 @@
     margin: 10px;
   }
   
-  .temp-suggest-button:after {
+  .template-suggest-button:after {
     content: " ";
     width: 0%;
     height: 100%;
@@ -91,13 +93,13 @@
     right: 0;
   }
   
-  .temp-suggest-button:hover::after {
+  .template-suggest-button:hover::after {
     right: auto;
     left: 0;
     width: 100%;
   }
   
-  .temp-suggest-button span {
+  .template-suggest-button span {
     text-align: center;
     text-decoration: none;
     width: 100%;
@@ -110,7 +112,7 @@
     transition: all 0.3s ease-in-out;
   }  
   
-  .temp-suggest-button:hover span {
+  .template-suggest-button:hover span {
     color: #183153;
     animation: scaleUp 0.3s ease-in-out;
   }
