@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import maleDev from "../assets/maleDev.png";
 import "../assets/TemplateSuggestion.css";
+import "../assets/Frontpage.css";
 
 const TemplateSuggestion = () => {
     return (

@@ -1,9 +1,14 @@
+/* 
+  Some of the rules, might want to be put into there own css, since they are used multiple place. 
+  The reason is to, make it easier to edit, and to combat conflicts or duplicate rules.
+*/
+
 .frontpage {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
-  width: calc(100vw - var(--margin-width));
+  width: calc(100vw - calc(var(--margin-width) * 2));
   display: flex;
   justify-content: flex-end;
   overflow: hidden;
@@ -36,15 +41,14 @@
   font-family: "Myriad Pro", sans-serif;
   margin-bottom: 1.5rem;
 }
-
+/*
 .section h2 {
   font-size: 1.5rem;
   font-family: Arial, sans-serif;
-  font-family: "ModernSans", sans-serif; /* Brug den nye skrifttype */
+  font-family: "ModernSans", sans-serif; /* Brug den nye skrifttype */ /*
   margin-bottom: 1.5rem;
 }
-
-
+*/
 .section h2 {
   font-family: "JetBrainsMono Bold", monospace; /* Fed JetBrains Mono */
   font-size: 1.5rem;
@@ -58,13 +62,16 @@
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
-@front-faceJetBrainsMono {
+/*
+@font-face {
   font-family: "JetBrainsMono", monospace; /* Normal JetBrains Mono */
+  /*
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
+*/
 @font-face {
   font-family: "ModernSans";
   src: url("../assets/ModernSans-Light.otf") format("opentype");
