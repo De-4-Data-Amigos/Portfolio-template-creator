@@ -15,6 +15,16 @@
 
 }
 
+/* Move the form upwards by using margin-top */
+.login-form {
+    margin-top: -40px; /* Use a negative value to move the form upwards */
+  }
+  
+  /* Alternatively, you could use padding */
+  .login-form {
+    padding-bottom: 200px; /* Add padding to move content upwards */
+  }
+  
 
 .form-container {
     display: flex;
@@ -33,16 +43,16 @@
 }
 
 
-.sign-title  {
-font-size: 25px;
-font-weight: bold;
-text-align: center;
-margin-bottom: 20px;
-color: #0e0e0e;
-font-family: "Montserrat", sans-serif; /* Tilføj en flot skrifttype */
-text-transform: uppercase; /* Hvis du vil have teksten i store bogstaver */
-letter-spacing: 1.5px; /* Gør teksten mere læselig */
-}
+.sign-title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0e0e0e;
+    font-family: "Montserrat", sans-serif; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+  }
 
 /* Styling for input-felterne */
 .input-field {
