@@ -111,11 +111,15 @@ function EditorPage() {
                 </div>
             </div>
 
+                 {/* Divider / Space */}
+            <div style={{ paddingTop: "15vh"}} ></div>
+
             
-            <div style={{ display: "flex", backgroundColor: "#333", alignItems: "center", height: "auto" }}>
+            
+            <div style={{ }}>
                 
                 <div style={{ display: "flex" }}>
-                    <Toolbar>
+                    <Toolbar addComponent={addComponent}>
                         <GridDeleteZone onDrop={onDropDeleteZone} />
                     </Toolbar>
                 </div>
