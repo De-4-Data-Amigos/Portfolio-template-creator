@@ -112,7 +112,9 @@ function LoginPage({ onLogin }) {
     >
       Don't have an account?
     </button>
-    <button type="button" className="login-button">
+    <button type="button" className="login-button"
+    onClick={() => navigate("/contact")}
+    >
       Forgot Password?
     </button>
         </div>
