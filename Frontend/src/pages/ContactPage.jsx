@@ -73,10 +73,16 @@ function ContactPage() {
               required
             ></textarea>
           </div>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }} >
 
           <button className="send-button" type="submit">
             Send
           </button>
+          
+          </div>
         </form>
       </div>
     </div>
