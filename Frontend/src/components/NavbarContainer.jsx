@@ -27,11 +27,16 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
         setDraggedIndex(null);
     };
 
-    const handleDelete = () => {
-        if (draggedIndex !== null) {
+    const handleDelete = (event) => {
+
+        const dropTargetElement = event.target.firstChild;
+        console.log("handleDelete", event)
+        const index = dropTargetElement.getAttribute("data-id");
+
+        if (index !== null) {
             
             const updatedLinks = [...links];
-            updatedLinks.splice(draggedIndex, 1);
+            updatedLinks.splice(index, 1);
             onUpdateLinks(updatedLinks);
             setDraggedIndex(null);
         }
@@ -48,12 +53,13 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
                     <span
                         key={link.id}
                         data-pos={link.pos}
+                        data-id={index}
                         /*
                         draggable
-                        */
                         onDragStart={() => handleDragStart(index)}
                         onDragOver={handleDragOver}
                         onDrop={() => handleDrop(index)}
+                        */
                         className="navbar-item"
                     >
                         {link.text}
