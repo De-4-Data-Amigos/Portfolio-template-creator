@@ -70,7 +70,7 @@ function SignUpPage() {
             <h2 className="sign-title"> Sign Up</h2>
           </div>
 
-          {/* Avatar/lock icon */}
+          
           <div className="form-container">
             <div className="form">
               <img src={lockIcon} alt="Lock icon" className="icon" />
