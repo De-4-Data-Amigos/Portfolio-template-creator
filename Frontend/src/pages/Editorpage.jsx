@@ -35,7 +35,7 @@ function EditorPage() {
 
     const addComponent = (comp) => {
         if (componentAmount === maxComponentAmount) {
-            alert("Grid er fyldt op!");
+            alert("Grid is filled up");
             return;
         }
 
@@ -72,15 +72,16 @@ function EditorPage() {
     };
 
     const handleAddLink = () => {
-        const text = prompt("Skriv teksten for navbaren:");
-        const href = prompt("Skriv linket (URL) for navbaren:");
+        const text = prompt("Write the text for the navbar:" );
+        const href = prompt("Write the link (URL) for the navbar:" );
 
         if (text && href) {
             addNavbarLink(text, href);
         } else {
-            alert("Både tekst og link skal udfyldes!");
+            alert("Both text and link must be filled in!" );
         }
     };
+
 
     const updateNavbarLinks = (updatedLinks) => {
         setNavbarLinks(updatedLinks);
@@ -115,8 +116,7 @@ function EditorPage() {
                  {/* Divider / Space */}
             <div style={{ paddingTop: "15vh"}} ></div>
 
-            
-            
+            {/* Footer */}
             <div style={{ }}>
                 
                 <div style={{ display: "flex" }}>
