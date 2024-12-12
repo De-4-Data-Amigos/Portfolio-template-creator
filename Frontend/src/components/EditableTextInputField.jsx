@@ -10,12 +10,11 @@ const EditableTextInputField = ({ text, dataPos }) => {
 
   const handleSaveClick = () => {
     setIsEditing(false);
-    // Logic to save the input value
   };
 
   const handleCancelClick = () => {
     setIsEditing(false);
-    setInputValue(text); // Revert to the original text
+    setInputValue(text); 
   };
 
   const handlePenClick = () => {
@@ -77,5 +76,8 @@ const EditableTextInputField = ({ text, dataPos }) => {
     </div>
   );
 };
+
+{/* Add below in EditorPage.jsx, below {childrenArray} to test:
+   <EditableTextInputField text="Test input if save" data-pos= "0,0"/> */}
 
 export default EditableTextInputField;
