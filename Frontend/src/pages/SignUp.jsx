@@ -67,12 +67,12 @@ function SignUpPage() {
 
         <form onSubmit={performSignup} className="login-form">
           <div className="input-group">
-            <h2><p>Sign Up</p></h2>
+            <h2 className="sign-title"> Sign Up</h2>
           </div>
 
           {/* Avatar/lock icon */}
-          <div className="avatar-container">
-            <div className="avatar">
+          <div className="form-container">
+            <div className="form">
               <img src={lockIcon} alt="Lock icon" className="icon" />
             </div>
           </div>
@@ -141,11 +141,16 @@ function SignUpPage() {
             />
             {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
           </div>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }} >
 
           {/* Submit button */}
-          <button className="login-button" type="submit">
+          <button className="sign-button" type="submit">
             Sign Up
           </button>
+          </div>
 
           {/* Link to login */}
           <p className="signin">

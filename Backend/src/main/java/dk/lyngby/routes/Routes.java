@@ -21,6 +21,7 @@ public class Routes {
 
 
     private final UserRoutes userRoutes = new UserRoutes();
+    private final ContactRoutes contactRoutes = new ContactRoutes();
 
     private final Logger LOGGER = LoggerFactory.getLogger(Routes.class);
 
@@ -35,6 +36,8 @@ public class Routes {
 
             app.routes(() -> {
                 path("/", userRoutes.getRoutes());
+                path("/contact", contactRoutes.getRoutes());
+
 
             });
 
