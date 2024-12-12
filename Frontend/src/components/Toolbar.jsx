@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../assets/Toolbar.css";
+import ChooseBackground from './ChooseBackground';
 
-const Toolbar = ({ addText, openChooseBackground, children }) => {
+const Toolbar = ({ addText, children }) => {
+  const [showChooseBackground, setShowChooseBackground] = useState(false);
+
   return (
     <div className="toolbar">
       <div style={{ display: 'flex', gap: '15px' }}> {/* Grupperer standard ikoner */}
@@ -13,11 +16,12 @@ const Toolbar = ({ addText, openChooseBackground, children }) => {
           <div className="toolbar-icon">🖼️</div>
           <div className="toolbar-label">Picture</div>
         </div>
-        <div className="toolbar-item" onClick={openChooseBackground}>
+        <div className="toolbar-item" onClick={() => setShowChooseBackground(true)}>
           <div className="toolbar-icon">🎨</div>
           <div className="toolbar-label">Background</div>
         </div>
       </div>
+      {showChooseBackground && <ChooseBackground setShowModal={setShowChooseBackground} />}
       <div> {/* "Delete Zone" placeres her */}
         {children}
       </div>
