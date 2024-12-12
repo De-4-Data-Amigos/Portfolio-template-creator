@@ -4,8 +4,6 @@ import facade from '../utils/apiFacade';
 import '../assets/login.css';
 import Office from "../assets/Office.png";
 import lockIcon from '../assets/icon/lock.png';
-import "../assets/login.css";
-
 
 function LoginPage({ onLogin }) {
   const init = { username: "", password: "" };
@@ -15,9 +13,7 @@ function LoginPage({ onLogin }) {
 
   const performLogin = (evt) => {
     evt.preventDefault();
-    console.log("Login button clicked");
 
-    // Hvis der er fejl, lad ikke brugeren logge ind
     if (errors.username || errors.password) {
       console.log("Validation error:", errors);
       return;
@@ -25,16 +21,14 @@ function LoginPage({ onLogin }) {
 
     facade.login(loginCredentials.username, loginCredentials.password)
       .then(() => {
-        console.log("Login successful");
         setErrors({ ...errors, login: "" });
-        onLogin(); // kald onLogin når login er succesfuldt
+        onLogin();
         navigate("/");
       })
-      .catch((err) => {
-        console.log("Login failed", err);
+      .catch(() => {
         setErrors({
           ...errors,
-          login: "Login failed. Please check your credentials." // Sæt fejlmeddelelse
+          login: "Login failed. Please check your credentials."
         });
       });
   };
@@ -43,95 +37,80 @@ function LoginPage({ onLogin }) {
     const { id, value } = evt.target;
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // Validering af email
     if (id === "username" && !emailPattern.test(value)) {
       setErrors((prevErrors) => ({ ...prevErrors, username: "Email must be a valid email" }));
-    }
-    // Validering af password
-    else if (id === "password" && value.length < 8) {
+    } else if (id === "password" && value.length < 8) {
       setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 8 characters" }));
-    }
-    else {
-      setErrors((prevErrors) => ({ ...prevErrors, [id]: "" })); // Fjern fejlmeddelelse
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, [id]: "" }));
     }
 
-    // Opdater login credentials state
     setLoginCredentials({ ...loginCredentials, [id]: value });
   };
 
   return (
-<div class="frontpage" style={{ backgroundImage: `url(${Office})` }}>
-  <div class="content-box">
-    <h2 class="sub-header"><i></i></h2>
+    <div className="frontpage" style={{ backgroundImage: `url(${Office})` }}>
+      <div className="content-box">
+        <h2 className="sub-header"><i></i></h2>
+        <div className="form">
+            <img src={lockIcon} alt="Lock icon" className="icon" />
+          </div>
+        <form onSubmit={performLogin} className="login-form">
+          <div className="input-group">
+            <h2><p>Login</p></h2>
+            <input
+              className="input-field"
+              placeholder="Email *"
+              type="email"
+              id="username"
+              value={loginCredentials.username}
+              onChange={handleValidation}
+              required
+            />
+            {errors.username && <span className="error-message">{errors.username}</span>}
+          </div>
 
-    <form onSubmit="{performLogin}" class="login-form">
-      <div class="input-group">
-        <h2><p>Login</p></h2>
-        <input
-          class="input-field"
-          placeholder="Email *"
-          type="email"
-          id="username"
-          value=""
-          onChange="{handleValidation}"
-          required
-        />
-        <xsl:if test="errors.username">
-          <span class="error-message">
-            <xsl:value-of select="errors.username" />
-          </span>
-        </xsl:if>
-      </div>
+          <div className="input-group">
+            <input
+              className="input-field"
+              placeholder="Password *"
+              type="password"
+              id="password"
+              value={loginCredentials.password}
+              onChange={handleValidation}
+              required
+            />
+            {errors.password && <span className="error-message">{errors.password}</span>}
+          </div>
 
-      <div class="input-group">
-        <input
-          class="input-field"
-          placeholder="Password *"
-          type="password"
-          id="password"
-          minLength="8"
-          value=""
-          onChange="{handleValidation}"
-          required
-        />
-        <xsl:if test="errors.password">
-          <span class="error-message">
-            <xsl:value-of select="errors.password" />
-          </span>
-        </xsl:if>
-      </div>
+          <div className="options-group">
+            <div className="checkbox-container">
+              <input type="checkbox" id="remember-me" />
+              <label htmlFor="remember-me">Remember Me</label>
+            </div>
+            <button className="login-button" type="submit">
+              Log In
+            </button>
+          </div>
 
-      <div class="options-group">
-        <div class="checkbox-container">
-          <input type="checkbox" id="remember-me" />
-          <label for="remember-me">Remember Me</label>
+          {errors.login && <span className="error-message">{errors.login}</span>}
+        </form>
+
+        <div className="link-group">
+    <button
+      type="button"
+      className="login-button"
+      onClick={() => navigate("/registration")}
+    >
+      Don't have an account?
+    </button>
+    <button type="button" className="login-button">
+      Forgot Password?
+    </button>
         </div>
-
-        <button class="login-button" type="submit">
-          Log In
-        </button>
       </div>
-
-      <xsl:if test="errors.login">
-        <span class="error-message">
-          <xsl:value-of select="errors.login" />
-        </span>
-      </xsl:if>
-    </form>
-
-    <div class="link-group">
-      <button type="button" class="login-button">
-        Forgot Password?
-      </button>
-      <button type="button" class="login-button">
-        Don't have an account?
-      </button>
     </div>
-  </div>
-</div>
-
-
   );
-};
+}
 
 export default LoginPage;

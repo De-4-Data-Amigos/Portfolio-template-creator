@@ -1,3 +1,5 @@
+/* Some of the roles in here and in Frontpage.css, were in conflict with eachother */
+/*
 .frontpage {
     background-size: cover;
     background-position: center;
@@ -49,7 +51,7 @@
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
-  
+  */
   .cta-button {
     font-size: 1.2rem;
     font-family: Arial, sans-serif;

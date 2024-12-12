@@ -45,17 +45,19 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
             <nav className="navbar">
                 <GridContainer columns={4} rows={1} style={gridStyle}>
                 {links.map((link, index) => (
-                    <div
+                    <span
                         key={link.id}
                         data-pos={link.pos}
+                        /*
                         draggable
+                        */
                         onDragStart={() => handleDragStart(index)}
                         onDragOver={handleDragOver}
                         onDrop={() => handleDrop(index)}
                         className="navbar-item"
                     >
                         {link.text}
-                    </div>
+                    </span>
                 ))}
                 </GridContainer>
             </nav>

@@ -6,9 +6,10 @@ import Frontpage from './pages/Frontpage';
 import TemplateSuggestion from './pages/TemplateSuggestion';
 import { useState } from 'react';
 import Login from './pages/Login';  // Antag, at du har en LoginPage
-import SignPage from './pages/SignUp';
+import SignUpPage from './pages/SignUp';
 import EditorPage from './pages/Editorpage';
 import EditorLayout from './layouts/EditorLayout';
+import ContactPage from './pages/ContactPage';
 
 
 
@@ -30,7 +31,8 @@ function App() {
           <Route path="template-suggestion" element={<TemplateSuggestion/>} />
           <Route path="*" element={<p>Page Not Found</p>} /> 
           <Route path="login" element={<Login onLogin={login} />} />
-          <Route path="registration" element={<SignPage />} />
+          <Route path="registration" element={<SignUpPage />} />
+          <Route path="contact" element={<ContactPage />} />
 
           { 
             /* Leave for now, to see how to do different routing things

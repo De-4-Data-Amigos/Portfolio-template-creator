@@ -3,8 +3,8 @@
     min-width: 100%;
     min-height: 100%;
 
-    width: 95vw;
-    height: 95vh;
+    width: var(--max-width);
+    height: var(--max-height);
     
     display: flex;
     flex-direction: row;
@@ -117,10 +117,12 @@
 
 
 .navbar-item {
+    /*
     padding: 10px 20px; 
+    border-radius: 10px;
+    */
     background-color:  rgba(52, 67, 78, 0.8); 
     color: #fff;
-    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.3s ease;

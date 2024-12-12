@@ -9,22 +9,23 @@ function Header({ loggedIn, logout }) {
   }
 
   return (
-    <>
-      <div className="Header">
-        <nav className="NavBar">
-          {/* Navigation links */}
-          <a onClick={() => clickHandler("/")}>Home</a>
-          <a onClick={() => clickHandler("/editor")}>Editor</a>
-          {loggedIn ? (
-            <a onClick={logout}>Logout</a>
-          ) : (
-            <a onClick={() => clickHandler("/login")}>Login</a>
-          )}
-        </nav>
-        <i className="NavIndicator"></i>
-      </div>
-      <div className='NavBarDivider'></div>
-    </>
+
+    <div className="Header">
+      <nav className="NavBar">
+        {/* Navigation links */}
+        <a onClick={() => clickHandler("/")}>Home</a>
+        <a onClick={() => clickHandler("/editor")}>Editor</a>
+        {loggedIn ? (
+          <a onClick={logout}>Logout</a>
+        ) : (
+          <a onClick={() => clickHandler("/login")}>Login</a>
+        )}
+        <a onClick={() => clickHandler("/contact")}>Contact</a>
+        
+      </nav>
+      <i className="NavIndicator"></i>
+    </div>
+
   );
 }
 
