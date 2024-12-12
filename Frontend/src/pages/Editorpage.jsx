@@ -1,8 +1,10 @@
-import { useState, cloneElement } from "react";
+import React, { useState, cloneElement } from "react";
 import GridContainer from "../components/GridContainer";
 import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
+import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
+import EditableTextInputField from "../components/EditableTextInputField";
 
 function EditorPage() {
     const columns = 3;
@@ -14,7 +16,6 @@ function EditorPage() {
     const [childrenArray, setChildrenArray] = useState([]);
     const [navbarLinks, setNavbarLinks] = useState(new Map());
 
-    
     const addNavbarLink = (text, href) => {
         let tempMap = new Map(navbarLinks);
         addloop: {
@@ -25,30 +26,30 @@ function EditorPage() {
                         const newLink = { id: Date.now(), text, href, pos };
                         tempMap.set(pos, newLink);
                         break addloop;
-                        
                     }
                 }
-        
             }
-       }
-       setNavbarLinks(tempMap);
-    
+        }
+        setNavbarLinks(tempMap);
     };
-   
+
     const addComponent = (comp) => {
         if (componentAmount === maxComponentAmount) {
             alert("Grid er fyldt op!");
             return;
         }
 
-        let updatedGridChildren = new Map(gridChildren); 
+        let updatedGridChildren = new Map(gridChildren);
 
         addloop: {
             for (let i = 0; i < columns; i++) {
                 for (let j = 0; j < rows; j++) {
                     const position = `${i},${j}`;
                     if (!updatedGridChildren.has(position)) {
-                        const newComp = cloneElement(comp, { "data-pos": position, key: `gridComponent-${position}` });
+                        const newComp = cloneElement(comp, {
+                            "data-pos": position,
+                            key: `gridComponent-${position}`,
+                        });
                         updatedGridChildren.set(position, newComp);
                         setComponentAmount((prev) => prev + 1);
                         break addloop;
@@ -61,9 +62,8 @@ function EditorPage() {
         setChildrenArray(Array.from(updatedGridChildren.values()));
     };
 
-   
     const removeComponent = (removedPos) => {
-        let updatedGridChildren = new Map(gridChildren); 
+        let updatedGridChildren = new Map(gridChildren);
         if (updatedGridChildren.delete(removedPos)) {
             setGridChildren(updatedGridChildren);
             setComponentAmount((prev) => prev - 1);
@@ -71,7 +71,6 @@ function EditorPage() {
         }
     };
 
-    
     const handleAddLink = () => {
         const text = prompt("Skriv teksten for navbaren:");
         const href = prompt("Skriv linket (URL) for navbaren:");
@@ -83,36 +82,50 @@ function EditorPage() {
         }
     };
 
-    
     const updateNavbarLinks = (updatedLinks) => {
         setNavbarLinks(updatedLinks);
     };
 
     const onDropDeleteZone = (event) => {
-       /* event.preventDefault();
-        const data = event.dataTransfer.getData("text");
-        const [x, y] = data.split(",");
-        const position = `${x},${y}`;
-        removeComponent(position); */
-    }
-
+        /* Uncomment this if you plan to enable drag-and-drop functionality */
+        // event.preventDefault();
+        // const data = event.dataTransfer.getData("text");
+        // const [x, y] = data.split(",");
+        // const position = `${x},${y}`;
+        // removeComponent(position);
+    };
 
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-           
+        <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+            {/* Navbar */}
             <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks} />
-            
+
             {/* Grid-container sektion */}
-            <div style={{ display: "flex", flexDirection: "column", marginTop: "30px" }}>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
                     <button onClick={handleAddLink}>Tilføj navbar-link</button>
                 </div>
-                <div style={{ marginTop: "20px" }}>
-                    <button onClick={() => addComponent(<p>test</p>)}>Add p tag</button>
+                <div style={{ marginTop: "20px", flex: 1 }}>
                     <GridContainer columns={columns} rows={rows} onRemove={removeComponent}>
                         {childrenArray}
                     </GridContainer>
-                    <GridDeleteZone onDrop={onDropDeleteZone}/>
+                </div>
+            </div>
+
+                 {/* Divider / Space */}
+            <div style={{ paddingTop: "15vh"}} ></div>
+
+            
+            
+            <div style={{ }}>
+                
+                <div style={{ display: "flex" }}>
+                    <Toolbar addComponent={addComponent}>
+                        <GridDeleteZone onDrop={onDropDeleteZone} />
+                    </Toolbar>
+                </div>
+                
+                <div style={{ flex: 1 }}>
                 </div>
             </div>
         </div>
