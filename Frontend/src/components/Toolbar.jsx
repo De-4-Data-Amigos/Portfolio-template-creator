@@ -22,7 +22,7 @@ const Toolbar = ({ addText, children }) => {
         </div>
       </div>
       {showChooseBackground && <ChooseBackground setShowModal={setShowChooseBackground} />}
-      <div> {/* "Delete Zone" placeres her */}
+      <div> 
         {children}
       </div>
     </div>
