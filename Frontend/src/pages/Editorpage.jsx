@@ -4,6 +4,7 @@ import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
+import EditableTextInputField from "../components/EditableTextInputField";
 
 function EditorPage() {
     const columns = 3;
