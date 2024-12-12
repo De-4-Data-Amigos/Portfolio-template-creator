@@ -36,23 +36,28 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
             setDraggedIndex(null);
         }
     };
-
+    const gridStyle = {
+        height: '100%',
+        margin: 0
+    };
     return (
         <div className="navbar-container">
             <nav className="navbar">
-                <GridContainer columns={4} rows={1}>
+                <GridContainer columns={4} rows={1} style={gridStyle}>
                 {links.map((link, index) => (
-                    <div
+                    <span
                         key={link.id}
                         data-pos={link.pos}
+                        /*
                         draggable
+                        */
                         onDragStart={() => handleDragStart(index)}
                         onDragOver={handleDragOver}
                         onDrop={() => handleDrop(index)}
                         className="navbar-item"
                     >
                         {link.text}
-                    </div>
+                    </span>
                 ))}
                 </GridContainer>
             </nav>

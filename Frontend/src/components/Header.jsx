@@ -9,6 +9,7 @@ function Header({ loggedIn, logout }) {
   }
 
   return (
+
     <div className="Header">
       <nav className="NavBar">
         {/* Navigation links */}
@@ -19,9 +20,12 @@ function Header({ loggedIn, logout }) {
         ) : (
           <a onClick={() => clickHandler("/login")}>Login</a>
         )}
+        <a onClick={() => clickHandler("/contact")}>Contact</a>
+        
       </nav>
       <i className="NavIndicator"></i>
     </div>
+
   );
 }
 
