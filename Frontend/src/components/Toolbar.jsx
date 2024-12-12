@@ -1,35 +1,20 @@
 import React, { useState } from "react";
 import "../assets/Toolbar.css";
 
-const Toolbar = () => {
-  const [selected, setSelected] = useState("DRIVE");
-
-  const handleSelection = (mode) => {
-    setSelected(mode);
-  };
-
+const Toolbar = ({ addText, openChooseBackground }) => {
   return (
-    <div className="toolbar-container">
-      <div
-        className={`toolbar-option ${selected === "WALK" ? "selected" : ""}`}
-        onClick={() => handleSelection("WALK")}
-      >
-        <div className="toolbar-icon">🚶‍♂️</div>
-        <div className="toolbar-label">WALK</div>
+    <div className="toolbar">
+      <div className="toolbar-item" onClick={addText}>
+        <div className="toolbar-icon">T</div>
+        <div className="toolbar-label">Text</div>
       </div>
-      <div
-        className={`toolbar-option ${selected === "BIKE" ? "selected" : ""}`}
-        onClick={() => handleSelection("BIKE")}
-      >
-        <div className="toolbar-icon">🚴‍♂️</div>
-        <div className="toolbar-label">BIKE</div>
+      <div className="toolbar-item" onClick={() => alert("Picture functionality not implemented yet!")}>
+        <div className="toolbar-icon">🖼️</div>
+        <div className="toolbar-label">Picture</div>
       </div>
-      <div
-        className={`toolbar-option ${selected === "DRIVE" ? "selected" : ""}`}
-        onClick={() => handleSelection("DRIVE")}
-      >
-        <div className="toolbar-icon">🚗</div>
-        <div className="toolbar-label">DRIVE</div>
+      <div className="toolbar-item" onClick={openChooseBackground}>
+        <div className="toolbar-icon">🎨</div>
+        <div className="toolbar-label">Background</div>
       </div>
     </div>
   );

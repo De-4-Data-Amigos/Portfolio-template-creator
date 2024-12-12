@@ -8,7 +8,7 @@ function EditorLayout({ loggedIn, logout }) {
     <>
       <Header loggedIn={loggedIn} logout={logout} />
       <div>{/* SPACER */}</div>
-      <ChooseBackground /> {/* background chooser*/}
+      
       <Toolbar/> {/* toolbar */}
       <Outlet />
     </>
