@@ -90,7 +90,7 @@ function ChooseBackground({ setShowModal }) {
           background: `radial-gradient(ellipse at ${gradientPosition.x}% ${gradientPosition.y}%, #e0e0e0, #6e6e6e)`,
         }}
       >
-        <h2>Vælg en baggrund</h2>
+        <h2>Choose a background</h2>
         <div className="image-grid">
           {images.slice(currentPage * imagesPerPage, (currentPage + 1) * imagesPerPage).map((image, index) => (
             <div
@@ -135,7 +135,7 @@ function ChooseBackground({ setShowModal }) {
           </button>
         </div>
         <div className="color-picker">
-          <label htmlFor="color-input">Eller vælg en farve:</label>
+          <label htmlFor="color-input">Or choose a color:</label>
           <input
             type="color"
             id="color-input"
@@ -143,7 +143,7 @@ function ChooseBackground({ setShowModal }) {
             onChange={handleColorChange}
           />
         </div>
-        <button onClick={handleSave} className="save-btn">Gem</button>
+        <button onClick={handleSave} className="save-btn">Save</button>
       </div>
     </div>
   );
