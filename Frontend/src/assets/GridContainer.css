@@ -63,10 +63,12 @@
 .GridDeleteZone{
     --border-width: .2em;
     display: flex;
-    align-items: center;
+    width: 50%;
     opacity: 70;
     background-color: rgb(180, 10, 10);
     height: auto;
+    justify-content: center;
+    float : right;
     
     margin-top: 2.5vh;
     margin-bottom: 2.5vh;
@@ -78,6 +80,7 @@
     opacity: .05;
 
     transition: opacity .5s;
+
 }
 
 .GridDeleteZone:hover{

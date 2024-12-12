@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../assets/Toolbar.css";
 
-const Toolbar = ({ addText, openChooseBackground }) => {
+const Toolbar = ({ addText, openChooseBackground, children}) => {
+  const childrenArray = React.Children.toArray(children);
   return (
     <div className="toolbar">
       <div className="toolbar-item" onClick={addText}>
@@ -16,6 +17,11 @@ const Toolbar = ({ addText, openChooseBackground }) => {
         <div className="toolbar-icon">🎨</div>
         <div className="toolbar-label">Background</div>
       </div>
+      {childrenArray.map((child, index) => (
+        <div key={index} className="toolbar-item">
+          {child}
+        </div>
+      ))}
     </div>
   );
 };

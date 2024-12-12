@@ -111,15 +111,16 @@ function EditorPage() {
                 </div>
             </div>
 
-            {/* Toolbar og Delete Zone */}
+            
             <div style={{ display: "flex", backgroundColor: "#333", alignItems: "center", height: "auto" }}>
-                {/* Toolbar */}
+                
                 <div style={{ display: "flex" }}>
-                    <Toolbar />
+                    <Toolbar>
+                        <GridDeleteZone onDrop={onDropDeleteZone} />
+                    </Toolbar>
                 </div>
-                {/* Delete Zone fylder resten af pladsen */}
+                
                 <div style={{ flex: 1 }}>
-                    <GridDeleteZone onDrop={onDropDeleteZone} />
                 </div>
             </div>
         </div>

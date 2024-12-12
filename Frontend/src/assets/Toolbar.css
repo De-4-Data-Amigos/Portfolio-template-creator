@@ -15,13 +15,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 5px;
   background-color: #3a3a3a;
   color: white;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
-  width: 80px;
+  width: 100px;
   height: 80px;
 }
 
