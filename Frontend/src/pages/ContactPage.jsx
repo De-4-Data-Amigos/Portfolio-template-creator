@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "../assets/contact.css";
 import Contact from "../assets/contact.png";
+import apiFacade from "../utils/apiFacade";
 
 function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({ email: "" });
+  const [successMessage, setSuccessMessage] = useState(""); // For succesmeddelelse
+  const [errorMessage, setErrorMessage] = useState(""); // For fejlmeddelelse
 
   const handleValidation = (evt) => {
     const { id, value } = evt.target;
@@ -19,25 +22,38 @@ function ContactPage() {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-
     if (errors.email) {
-      console.log("Validation error:", errors);
+      alert("Der opstod en fejl. Tjek venligst din email.");
       return;
     }
-
-    console.log("Form data submitted:", formData);
-    // Her kan du tilføje logik til at sende dataen til en server.
+    let response;
+  
+    try {
+     response = await apiFacade.sendContactMessage(formData);
+      if (response.message) {
+        alert(response.message); 
+        setSuccessMessage(response.message); 
+        setErrorMessage(""); 
+        setFormData({ name: "", email: "", message: "" }); 
+      } else {
+        throw new Error("Uventet svarformat fra serveren");
+      }
+    } catch (err) {
+      console.error("Kunne ikke sende besked:", err);
+      alert("Noget gik galt. Prøv igen senere."); 
+      setErrorMessage("Noget gik galt. Prøv igen senere.");
+      setSuccessMessage(""); 
+    }
   };
 
   return (
     <div className="frontpage" style={{ backgroundImage: `url(${Contact})` }}>
       <div className="contact-container">
-      <h2 className="sub-header"><i></i></h2>
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="input-group">
-          <h2 className="contact-title">Contact</h2>
+            <h2 className="contact-title">Contact</h2>
             <input
               className="input-field"
               placeholder="Your Name *"
@@ -73,16 +89,16 @@ function ContactPage() {
               required
             ></textarea>
           </div>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-          }} >
 
-          <button className="send-button" type="submit">
-            Send
-          </button>
-          
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <button className="send-button" type="submit">
+              Send
+            </button>
           </div>
+
+          {/* Viser succes- eller fejlmeddelelser */}
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       </div>
     </div>
