@@ -1,8 +1,10 @@
-import { useState, cloneElement } from "react";
+import React, { useState, cloneElement } from "react";
 import GridContainer from "../components/GridContainer";
 import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
+import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
+import EditableTextInputField from "../components/EditableTextInputField";
 
 function EditorPage() {
     const columns = 3;
@@ -15,10 +17,10 @@ function EditorPage() {
     */
     const [navbarLinks, setNavbarLinks] = useState(new Map());
 
+
     const [navbarGridChildren, setNavbarGridChildren] = useState(new Map());
     const [bodyGridChildren, setBodyGridChildren] = useState(new Map());
-
-    
+  
     const addNavbarLink = (text, href) => {
         let tempMap = new Map(navbarLinks);
         addloop: {
@@ -29,20 +31,17 @@ function EditorPage() {
                         const newLink = { id: Date.now(), text, href, pos };
                         tempMap.set(pos, newLink);
                         break addloop;
-                        
                     }
                 }
-        
             }
-       }
-       setNavbarLinks(tempMap);
-    
+        }
+        setNavbarLinks(tempMap);
     };
-   
+
     const addComponent = (comp, parentGridName) => {
         /* 
         if (componentAmount === maxComponentAmount) {
-            alert("Grid er fyldt op!");
+            alert("Grid is filled up");
             return;
         }
         */
@@ -114,19 +113,18 @@ function EditorPage() {
         }
     };
 
-    
     const handleAddLink = () => {
-        const text = prompt("Skriv teksten for navbaren:");
-        const href = prompt("Skriv linket (URL) for navbaren:");
+        const text = prompt("Write the text for the navbar:" );
+        const href = prompt("Write the link (URL) for the navbar:" );
 
         if (text && href) {
             addNavbarLink(text, href);
         } else {
-            alert("Både tekst og link skal udfyldes!");
+            alert("Both text and link must be filled in!" );
         }
     };
 
-    
+
     const updateNavbarLinks = (updatedLinks) => {
         setNavbarLinks(updatedLinks);
     };
@@ -201,23 +199,37 @@ function EditorPage() {
         //setBodyGridChildren(tempMap);
     };
 
-
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-           
+        <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+            {/* Navbar */}
             <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks} />
-            
+
             {/* Grid-container sektion */}
-            <div style={{ display: "flex", flexDirection: "column", marginTop: "30px" }}>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
                     <button onClick={handleAddLink}>Tilføj navbar-link</button>
                 </div>
-                <div style={{ marginTop: "20px" }}>
+                <div style={{ marginTop: "20px", flex: 1 }}>
                     <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
                     <GridContainer columns={columns} rows={rows} onUpdate={changePositionOfElement}>
                         {Array.from(bodyGridChildren.values())}
                     </GridContainer>
-                    <GridDeleteZone onDrop={onDropDeleteZone}/>
+                </div>
+            </div>
+
+                 {/* Divider / Space */}
+            <div style={{ paddingTop: "15vh"}} ></div>
+
+            {/* Footer */}
+            <div style={{ }}>
+                
+                <div style={{ display: "flex" }}>
+                    <Toolbar addComponent={addComponent}>
+                        <GridDeleteZone onDrop={onDropDeleteZone} />
+                    </Toolbar>
+                </div>
+                
+                <div style={{ flex: 1 }}>
                 </div>
             </div>
         </div>
