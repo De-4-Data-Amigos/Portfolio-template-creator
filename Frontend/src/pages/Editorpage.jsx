@@ -46,7 +46,7 @@ function EditorPage() {
                 for (let j = 0; j < rows; j++) {
                     const position = `${i},${j}`;
                     if (!updatedGridChildren.has(position)) {
-                        const newComp = cloneElement(comp, {
+                        const newComp = cloneElement((<div>{comp}</div>), {
                             "data-pos": position,
                             key: `gridComponent-${position}`,
                         });
