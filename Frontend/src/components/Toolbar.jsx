@@ -6,7 +6,10 @@ const Toolbar = ({addComponent, children }) => {
   const [showChooseBackground, setShowChooseBackground] = useState(false);
 
   function addText() {
-    addComponent(<div className="text-component">New text</div>);
+    // Ask for which grid to add 
+    // Atm this is just mocked
+    let gridName = "body";
+    addComponent(<div className="text-component">New text</div>, gridName);
   }
 
   return (

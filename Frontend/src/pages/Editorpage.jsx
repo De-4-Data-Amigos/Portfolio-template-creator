@@ -141,7 +141,7 @@ function EditorPage() {
         */
     };
 
-    const changePositionOfElement = (oldPos, newPos) => {
+    const changePositionOfElementInBodyGrid = (oldPos, newPos) => {
         console.log("Changing from", oldPos, "to", newPos);
         let tempMap = new Map(bodyGridChildren);
         
@@ -154,50 +154,26 @@ function EditorPage() {
         }
         else{
             tempMap.set(oldPos, undefined);
-            //removeComponent(oldPos, "body")
         }
         setBodyGridChildren(tempMap);
-
-        /*
-        tempMap.forEach((value, key) => {
-            const pos = value.props["data-pos"];
-            if(pos == oldPos){
-               oldElement = child;
-            }
-            if(pos == newPos){
-                newElement = child;
-            }
-        });
-        let temp = childrenArray.map((child) => {
-            let newChild = child;
-            
-            if(child == oldElement){
-                newChild = React.cloneElement(child, {"data-pos" : newPos});
-            }
-            if(newElement && child == newElement){
-                newChild = React.cloneElement(child, {"data-pos" : oldPos});
-            }
-            
-            return newChild;
-        });
-        setChildrenArray(temp);
-        */
-         //setGrid(makeColumns(childrenArray));
-        //onUpdate(childrenArray);
     };
-
-    const onBodyGridUpdate = (array) => {
-        // todo
-        const tempMap = new Map(bodyGridChildren);
-        for (let i = 0; i < array.length; i++) {
-            const element = array[i];
-            const pos = element.props["data-pos"];
-            tempMap.set(pos, element);
-        }
-        console.log("onUpdate", array, tempMap);
+    const changePositionOfElementInNavbarGrid = (oldPos, newPos) => {
+        console.log("Changing from", oldPos, "to", newPos);
+        let tempMap = new Map(navbarGridChildren);
         
-        //setBodyGridChildren(tempMap);
+        let oldElement = tempMap.get(oldPos);
+        let newElement = tempMap.get(newPos);
+
+        tempMap.set(newPos, cloneElement(oldElement, {"data-pos" : newPos}));
+        if(newElement){
+            tempMap.set(oldPos, cloneElement(newElement, {"data-pos" : oldPos}));
+        }
+        else{
+            tempMap.set(oldPos, undefined);
+        }
+        setNavbarGridChildren(tempMap);
     };
+
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -211,17 +187,17 @@ function EditorPage() {
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
                     <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
-                    <GridContainer columns={columns} rows={rows} onUpdate={changePositionOfElement}>
+                    <GridContainer columns={columns} rows={rows} onUpdate={changePositionOfElementInBodyGrid}>
                         {Array.from(bodyGridChildren.values())}
                     </GridContainer>
                 </div>
             </div>
 
                  {/* Divider / Space */}
-            <div style={{ paddingTop: "15vh"}} ></div>
+            <div style={{ paddingTop: "20vh"}} ></div>
 
             {/* Footer */}
-            <div style={{ }}>
+            <div style={{}}>
                 
                 <div style={{ display: "flex" }}>
                     <Toolbar addComponent={addComponent}>
