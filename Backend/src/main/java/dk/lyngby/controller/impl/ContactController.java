@@ -32,7 +32,7 @@ public class ContactController {
             Contact contact = contactDTO.toEntity();
             contactDao.save(contact);
             JsonObject response = new JsonObject();
-            response.addProperty("message", "Thank you! Your message has been received. We will get back to you shortly.");
+            response.addProperty("message", "Thank you! Your message has been received." + "\nWe will get back to you shortly.");
             ctx.status(201).json(new Gson().toJson(response));
         } catch (Exception e) {
             throw new ApiException(400, "Error saving contact: " + e.getMessage());
