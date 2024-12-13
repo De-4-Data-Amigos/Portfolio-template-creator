@@ -1,4 +1,6 @@
 package dk.lyngby.controller.impl;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dk.lyngby.config.HibernateConfig;
 import dk.lyngby.dao.impl.ContactDao;
 import dk.lyngby.dto.ContactDTO;
@@ -7,6 +9,7 @@ import dk.lyngby.model.Contact;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceException;
+import netscape.javascript.JSObject;
 import org.slf4j.Logger;
 
 public class ContactController {
@@ -28,7 +31,9 @@ public class ContactController {
             }
             Contact contact = contactDTO.toEntity();
             contactDao.save(contact);
-            ctx.status(201).result("Contact saved successfully!");
+            JsonObject response = new JsonObject();
+            response.addProperty("message", "Contact saved successfully!");
+            ctx.status(201).json(new Gson().toJson(response));
         } catch (Exception e) {
             throw new ApiException(400, "Error saving contact: " + e.getMessage());
         }
