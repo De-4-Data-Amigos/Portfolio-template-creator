@@ -4,7 +4,6 @@ import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
-import EditableTextInputField from "../components/EditableTextInputField";
 
 function EditorPage() {
     const navbarColumns = 4;
@@ -41,7 +40,7 @@ function EditorPage() {
                     for (let j = 0; j < rows; j++) {
                         const position = `${i},${j}`;
                         if (!map.has(position) || !map.get(position)) {
-                            const newComp = cloneElement(comp, { "data-pos": position, key: `gridComponent-${position}` });
+                            const newComp = cloneElement(<div>{comp}</div>, { "data-pos": position, key: `gridComponent-${position}` });
                             map.set(position, newComp);
                             //setComponentAmount((prev) => prev + 1);
                             break addloop;
@@ -179,7 +178,6 @@ function EditorPage() {
                     <button onClick={handleAddLink}>Tilføj navbar-link</button>
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
-                    <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
                     <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
                         {Array.from(bodyGridChildren.values())}
                     </GridContainer>
