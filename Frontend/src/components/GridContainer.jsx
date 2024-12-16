@@ -4,7 +4,7 @@ import GridColumn from "../components/GridColumn";
 import GridRow from "../components/GridRow";
 import '../assets/GridContainer.css';
 
-function GridContainer({columns, rows, onRemove, children, style}) { 
+function GridContainer({columns, rows, name, onUpdate, children, style}) { 
     console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
     const amountOfColumns = columns;
     const amountOfRows = rows;
@@ -66,21 +66,24 @@ function GridContainer({columns, rows, onRemove, children, style}) {
             return;
         }
         const startDragPos = dragElement.attributes["data-pos"].value;
-        setSelectedGridPos(startDragPos);
+        //setSelectedGridPos(startDragPos);
+        e.dataTransfer.clearData();
+        e.dataTransfer.setData("text/plain", `${startDragPos}-${name}`);
     };
     const onDrop = (e) => {
         console.log("onDrop", e);
         const dropTargetElement = e.target.children[0]; 
         const startDragPos = dropTargetElement.attributes["data-pos"].value;
-        changePositionOfElement(selectedGridPos, startDragPos);
+        let dtData = e.dataTransfer.getData("text");
+        dtData = String(dtData).split('-');
+        const _selectedGridPos = dtData[0];
+        //removeComponent(position, "body"); 
+        //changePositionOfElement();
         setSelectedGridPos(null);
         setTargetGridPos(null);
-    };
-    const onDropDeleteZone = (e) => {
-        console.log("onDropDeleteZone", e);
-        removeElement(selectedGridPos);
-        setSelectedGridPos(null);
-        setTargetGridPos(null);
+        onUpdate(_selectedGridPos, startDragPos);
+        grid = makeColumns(childrenArray);
+
     };
     const onDragEnd = (e) => {
         console.log("onDragEnd", e);
@@ -105,7 +108,7 @@ function GridContainer({columns, rows, onRemove, children, style}) {
                 let isSelected = false;
                 let isEmpty = true;
                 let isTarget = false;
-                let element = React.cloneElement(emptyElement, {"data-pos" : `${i},${j}`});
+                let element = React.cloneElement(emptyElement, {"data-pos" : `${i},${j}`, "data-grid-name": name});
                 array.forEach((child) => {
                     if(child){
                         const location = child.props["data-pos"];
@@ -146,9 +149,7 @@ function GridContainer({columns, rows, onRemove, children, style}) {
         console.log("Deleting from pos: ", deletePos);
         const newChildrenArray = childrenArray.filter((x) => x.props["data-pos"] !== deletePos);
         setChildrenArray(newChildrenArray);
-        onRemove(deletePos);
         grid = makeColumns(childrenArray);
-
     };
     const changePositionOfElement = (oldPos, newPos) => {
         let oldElement;
@@ -180,7 +181,7 @@ function GridContainer({columns, rows, onRemove, children, style}) {
         setChildrenArray(temp);
 
          //setGrid(makeColumns(childrenArray));
-        grid = makeColumns(childrenArray);
+        //onUpdate(childrenArray);
     };
 
 

@@ -7,9 +7,8 @@ const Toolbar = ({addComponent, children }) => {
   const [showChooseBackground, setShowChooseBackground] = useState(false);
 
   function addText() {
-    
+    let gridName = "body";
     addComponent(<EditableTextInputField text="Test input if save"/>);
-
   }
 
   return (

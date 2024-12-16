@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render, fireEvent } from '@testing-library/react';
 import GridContainer from '../components/GridContainer';
-
+import { spyOn } from 'jest'
 
 describe(GridContainer, () => {
     it("grid gets created correctly", () => {
@@ -143,17 +143,68 @@ describe(GridContainer, () => {
     it("grid item gets moved correctly", () => {
         const columns = 3;
         const rows = 3;
+        // Map as storage place
+        const testStorageDrag = new Map();
+        const testStorageDrop = new Map();
+        //const [bodyGridChildren, setBodyGridChildren] = React.useState(new Map());
+        const bodyGridChildren = new Map();
 
+        const TestComp = () => {
+            return(<p>test</p>);
+        };
+
+        //data-pos={`${num},${num}`} data-testid={`component${num}`}
+        const changePositionOfElement = (oldPos, newPos) => {
+            console.log("Changing from", oldPos, "to", newPos);
+            
+            let oldElement = bodyGridChildren.get(oldPos);
+            let newElement = bodyGridChildren.get(newPos);
+    
+            bodyGridChildren.set(newPos, React.cloneElement((<div>{oldElement}</div>), {"data-pos" : newPos}));
+            if(newElement){
+                bodyGridChildren.set(oldPos, React.cloneElement((<div>{newElement}</div>), {"data-pos" : oldPos}));
+            }
+            else{
+                bodyGridChildren.set(oldPos, undefined);
+            }
+        };
+
+
+        bodyGridChildren.set('0,0', React.cloneElement(<div><TestComp/></div>, { "data-pos" : '0,0', "data-testid": "component0" }));
+        bodyGridChildren.set('1,1', React.cloneElement(<div><TestComp/></div>, { "data-pos" : '1,1', "data-testid": "component1" }));
+
+        
         const { getAllByTestId, getByTestId } = render(
-            <GridContainer columns={columns} rows={rows}>
-                <p data-pos='0,0' data-testid='component1'></p>
-                <p data-pos='1,1' data-testid='component2'></p>
+            <GridContainer columns={columns} rows={rows} onUpdate={changePositionOfElement}>
+                {Array.from(bodyGridChildren.values())}
             </GridContainer>
         );
-        const comp1Parent = getByTestId("component1").parentElement;
-        const comp2Parent = getByTestId("component2").parentElement;
-        expect(fireEvent.dragStart(comp1Parent, { target: comp1Parent })).toEqual(true);
-        expect(fireEvent.drop(comp2Parent, { target: comp2Parent })).toEqual(true);
+        const comp1Parent = getByTestId("component0").parentElement;
+        const comp2Parent = getByTestId("component1").parentElement;
+        
+        // https://stackoverflow.com/questions/54864280/how-to-mock-datatransfer-with-jest
+        // Mock of the drop Event
+        const testEventDrag = {
+            dataTransfer: {
+                setData: (key, value) => testStorageDrag.set(key, value),
+                getData: (key) => testStorageDrag.get(key),
+                clearData: () => testStorageDrag.clear()
+            },
+            target: comp1Parent
+        };
+        const testEventDrop = {
+            dataTransfer: {
+                setData: (key, value) => testStorageDrop.set(key, value),
+                getData: (key) => testStorageDrop.get(key),
+                clearData: () => testStorageDrop.clear()
+            },
+            target: comp2Parent
+        };
+        // remmeber to have 'and.callTrough()' to allow go trough the method
+        //jest.spyOn(testEventDrag.dataTransfer, 'getData').and.callThrough();
+        //spyOn(testEventDrop.dataTransfer, 'getData').and.callThrough();
+        expect(fireEvent.dragStart(comp1Parent, testEventDrag)).toEqual(true);
+        expect(fireEvent.drop(comp2Parent, testEventDrop)).toEqual(true);
         const movedComponet = getByTestId("component1");
         expect(movedComponet).toHaveAttribute('data-pos', '1,1');
     });
