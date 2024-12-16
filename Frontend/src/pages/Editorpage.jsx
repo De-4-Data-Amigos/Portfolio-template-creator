@@ -2,21 +2,27 @@ import React, { useState, cloneElement } from "react";
 import GridContainer from "../components/GridContainer";
 import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
+import FooterContainer from "../components/FooterContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
 import EditableTextInputField from "../components/EditableTextInputField";
+
 
 function EditorPage() {
     const navbarColumns = 4;
     const navbarRows = 1;
     const bodyColumns = 3;
     const bodyRows = 3;
+    const footerColums = 4;
+    const footerRows = 1;
 
     const [navbarLinks, setNavbarLinks] = useState(new Map());
+    const[footerLinks, setFooterLinks] = useState(new Map());
 
 
     const [navbarGridChildren, setNavbarGridChildren] = useState(new Map());
     const [bodyGridChildren, setBodyGridChildren] = useState(new Map());
+    const [footerGridChildren, setFooterGridChildren] = useState(new Map());
 
 
     const linkTemp = (text, href) => {
@@ -32,6 +38,10 @@ function EditorPage() {
   
     const addNavbarLink = (text, href) => {
         addComponent(linkTemp(text, href), "navbar");        
+    };
+
+    const addFooterLinks = (text, href) => {
+        setFooterLinks(linkTemp(text, href));
     };
 
     const addComponent = (comp, parentGridName) => {
@@ -64,6 +74,11 @@ function EditorPage() {
                 updateMap(tempMap, bodyColumns, bodyRows);
                 setBodyGridChildren(tempMap);
                 break;
+            case "footer":
+                tempMap = new Map(footerGridChildren);
+                updateMap(tempMap, footerColums, footerRows);
+                setFooterGridChildren(tempMap);
+                break;
         
             default:
                 console.log("Invalid grid name: ", parentGridName);
@@ -92,7 +107,14 @@ function EditorPage() {
                 if (tempMap.delete(removedPos)) {
                     setBodyGridChildren(tempMap);
                     console.log("state:", bodyGridChildren, "temp:", tempMap);
-                    
+                }
+                break;
+
+            case "footer":
+                tempMap = new Map(footerGridChildren);
+                if (tempMap.delete(removedPos)) {
+                    setFooterGridChildren(tempMap);
+                    console.log("state:", footerGridChildren, "temp:", tempMap);
                 }
                 break;
                 
@@ -113,9 +135,23 @@ function EditorPage() {
         }
     };
 
+    const handleAddFooterLink = () => {
+        const text = prompt("Write the text for the footer:");
+        const href = prompt("Write the link (URL) for the footer:");
+    
+        if (text && href) {
+            addComponent(linkTemp(text, href), "footer");
+        } else {
+            alert("Both text and link must be filled in!");
+        }
+    };
+
 
     const updateNavbarLinks = (updatedLinks) => {
         setNavbarLinks(updatedLinks);
+    };
+    const updateFooterLinks = (updatedLinks) => {
+        setFooterLinks(updatedLinks);
     };
 
     const onDropDeleteZone = (event) => {
@@ -160,6 +196,7 @@ function EditorPage() {
             tempMap.set(oldPos, undefined);
         }
         setNavbarGridChildren(tempMap);
+        setFooterGridChildren(tempMap);
     };
 
 
@@ -173,6 +210,7 @@ function EditorPage() {
                 </GridContainer>
             </NavbarContainer>
 
+        
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
@@ -185,6 +223,18 @@ function EditorPage() {
                     </GridContainer>
                 </div>
             </div>
+            <div style={{ paddingTop: "10vh"}} ></div>
+
+            <FooterContainer linkMap={footerLinks} onUpdatelinks={updateFooterLinks}>
+                <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}} name={"footer"}
+                
+                onUpdate={changePositionOfElementInNavbarGrid}>
+                    {Array.from(footerGridChildren.values())}
+                </GridContainer>
+            </FooterContainer>
+            <div>
+                    <button onClick={handleAddFooterLink}>Tilføj footer-link</button>
+                </div>
 
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
