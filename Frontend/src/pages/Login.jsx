@@ -5,6 +5,7 @@ import '../assets/login.css';
 import Office from "../assets/Office.png";
 import lockIcon from '../assets/icon/lock.png';
 
+
 function LoginPage({ onLogin }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
@@ -23,7 +24,7 @@ function LoginPage({ onLogin }) {
       .then(() => {
         setErrors({ ...errors, login: "" });
         onLogin();
-        navigate("/");
+        navigate("/template-suggestion");
       })
       .catch(() => {
         setErrors({
