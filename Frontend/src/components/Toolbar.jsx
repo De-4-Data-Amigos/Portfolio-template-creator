@@ -8,7 +8,7 @@ const Toolbar = ({addComponent, children }) => {
 
   function addText() {
     let gridName = "body";
-    addComponent(<EditableTextInputField text="Test input if save"/>);
+    addComponent(<EditableTextInputField text="Test input if save"/>, gridName);
   }
 
   return (
