@@ -40,19 +40,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1em;
 }
 
 
-.sign-title  {
-font-size: 25px;
-font-weight: bold;
-text-align: center;
-margin-bottom: 20px;
-color: #0e0e0e;
-font-family: "Montserrat", sans-serif; /* Tilføj en flot skrifttype */
-text-transform: uppercase; /* Hvis du vil have teksten i store bogstaver */
-letter-spacing: 1.5px; /* Gør teksten mere læselig */
-}
+.sign-title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1px;
+    color: #ffffff;
+    padding: 1em;
+    font-family: "JetBrainsMono Bold", monospace;
+    text-transform: uppercase; 
+    }
+
 
 /* Styling for input-felterne */
 .input-field {
@@ -76,17 +78,21 @@ letter-spacing: 1.5px; /* Gør teksten mere læselig */
     display: block;
 }
 
-/* login button */
-.button {
-    width: 100%;
-    padding: 0.8em;
-    margin-top: 2em;
-    font-size: 1em;
-    color: white;
-    background-color: #0000009e;
-    border: none;
-    border-radius: 100px;
+/* signup button */
+.sign-button {
+    position: relative;
+    display: flex;
+    justify-content:center;
+    width: 50%;
+    align-items: center;
+    border-radius: .5em;
+    background: #183153;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
     cursor: pointer;
+    border: none;
+    margin: 10px;
 }
 
 .button:hover {

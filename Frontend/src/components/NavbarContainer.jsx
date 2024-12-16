@@ -74,7 +74,7 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
                 onDragOver={(event) => event.preventDefault()}
             >
                 <span className="delete-navbarText">
-                    Træk et link her for at fjerne
+                    Delete Zone
                 </span>
             </div>
         </div>

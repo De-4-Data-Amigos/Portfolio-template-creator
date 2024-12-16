@@ -33,6 +33,15 @@ const signup = (username, password, role) => {
   const options = makeOptions("POST", true, { username, password, role });
   return fetch(URL + "auth/register", options).then(handleHttpErrors);
 }
+const sendContactMessage = (formData) => {
+  const options = makeOptions("POST", false, formData);
+  return fetch(URL + "contact/save", options)
+    .then(handleHttpErrors)
+    .catch(err => {
+      console.error("Error sending contact message:", err);
+      throw err;
+    });
+}
   const fetchData = () => {
     const options = makeOptions("GET", true);
     return fetch(URL+"ptc/", options)
@@ -62,7 +71,9 @@ const signup = (username, password, role) => {
      login,
      logout,
      signup,
-     fetchData
+     fetchData,
+     sendContactMessage 
+
  }
 }
 

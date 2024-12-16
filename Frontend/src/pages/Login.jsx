@@ -52,12 +52,18 @@ function LoginPage({ onLogin }) {
     <div className="frontpage" style={{ backgroundImage: `url(${Office})` }}>
       <div className="content-box">
         <h2 className="sub-header"><i></i></h2>
-        <div className="form">
+        <form onSubmit={performLogin} className="login-form">
+          
+          <div className="input-group">
+            <h2 className="login-title">Log in</h2>
+          </div>
+
+        <div className="form-container">
+          <div className="form-login">
             <img src={lockIcon} alt="Lock icon" className="icon" />
           </div>
-        <form onSubmit={performLogin} className="login-form">
-          <div className="input-group">
-            <h2><p>Login</p></h2>
+        </div>
+        <div className="input-group">
             <input
               className="input-field"
               placeholder="Email *"
@@ -88,10 +94,12 @@ function LoginPage({ onLogin }) {
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember Me</label>
             </div>
+
             <button className="login-button" type="submit">
               Log In
             </button>
           </div>
+
 
           {errors.login && <span className="error-message">{errors.login}</span>}
         </form>
@@ -104,7 +112,9 @@ function LoginPage({ onLogin }) {
     >
       Don't have an account?
     </button>
-    <button type="button" className="login-button">
+    <button type="button" className="login-button"
+    onClick={() => navigate("/contact")}
+    >
       Forgot Password?
     </button>
         </div>

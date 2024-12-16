@@ -1,0 +1,275 @@
+.choose-background {
+    position: relative;
+  }
+  
+  .learn-more {
+    width: 12rem;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+  }
+  
+  .learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #282936;
+    border-radius: 1.625rem;
+  }
+  
+  .learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+  }
+  
+  .learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+  }
+  
+  .learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+  }
+  
+  .learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 50%; /* Centrerer lodret */
+    left: 0;
+    right: 0;
+    transform: translateY(-50%); /* Justerer for den lodrette centrering */
+    padding: 0.75rem 0;
+    margin: 0 0 0 3.3rem; /* Flytter teksten mere mod højre */
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  
+.learn-more:focus {
+    outline: none; /* Fjern outline ved fokus */
+  }
+  
+  .learn-more:active {
+    outline: none; /* Fjern outline ved klik */
+  }
+  
+  .learn-more:hover .circle {
+    width: 110%;
+  }
+  
+  .learn-more:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+  }
+  
+  .learn-more:hover .button-text {
+    color: #fff;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: radial-gradient(circle at 50% 50%, #6e6e6e, #e0e0e0);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    color: white;
+    font-family: 'JetBrainsMono', monospace; /* Anvend fonten */
+    font-size: 1rem; /* Standard størrelse */
+    line-height: 1.6; /* Læsevenlig linjeafstand */
+  }
+  
+  
+  
+  .modal-content:hover {
+    background-position: right center; /* Flytter gradienten ved hover */
+    background-size: 100% auto; /* Udvider gradienten for en dynamisk effekt */
+  }
+  
+  
+  .image-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .image-option {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: border 0.3s ease;
+  }
+  
+  .image-option img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .image-option.selected {
+    border-color: #007bff;
+  }
+  
+  .save-btn {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #6e6e6e, #6e6e6e); /* Grøn gradient */
+    border-radius: 20px;
+    background-size: 200% auto; /* Gør gradienten klar til bevægelse */
+    font-family: inherit;
+    font-size: 17px;
+    padding: 0.6em 1.5em;
+    cursor: pointer; /* Gør knappen klikbar */
+    transition: background-position 0.5s ease-in-out, background-size 0.5s ease-in-out; /* Jævn overgang */
+  }
+  
+  .save-btn:hover {
+    background-position: right center; /* Flytter gradienten ved hover */
+    background-size: 400% auto; /* Udvider gradientens bevægelse */
+    animation: pulse 1.5s infinite; /* Tilføjer puls-effekten */
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.5); /* Grøn skygge starter */
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); /* Skygge falmer ud */
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); /* Tilbage til ingen skygge */
+    }
+  }
+  
+  
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+  }
+  
+  .pagination-arrow {
+    cursor: pointer;
+    background: none; /* Fjern baggrund */
+    border: none; /* Fjern kant */
+    padding: 0; /* Fjern padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto; /* Ingen fast bredde */
+    height: auto; /* Ingen fast højde */
+    outline: none; /* Fjern outline */
+  }
+  
+  .pagination-arrow:focus {
+    outline: none; /* Fjern outline, når knappen får fokus */
+  }
+  
+  .pagination-arrow > svg {
+    width: 32px; /* Størrelse på pilen */
+    height: 32px;
+    transition: transform 0.3s ease-in-out;
+    fill: none;
+  }
+  
+  .pagination-arrow:hover > svg {
+    transform: translateX(5px); /* Standard: bevæger sig mod højre */
+  }
+  
+  /* Specifik styling for tilbage-knappen */
+  .pagination-arrow:first-child:hover > svg {
+    transform: translateX(-5px); /* Bevæger sig mod venstre */
+  }
+  
+  .pagination-arrow:disabled > svg {
+    transform: none; /* Ingen animation for disabled knapper */
+    opacity: 0.5; /* Gør pilen mindre synlig */
+  }
+  
+  .pagination-arrow:active {
+    transform: scale(0.95); /* Lidt mindre ved klik */
+    outline: none; /* Fjern outline, når knappen er aktiv */
+  }
+  
+  
+  
+  
+  
+  .color-picker {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .color-picker label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: rgb(255, 255, 255); /* Gør teksten sort */
+  }
+  
+  #color-input {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  @font-face {
+    font-family: 'JetBrainsMono';
+    src: url('/path-to-your-fonts/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .modal-content h2,
+.modal-content p, 
+.modal-content label {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sort skygge */
+  color: white; /* Sørg for, at teksten forbliver læsbar */
+}
+
+  
