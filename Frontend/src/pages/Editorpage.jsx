@@ -7,14 +7,11 @@ import "../assets/GridContainer.css";
 import EditableTextInputField from "../components/EditableTextInputField";
 
 function EditorPage() {
-    const columns = 3;
-    const rows = 3;
-    /*
-    const maxComponentAmount = columns * rows;
-    const [componentAmount, setComponentAmount] = useState(0);
-    const [gridChildren, setGridChildren] = useState(new Map());
-    const [childrenArray, setChildrenArray] = useState([]);
-    */
+    const navbarColumns = 4;
+    const navbarRows = 1;
+    const bodyColumns = 3;
+    const bodyRows = 3;
+
     const [navbarLinks, setNavbarLinks] = useState(new Map());
 
 
@@ -35,33 +32,10 @@ function EditorPage() {
   
     const addNavbarLink = (text, href) => {
         addComponent(linkTemp(text, href), "navbar");        
-        /*
-        let tempMap = new Map(navbarLinks);
-        addloop: {
-            for (let i = 0; i < 4; i++) {
-                for (let j = 0; j < 1; j++) {
-                    const pos = `${i},${j}`;
-                    if (!tempMap.has(pos)) {
-                        const newLink = { id: Date.now(), text, href, pos };
-                        tempMap.set(pos, newLink);
-                        break addloop;
-                    }
-                }
-            }
-        }
-        setNavbarLinks(tempMap);
-        */
     };
 
     const addComponent = (comp, parentGridName) => {
-        /* 
-        if (componentAmount === maxComponentAmount) {
-            alert("Grid is filled up");
-            return;
-        }
-        */
-
-        const updateMap = (map) => {
+        const updateMap = (map, columns, rows) => {
             addloop: {
                 for (let i = 0; i < columns; i++) {
                     for (let j = 0; j < rows; j++) {
@@ -81,13 +55,13 @@ function EditorPage() {
         switch (parentGridName) {
             case "navbar":
                 tempMap = new Map(navbarGridChildren);
-                updateMap(tempMap);
+                updateMap(tempMap, navbarColumns, navbarRows);
                 setNavbarGridChildren(tempMap);
                 break;
                 
             case "body":
                 tempMap = new Map(bodyGridChildren);
-                updateMap(tempMap);
+                updateMap(tempMap, bodyColumns, bodyRows);
                 setBodyGridChildren(tempMap);
                 break;
         
@@ -96,13 +70,13 @@ function EditorPage() {
                 
                 break;
         }
-        // = new Map(gridChildren); 
-        //setGridChildren(updatedGridChildren);
-        //setChildrenArray(Array.from(updatedGridChildren.values()));
     };
 
    
     const removeComponent = (removedPos, parentGridName) => {
+        console.log("removedPos:", removedPos, "parentGridName:", parentGridName);
+        
+        
         let tempMap; 
         
         switch (parentGridName) {
@@ -147,13 +121,12 @@ function EditorPage() {
     const onDropDeleteZone = (event) => {
         event.preventDefault();
         console.log("onDropDeleteZone", event);
-        const data = event.dataTransfer.getData("text");
-        const [x, y] = data.split(",");
+        const dtData = event.dataTransfer.getData("text");
+        console.log(dtData);        
+        const data = dtData.split("-");
+        const [x, y] = data[0].split(',');
         const position = `${x},${y}`;
-        removeComponent(position, "body"); 
-        /* 
-        event.dataTransfer.clearData();
-        */
+        removeComponent(position, data[1]); 
     };
 
     const changePositionOfElementInBodyGrid = (oldPos, newPos) => {
@@ -194,24 +167,9 @@ function EditorPage() {
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
             {/* Navbar */}
             <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks}>
-                <GridContainer columns={4} rows={1} style={{height: '100%', margin: 0}}
-                    onUpdate={changePositionOfElementInNavbarGrid}
-                >
-                    
+                <GridContainer columns={navbarColumns} rows={navbarRows} style={{height: '100%', margin: 0}} name={"navbar"}
+                onUpdate={changePositionOfElementInNavbarGrid}>
                     {Array.from(navbarGridChildren.values())}
-                    
-                    {/*
-                    links.map((link, index) => (
-                        <span
-                            key={link.id}
-                            data-pos={link.pos}
-                            data-id={index}
-                            className="navbar-item"
-                        >
-                            {link.text}
-                        </span>
-                    ))
-                    */}
                 </GridContainer>
             </NavbarContainer>
 
@@ -222,13 +180,13 @@ function EditorPage() {
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
                     <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
-                    <GridContainer columns={columns} rows={rows} onUpdate={changePositionOfElementInBodyGrid}>
+                    <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
                         {Array.from(bodyGridChildren.values())}
                     </GridContainer>
                 </div>
             </div>
 
-                 {/* Divider / Space */}
+            {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
 
             {/* Footer */}
