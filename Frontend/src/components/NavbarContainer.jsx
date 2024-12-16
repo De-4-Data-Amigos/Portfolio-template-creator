@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GridContainer from "./GridContainer";
 
-function NavbarContainer({ linkMap, onUpdateLinks }) {
+function NavbarContainer({ linkMap, onUpdateLinks, children }) {
     const links = Array.from(linkMap.values());
 
     const [draggedIndex, setDraggedIndex] = useState(null);
@@ -41,14 +41,13 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
             setDraggedIndex(null);
         }
     };
-    const gridStyle = {
-        height: '100%',
-        margin: 0
-    };
+    //const gridStyle = ;
     return (
         <div className="navbar-container">
             <nav className="navbar">
-                <GridContainer columns={4} rows={1} style={gridStyle}>
+                {/*
+                 
+                <GridContainer columns={4} rows={1} style={{height: '100%',margin: 0}}>
                 {links.map((link, index) => (
                     <span
                         key={link.id}
@@ -59,13 +58,15 @@ function NavbarContainer({ linkMap, onUpdateLinks }) {
                         onDragStart={() => handleDragStart(index)}
                         onDragOver={handleDragOver}
                         onDrop={() => handleDrop(index)}
-                        */
+                        *//*
                         className="navbar-item"
                     >
                         {link.text}
                     </span>
                 ))}
                 </GridContainer>
+                    */}
+                {children}
             </nav>
 
             <div

@@ -20,8 +20,22 @@ function EditorPage() {
 
     const [navbarGridChildren, setNavbarGridChildren] = useState(new Map());
     const [bodyGridChildren, setBodyGridChildren] = useState(new Map());
+
+
+    const linkTemp = (text, href) => {
+
+        return (
+            <span
+                data-href={href}
+                className="navbar-item">
+                {text}
+            </span>
+        );
+    } 
   
     const addNavbarLink = (text, href) => {
+        addComponent(linkTemp(text, href), "navbar");        
+        /*
         let tempMap = new Map(navbarLinks);
         addloop: {
             for (let i = 0; i < 4; i++) {
@@ -36,6 +50,7 @@ function EditorPage() {
             }
         }
         setNavbarLinks(tempMap);
+        */
     };
 
     const addComponent = (comp, parentGridName) => {
@@ -178,7 +193,27 @@ function EditorPage() {
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
             {/* Navbar */}
-            <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks} />
+            <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks}>
+                <GridContainer columns={4} rows={1} style={{height: '100%', margin: 0}}
+                    onUpdate={changePositionOfElementInNavbarGrid}
+                >
+                    
+                    {Array.from(navbarGridChildren.values())}
+                    
+                    {/*
+                    links.map((link, index) => (
+                        <span
+                            key={link.id}
+                            data-pos={link.pos}
+                            data-id={index}
+                            className="navbar-item"
+                        >
+                            {link.text}
+                        </span>
+                    ))
+                    */}
+                </GridContainer>
+            </NavbarContainer>
 
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
