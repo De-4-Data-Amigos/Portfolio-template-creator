@@ -50,7 +50,13 @@ function ContactPage() {
   return (
     <div className="frontpage" style={{ backgroundImage: `url(${Contact})` }}>
       <div className="contact-container">
-	<h2 className="sub-header"><i></i></h2>
+      <div className="welcome-text">
+        <h2 className="contact-header">You're Always Welcome to Reach Out!</h2>
+        <p className="contact-description">
+          Here you can ask questions, provide feedback, or share your thoughts. 
+          We're here to listen and assist you in any way we can.
+        </p>
+      </div>
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="input-group">
             <h2 className="contact-title">Contact</h2>

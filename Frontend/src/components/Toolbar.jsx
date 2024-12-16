@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import "../assets/Toolbar.css";
 import ChooseBackground from './ChooseBackground';
+import EditableTextInputField from './EditableTextInputField';
 
 const Toolbar = ({addComponent, children }) => {
   const [showChooseBackground, setShowChooseBackground] = useState(false);
 
   function addText() {
-    // Ask for which grid to add 
-    // Atm this is just mocked
     let gridName = "body";
-    addComponent(<div className="text-component">New text</div>, gridName);
+    addComponent(<EditableTextInputField text="Test input if save"/>);
   }
 
   return (

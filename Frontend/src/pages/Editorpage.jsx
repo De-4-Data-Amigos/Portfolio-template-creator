@@ -188,10 +188,8 @@ function EditorPage() {
 
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
-
             {/* Footer */}
-            <div style={{}}>
-                
+            <div style={{ }}>                
                 <div style={{ display: "flex" }}>
                     <Toolbar addComponent={addComponent}>
                         <GridDeleteZone onDrop={onDropDeleteZone} />
