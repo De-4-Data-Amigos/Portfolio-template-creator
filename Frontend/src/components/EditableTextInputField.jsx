@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const EditableTextInputField = ({ text, dataPos }) => {
+const EditableTextInputField = ({ text }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(text);
 
@@ -22,7 +22,7 @@ const EditableTextInputField = ({ text, dataPos }) => {
   };
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }} data-pos={dataPos}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }} data-text={inputValue}>
       {isEditing ? (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
           <input
