@@ -165,3 +165,24 @@
     font-weight: bold;
     text-align: center;
 }
+
+.footer-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-top: 2.5vh;
+}
+
+/* Navbar layout */
+.footer {
+    display: flex;
+    flex-direction: row; 
+    height: 5vh;
+    gap: 20px; 
+    justify-content: center; 
+    align-items: center;
+    background-color:  rgba(52, 67, 78, 0.8); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    overflow: hidden;
+    border-radius: .5em;
