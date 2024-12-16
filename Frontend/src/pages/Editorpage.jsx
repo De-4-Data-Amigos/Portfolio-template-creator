@@ -162,6 +162,10 @@ function EditorPage() {
         setNavbarGridChildren(tempMap);
     };
 
+    <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} className="GridBackground" onUpdate={changePositionOfElementInBodyGrid}>
+    {Array.from(bodyGridChildren.values())}
+    </GridContainer>
+
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
