@@ -9,6 +9,7 @@ const Toolbar = ({addComponent, children }) => {
   function addText() {
     
     addComponent(<EditableTextInputField text="Test input if save"/>);
+
   }
 
   return (

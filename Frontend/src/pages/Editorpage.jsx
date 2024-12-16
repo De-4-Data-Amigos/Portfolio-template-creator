@@ -4,6 +4,7 @@ import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
+import EditableTextInputField from "../components/EditableTextInputField";
 
 function EditorPage() {
     const columns = 3;
@@ -34,7 +35,7 @@ function EditorPage() {
 
     const addComponent = (comp) => {
         if (componentAmount === maxComponentAmount) {
-            alert("Grid er fyldt op!");
+            alert("Grid is filled up");
             return;
         }
 
@@ -45,7 +46,9 @@ function EditorPage() {
                 for (let j = 0; j < rows; j++) {
                     const position = `${i},${j}`;
                     if (!updatedGridChildren.has(position)) {
-                        const newComp = cloneElement(comp, {
+
+                        const newComp = cloneElement((<div>{comp}</div>), {
+
                             "data-pos": position,
                             key: `gridComponent-${position}`,
                         });
@@ -71,15 +74,16 @@ function EditorPage() {
     };
 
     const handleAddLink = () => {
-        const text = prompt("Skriv teksten for navbaren:");
-        const href = prompt("Skriv linket (URL) for navbaren:");
+        const text = prompt("Write the text for the navbar:" );
+        const href = prompt("Write the link (URL) for the navbar:" );
 
         if (text && href) {
             addNavbarLink(text, href);
         } else {
-            alert("Både tekst og link skal udfyldes!");
+            alert("Both text and link must be filled in!" );
         }
     };
+
 
     const updateNavbarLinks = (updatedLinks) => {
         setNavbarLinks(updatedLinks);
@@ -114,8 +118,7 @@ function EditorPage() {
                  {/* Divider / Space */}
             <div style={{ paddingTop: "15vh"}} ></div>
 
-            
-            
+
             <div style={{ }}>
                 
                 <div style={{ display: "flex" }}>
