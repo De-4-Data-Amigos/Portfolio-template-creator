@@ -74,7 +74,8 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
         console.log("onDrop", e);
         const dropTargetElement = e.target.children[0]; 
         const startDragPos = dropTargetElement.attributes["data-pos"].value;
-        const dtData = e.dataTransfer.getData("text").split('-');
+        let dtData = e.dataTransfer.getData("text");
+        dtData = String(dtData).split('-');
         const _selectedGridPos = dtData[0];
         //removeComponent(position, "body"); 
         //changePositionOfElement();
