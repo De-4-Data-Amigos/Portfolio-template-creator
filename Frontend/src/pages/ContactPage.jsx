@@ -58,10 +58,10 @@ function ContactPage() {
         </p>
       </div>
         <form onSubmit={handleSubmit} className="contact-form">
-          <div className="input-group">
+          <div className="input-group-contact">
             <h2 className="contact-title">Contact</h2>
             <input
-              className="input-field"
+              className="input-field-contact"
               placeholder="Your Name *"
               type="text"
               id="name"
@@ -71,9 +71,9 @@ function ContactPage() {
             />
           </div>
 
-          <div className="input-group">
+          <div className="input-group-contact">
             <input
-              className="input-field"
+              className="input-field-contact"
               placeholder="Your Email *"
               type="email"
               id="email"
@@ -84,9 +84,9 @@ function ContactPage() {
             {errors.email && <span className="error-message">{errors.email}</span>}
           </div>
 
-          <div className="input-group">
+          <div className="input-group-contact">
             <textarea
-              className="input-field"
+              className="input-field-contact"
               placeholder="Your Message *"
               id="message"
               rows="4"
@@ -96,11 +96,13 @@ function ContactPage() {
             ></textarea>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          
+          <div style={{ display: "flex", justifyContent: "center"}}>
             <button className="send-button" type="submit">
               Send
             </button>
           </div>
+         
 
         
           {successMessage && <p className="success-message">{successMessage}</p>}

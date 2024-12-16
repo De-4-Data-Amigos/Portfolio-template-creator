@@ -65,7 +65,7 @@ function LoginPage({ onLogin }) {
         </div>
         <div className="input-group">
             <input
-              className="input-field"
+              className="input-field-login"
               placeholder="Email *"
               type="email"
               id="username"
@@ -78,7 +78,7 @@ function LoginPage({ onLogin }) {
 
           <div className="input-group">
             <input
-              className="input-field"
+              className="input-field-login"
               placeholder="Password *"
               type="password"
               id="password"
