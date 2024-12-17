@@ -5,7 +5,7 @@ import GridRow from "../components/GridRow";
 import '../assets/GridContainer.css';
 
 function GridContainer({columns, rows, name, onUpdate, children, style}) { 
-    console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
+    //console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
     const amountOfColumns = columns;
     const amountOfRows = rows;
     const emptyElement = (<div data-grid-empty={true}></div>);
@@ -27,13 +27,13 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
     }
     const existingLocations = [];
     childrenArray.forEach((child) => {
-        const position = child.props["data-pos"];
+        const position = child.props["datapos"];
         if(!position){
-            throw new Error("Child is missing 'data-pos' attribute. Add it like this: <p data-pos='0,0'></p>");
+            throw new Error("Child is missing 'datapos' attribute. Add it like this: <p datapos='0,0'></p>");
         }
         
         if(position.indexOf(',') < 0){
-            throw new Error(`Child data-pos was formatted incorrectly. Got: ${position}, expected: '<x>,<y>'`)
+            throw new Error(`Child datapos was formatted incorrectly. Got: ${position}, expected: '<x>,<y>'`)
         }
         
         let [x,y] = position.split(',');
@@ -58,22 +58,22 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
     });
     
     const onDragStart = (e) => {
-        console.log("onDragStart", e);
+        //console.log("onDragStart", e);
         const dragElement = e.target.children[0];
         const isEmpty = !!dragElement.attributes["data-grid-empty"] && Boolean(dragElement.attributes["data-grid-empty"].value);
         if(isEmpty){
             e.preventDefault();
             return;
         }
-        const startDragPos = dragElement.attributes["data-pos"].value;
+        const startDragPos = dragElement.attributes["datapos"].value;
         //setSelectedGridPos(startDragPos);
         e.dataTransfer.clearData();
         e.dataTransfer.setData("text/plain", `${startDragPos}-${name}`);
     };
     const onDrop = (e) => {
-        console.log("onDrop", e);
+        //console.log("onDrop", e);
         const dropTargetElement = e.target.children[0]; 
-        const startDragPos = dropTargetElement.attributes["data-pos"].value;
+        const startDragPos = dropTargetElement.attributes["datapos"].value;
         let dtData = e.dataTransfer.getData("text");
         dtData = String(dtData).split('-');
         const _selectedGridPos = dtData[0];
@@ -86,18 +86,18 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
 
     };
     const onDragEnd = (e) => {
-        console.log("onDragEnd", e);
+        //console.log("onDragEnd", e);
         setSelectedGridPos(null);
     };
     const onDragEnter = (e) => {
-        console.log("onDragEnter", e);
+        //console.log("onDragEnter", e);
         const enterTargetElement = !!e.target.children ? e.target.children[0] : e.target; 
-        const enterTargetPos = enterTargetElement.attributes["data-pos"].value;
+        const enterTargetPos = enterTargetElement.attributes["datapos"].value;
         setTargetGridPos(enterTargetPos);
-        console.log("onDragEnter target", targetGridPos);
-        };
+        //console.log("onDragEnter target", targetGridPos);
+    };
     const onDragLeave = (e) => {
-        console.log("onDragLeave", e);
+        //console.log("onDragLeave", e);
     };
     const makeColumns = (array) => {
         const columns = [];
@@ -108,10 +108,10 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
                 let isSelected = false;
                 let isEmpty = true;
                 let isTarget = false;
-                let element = React.cloneElement(emptyElement, {"data-pos" : `${i},${j}`, "data-grid-name": name});
+                let element = React.cloneElement(emptyElement, {"datapos" : `${i},${j}`, "data-grid-name": name});
                 array.forEach((child) => {
                     if(child){
-                        const location = child.props["data-pos"];
+                        const location = child.props["datapos"];
                         if(location == `${i},${j}`){
                             element = child;
                             isSelected = location == selectedGridPos;
@@ -145,47 +145,6 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
     };
     
     let grid = makeColumns(childrenArray);
-    const removeElement = (deletePos) => {
-        console.log("Deleting from pos: ", deletePos);
-        const newChildrenArray = childrenArray.filter((x) => x.props["data-pos"] !== deletePos);
-        setChildrenArray(newChildrenArray);
-        grid = makeColumns(childrenArray);
-    };
-    const changePositionOfElement = (oldPos, newPos) => {
-        let oldElement;
-        let newElement;
-
-        console.log("Changing from", oldPos, "to", newPos);
-
-        childrenArray.forEach((child) => {
-            const pos = child.props["data-pos"];
-            if(pos == oldPos){
-               oldElement = child;
-            }
-            if(pos == newPos){
-                newElement = child;
-            }
-        });
-        let temp = childrenArray.map((child) => {
-            let newChild = child;
-
-            if(child == oldElement){
-                newChild = React.cloneElement(child, {"data-pos" : newPos});
-            }
-            if(newElement && child == newElement){
-                newChild = React.cloneElement(child, {"data-pos" : oldPos});
-            }
-
-            return newChild;
-        });
-        setChildrenArray(temp);
-
-         //setGrid(makeColumns(childrenArray));
-        //onUpdate(childrenArray);
-    };
-
-
-
     return(
         <div style={style} className="GridContainer">
             {grid}

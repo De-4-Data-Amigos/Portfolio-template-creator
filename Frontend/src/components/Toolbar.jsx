@@ -3,12 +3,12 @@ import "../assets/Toolbar.css";
 import ChooseBackground from './ChooseBackground';
 import EditableTextInputField from './EditableTextInputField';
 
-const Toolbar = ({addComponent, children }) => {
+const Toolbar = ({addComponent, onTextUpdate, children }) => {
   const [showChooseBackground, setShowChooseBackground] = useState(false);
 
   function addText() {
     let gridName = "body";
-    addComponent(<EditableTextInputField text="Test input if save"/>, gridName);
+    addComponent(<EditableTextInputField text="Test input if save" grid={gridName} onUpdate={onTextUpdate}/>, gridName);
   }
 
   return (

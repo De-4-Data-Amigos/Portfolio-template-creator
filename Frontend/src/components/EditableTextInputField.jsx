@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
-const EditableTextInputField = ({ text, dataPos }) => {
+const EditableTextInputField = ({ text, grid, onUpdate, datapos }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(text);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-
+  
   const handleSaveClick = () => {
     setIsEditing(false);
+    onUpdate(inputValue, datapos, grid);
   };
 
   const handleCancelClick = () => {
@@ -22,7 +23,7 @@ const EditableTextInputField = ({ text, dataPos }) => {
   };
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }} data-pos={dataPos}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }} datapos={datapos}>
       {isEditing ? (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
           <input
@@ -78,6 +79,6 @@ const EditableTextInputField = ({ text, dataPos }) => {
 };
 
 {/* Add below in EditorPage.jsx, below {childrenArray} to test:
-   <EditableTextInputField text="Test input if save" data-pos= "0,0"/> */}
+   <EditableTextInputField text="Test input if save" datapos= "0,0"/> */}
 
 export default EditableTextInputField;
