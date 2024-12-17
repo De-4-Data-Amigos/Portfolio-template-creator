@@ -162,9 +162,7 @@ function EditorPage() {
         setNavbarGridChildren(tempMap);
     };
 
-    <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} className="GridBackground" onUpdate={changePositionOfElementInBodyGrid}>
-    {Array.from(bodyGridChildren.values())}
-    </GridContainer>
+    
 
 
     return (
@@ -184,9 +182,12 @@ function EditorPage() {
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
                     <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
-                    <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
-                        {Array.from(bodyGridChildren.values())}
-                    </GridContainer>
+                    
+                    <div style={{backgroundImage: "url(https://plus.unsplash.com/premium_photo-1675674547854-d1ebf222d0ec?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)"}}>
+                        <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
+                            {Array.from(bodyGridChildren.values())}
+                        </GridContainer>
+                    </div>
                 </div>
             </div>
 

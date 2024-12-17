@@ -10,11 +10,7 @@
     flex-direction: row;
 }
 
-.GridBackground {
-    background-size: cover;  /* Sørger for at baggrunden dækker hele containeren */
-    background-position: center;  /* Centrerer baggrunden */
-  }
-  
+
 
 .GridColumn{
     /*
