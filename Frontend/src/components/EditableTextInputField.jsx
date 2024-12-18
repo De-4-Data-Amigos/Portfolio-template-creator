@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-const EditableTextInputField = ({ text, grid, onUpdate, datapos }) => {
+const EditableTextInputField = ({ children, grid, onUpdate, datapos}) => { 
   const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(text);
+  const [inputValue, setInputValue] = useState(children);
+  const [text, setText] = useState(children);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -10,12 +11,14 @@ const EditableTextInputField = ({ text, grid, onUpdate, datapos }) => {
   
   const handleSaveClick = () => {
     setIsEditing(false);
+    setText(inputValue);
     onUpdate(inputValue, datapos, grid);
+    //_text = inputValue;
+    //children = inputValue;
   };
 
   const handleCancelClick = () => {
-    setIsEditing(false);
-    setInputValue(text); 
+    setIsEditing(false); 
   };
 
   const handlePenClick = () => {
@@ -60,7 +63,7 @@ const EditableTextInputField = ({ text, grid, onUpdate, datapos }) => {
         </div>
       ) : (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-          <span>{inputValue}</span>
+          <span>{text}</span>
           <span
             style={{
               cursor: 'pointer',

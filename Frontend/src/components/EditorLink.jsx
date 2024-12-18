@@ -1,10 +1,12 @@
 function EditorLink({text, href, datapos}) {
     return (
-        <span datapos={datapos}
-            data-href={href}
-            className="navbar-item">
-            {text}
-        </span>
+        <div datapos={datapos}>
+            <span
+                data-href={href}
+                className="navbar-item">
+                {text}
+            </span>
+        </div>
     );
 }
 
