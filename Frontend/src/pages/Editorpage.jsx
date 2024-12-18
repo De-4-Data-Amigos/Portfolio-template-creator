@@ -8,6 +8,7 @@ import "../assets/GridContainer.css";
 import EditableTextInputField from "../components/EditableTextInputField";
 import EditorLink from "../components/EditorLink";
 import RestoreState from "../components/RestoreState";
+import { DeleteUsingObjectKey } from "../utils/arrayUtils";
 
 
 function EditorPage() {
@@ -127,24 +128,44 @@ function EditorPage() {
         let tempMap;
         switch (grid) {
             case "navbar":
-                tempMap = new Map(navbarGridChildren);
-                tempMap.delete(pos);
-                tempMap.set(pos, element);
-                setNavbarGridChildren(tempMap);
+                //tempMap = new Map(navbarGridChildren);
+                //tempMap.delete(pos);
+                //tempMap.set(pos, element);
+                setNavbarGridChildren(navbarGridChildren.map((child) => {
+                    if(child.props["datapos"] === pos){
+                        return element;
+                    }
+                    else{
+                        return child;
+                    }
+                }));
                 break;
             case "body":
-                console.log("map before update", bodyGridChildren);
-                
                 //tempMap = new Map(bodyGridChildren);
-                tempMap.delete(pos);
-                tempMap.set(pos, element);
-                setBodyGridChildren(tempMap);
+                //DeleteUsingObjectKey()
+                //tempMap.delete(pos);
+                //tempMap.set(pos, element);
+                setBodyGridChildren(bodyGridChildren.map((child) => {
+                    if(child.props["datapos"] === pos){
+                        return element;
+                    }
+                    else{
+                        return child;
+                    }
+                }));
                 break;
             case "footer":
-                tempMap = new Map(footerGridChildren);
-                tempMap.delete(pos);
-                tempMap.set(pos, element);
-                setFooterGridChildren(tempMap);
+                //tempMap = new Map(footerGridChildren);
+                //tempMap.delete(pos);
+                //tempMap.set(pos, element);
+                setFooterGridChildren(footerGridChildren.map((child) => {
+                    if(child.props["datapos"] === pos){
+                        return element;
+                    }
+                    else{
+                        return child;
+                    }
+                }));
                 break;
         
             default:
