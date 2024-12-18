@@ -10,6 +10,8 @@ import SignUpPage from './pages/SignUp';
 import EditorPage from './pages/Editorpage';
 import EditorLayout from './layouts/EditorLayout';
 import ContactPage from './pages/ContactPage';
+import { BackgroundProvider } from './components/BackgroundContext'; // Sørg for at stien er korrekt
+
 
 
 
@@ -42,7 +44,12 @@ function App() {
           }
         </Route>
         <Route path="/editor" element={<EditorLayout loggedIn={loggedIn} logout={logout} />}>
-          <Route index element={<EditorPage />} />
+          <Route index element={
+            // Omslutter kun EditorPage med BackgroundProvider
+            <BackgroundProvider>
+              <EditorPage />
+            </BackgroundProvider>
+          } />
         </Route>
       </>
     )

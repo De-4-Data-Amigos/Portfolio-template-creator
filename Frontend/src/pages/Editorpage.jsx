@@ -5,6 +5,8 @@ import NavbarContainer from "../components/NavbarContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
 import EditableTextInputField from "../components/EditableTextInputField";
+import { useBackground } from "../components/BackgroundContext";
+
 
 function EditorPage() {
     const navbarColumns = 4;
@@ -17,6 +19,8 @@ function EditorPage() {
 
     const [navbarGridChildren, setNavbarGridChildren] = useState(new Map());
     const [bodyGridChildren, setBodyGridChildren] = useState(new Map());
+
+    const { background } = useBackground();
 
 
     const linkTemp = (text, href) => {
@@ -162,8 +166,15 @@ function EditorPage() {
         setNavbarGridChildren(tempMap);
     };
 
+    function getBackgroundStyle() {
+        const { background } = useBackground();
+        if (background.type === 'image') {
+            return { backgroundImage: `url(${background.value})`, backgroundSize: 'cover', backgroundPosition: 'center' };
+        } else {
+            return { backgroundColor: background.value, backgroundSize: 'auto', backgroundPosition: 'initial' };
+        }
+    }
     
-
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -174,7 +185,7 @@ function EditorPage() {
                     {Array.from(navbarGridChildren.values())}
                 </GridContainer>
             </NavbarContainer>
-
+    
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
@@ -183,18 +194,20 @@ function EditorPage() {
                 <div style={{ marginTop: "20px", flex: 1 }}>
                     <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
                     
-                    <div style={{backgroundImage: "url(https://plus.unsplash.com/premium_photo-1675674547854-d1ebf222d0ec?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)"}}>
+                    {/* Baggrundskontainer for grid */}
+                    <div style={getBackgroundStyle()}>
                         <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
                             {Array.from(bodyGridChildren.values())}
                         </GridContainer>
                     </div>
                 </div>
             </div>
-
+    
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
+    
             {/* Footer */}
-            <div style={{ }}>                
+            <div>                
                 <div style={{ display: "flex" }}>
                     <Toolbar addComponent={addComponent}>
                         <GridDeleteZone onDrop={onDropDeleteZone} />

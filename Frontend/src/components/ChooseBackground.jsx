@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/ChooseBackground.css';
+import { useBackground } from "../components/BackgroundContext";
+
 // https://wallpapercave.com/developer-wallpapers
 import background1 from '../assets/backgrounds/background1.jpg';
 // https://www.reddit.com/r/wallpapers/comments/bya50d/made_a_minimalistic_apple_developer_wallpaper/
@@ -39,22 +41,26 @@ function ChooseBackground({ setShowModal }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [customColor, setCustomColor] = useState('#ffffff');
   const [gradientPosition, setGradientPosition] = useState({ x: 50, y: 50 });
+  const { setBackground } = useBackground();
+
 
   const imagesPerPage = 3;
   const totalPages = Math.ceil(images.length / imagesPerPage);
 
   const handleBackgroundChange = (image) => {
     setSelectedImage(image);
+    /*
     document.body.style.backgroundImage = `url(${image})`;
     document.body.style.backgroundColor = '';
+    */
   };
 
-  const handleColorChange = (color) => {
+  const handleColorChange = (event) => {
+    const color = event.target.value;
     setCustomColor(color);
     setSelectedImage(null);
-    document.body.style.backgroundImage = '';
-    document.body.style.backgroundColor = color;
-  };
+    setBackground({ type: 'color', value: color });
+};
 
   const handleNextPage = () => {
     if (currentPage < totalPages - 1) {
@@ -77,7 +83,12 @@ function ChooseBackground({ setShowModal }) {
   };
 
   const handleSave = () => {
-    setShowModal(false);  // Close the modal when the save button is clicked
+    if (selectedImage) {
+      setBackground({ type: 'image', value: selectedImage });
+    } else {
+      setBackground({ type: 'color', value: customColor });
+    }
+    setShowModal(false);
   };
 
   return (
@@ -140,8 +151,8 @@ function ChooseBackground({ setShowModal }) {
             type="color"
             id="color-input"
             value={customColor}
-            onChange={handleColorChange}
-          />
+            onChange={handleColorChange}  // Sørger for at eventet håndteres korrekt
+        />
         </div>
         <button onClick={handleSave} className="save-btn">Save</button>
       </div>
