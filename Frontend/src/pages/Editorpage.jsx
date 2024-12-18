@@ -2,10 +2,12 @@ import React, { useState, cloneElement } from "react";
 import GridContainer from "../components/GridContainer";
 import GridDeleteZone from "../components/GridDeleteZone";
 import NavbarContainer from "../components/NavbarContainer";
+import FooterContainer from "../components/FooterContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
 import EditableTextInputField from "../components/EditableTextInputField";
 import { useBackground } from "../components/BackgroundContext";
+
 
 
 function EditorPage() {
@@ -13,12 +15,16 @@ function EditorPage() {
     const navbarRows = 1;
     const bodyColumns = 3;
     const bodyRows = 3;
+    const footerColums = 4;
+    const footerRows = 1;
 
     const [navbarLinks, setNavbarLinks] = useState(new Map());
+    const[footerLinks, setFooterLinks] = useState(new Map());
 
 
     const [navbarGridChildren, setNavbarGridChildren] = useState(new Map());
     const [bodyGridChildren, setBodyGridChildren] = useState(new Map());
+    const [footerGridChildren, setFooterGridChildren] = useState(new Map());
 
     const { background } = useBackground();
 
@@ -38,6 +44,10 @@ function EditorPage() {
         addComponent(linkTemp(text, href), "navbar");        
     };
 
+    const addFooterLinks = (text, href) => {
+        setFooterLinks(linkTemp(text, href));
+    };
+
     const addComponent = (comp, parentGridName) => {
         const updateMap = (map, columns, rows) => {
             addloop: {
@@ -45,7 +55,7 @@ function EditorPage() {
                     for (let j = 0; j < rows; j++) {
                         const position = `${i},${j}`;
                         if (!map.has(position) || !map.get(position)) {
-                            const newComp = cloneElement(comp, { "data-pos": position, key: `gridComponent-${position}` });
+                            const newComp = cloneElement(<div>{comp}</div>, { "data-pos": position, key: `gridComponent-${position}` });
                             map.set(position, newComp);
                             //setComponentAmount((prev) => prev + 1);
                             break addloop;
@@ -67,6 +77,11 @@ function EditorPage() {
                 tempMap = new Map(bodyGridChildren);
                 updateMap(tempMap, bodyColumns, bodyRows);
                 setBodyGridChildren(tempMap);
+                break;
+            case "footer":
+                tempMap = new Map(footerGridChildren);
+                updateMap(tempMap, footerColums, footerRows);
+                setFooterGridChildren(tempMap);
                 break;
         
             default:
@@ -96,7 +111,14 @@ function EditorPage() {
                 if (tempMap.delete(removedPos)) {
                     setBodyGridChildren(tempMap);
                     console.log("state:", bodyGridChildren, "temp:", tempMap);
-                    
+                }
+                break;
+
+            case "footer":
+                tempMap = new Map(footerGridChildren);
+                if (tempMap.delete(removedPos)) {
+                    setFooterGridChildren(tempMap);
+                    console.log("state:", footerGridChildren, "temp:", tempMap);
                 }
                 break;
                 
@@ -117,9 +139,23 @@ function EditorPage() {
         }
     };
 
+    const handleAddFooterLink = () => {
+        const text = prompt("Write the text for the footer:");
+        const href = prompt("Write the link (URL) for the footer:");
+    
+        if (text && href) {
+            addComponent(linkTemp(text, href), "footer");
+        } else {
+            alert("Both text and link must be filled in!");
+        }
+    };
+
 
     const updateNavbarLinks = (updatedLinks) => {
         setNavbarLinks(updatedLinks);
+    };
+    const updateFooterLinks = (updatedLinks) => {
+        setFooterLinks(updatedLinks);
     };
 
     const onDropDeleteZone = (event) => {
@@ -164,6 +200,7 @@ function EditorPage() {
             tempMap.set(oldPos, undefined);
         }
         setNavbarGridChildren(tempMap);
+        setFooterGridChildren(tempMap);
     };
 
     function getBackgroundStyle() {
