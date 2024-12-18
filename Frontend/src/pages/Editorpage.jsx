@@ -5,6 +5,9 @@ import NavbarContainer from "../components/NavbarContainer";
 import FooterContainer from "../components/FooterContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
+import EditableTextInputField from "../components/EditableTextInputField";
+import { useBackground } from "../components/BackgroundContext";
+
 
 
 function EditorPage() {
@@ -22,6 +25,8 @@ function EditorPage() {
     const [navbarGridChildren, setNavbarGridChildren] = useState(new Map());
     const [bodyGridChildren, setBodyGridChildren] = useState(new Map());
     const [footerGridChildren, setFooterGridChildren] = useState(new Map());
+
+    const { background } = useBackground();
 
 
     const linkTemp = (text, href) => {
@@ -198,6 +203,15 @@ function EditorPage() {
         setFooterGridChildren(tempMap);
     };
 
+    function getBackgroundStyle() {
+        const { background } = useBackground();
+        if (background.type === 'image') {
+            return { backgroundImage: `url(${background.value})`, backgroundSize: 'cover', backgroundPosition: 'center' };
+        } else {
+            return { backgroundColor: background.value, backgroundSize: 'auto', backgroundPosition: 'initial' };
+        }
+    }
+    
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -208,36 +222,29 @@ function EditorPage() {
                     {Array.from(navbarGridChildren.values())}
                 </GridContainer>
             </NavbarContainer>
-
-        
+    
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
                     <button onClick={handleAddLink}>Tilføj navbar-link</button>
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
-                    <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
-                        {Array.from(bodyGridChildren.values())}
-                    </GridContainer>
+                    <button onClick={() => addComponent(<p>test{Math.random()}</p>, "body")}>Add p tag</button>
+                    
+                    {/* Baggrundskontainer for grid */}
+                    <div style={getBackgroundStyle()}>
+                        <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
+                            {Array.from(bodyGridChildren.values())}
+                        </GridContainer>
+                    </div>
                 </div>
             </div>
-            <div style={{ paddingTop: "10vh"}} ></div>
-
-            <FooterContainer linkMap={footerLinks} onUpdatelinks={updateFooterLinks}>
-                <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}} name={"footer"}
-                
-                onUpdate={changePositionOfElementInNavbarGrid}>
-                    {Array.from(footerGridChildren.values())}
-                </GridContainer>
-            </FooterContainer>
-            <div>
-                    <button onClick={handleAddFooterLink}>Tilføj footer-link</button>
-                </div>
-
+    
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
+    
             {/* Footer */}
-            <div style={{ }}>                
+            <div>                
                 <div style={{ display: "flex" }}>
                     <Toolbar addComponent={addComponent}>
                         <GridDeleteZone onDrop={onDropDeleteZone} />
