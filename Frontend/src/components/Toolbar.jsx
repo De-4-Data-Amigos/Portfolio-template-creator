@@ -3,15 +3,23 @@ import "../assets/Toolbar.css";
 import ChooseBackground from './ChooseBackground';
 import EditableTextInputField from './EditableTextInputField';
 import AddPicture from './AddPicture';
+import ComponentChooserModal from './ComponentChooserModal';
 
 const Toolbar = ({ addComponent, children }) => {
   const [showChooseBackground, setShowChooseBackground] = useState(false);
-  const [showAddPicture, setShowAddPicture] = useState(false);  // Tilføj en state for at vise/hide AddPicture modal
+  const [showComponentChooser, setShowComponentChooser] = useState(false);
+  const [componentToAdd, setComponentToAdd] = useState(null);
 
-  function addText() {
-    let gridName = "body";
-    addComponent(<EditableTextInputField text="Test input if save"/>, gridName);
-  }
+  const addText = () => {
+    const textComponent = <EditableTextInputField text="New Text"/>;
+    setComponentToAdd(textComponent);
+    setShowComponentChooser(true);
+  };
+
+  const addPicture = () => {
+    setShowComponentChooser(true);
+    setComponentToAdd(<AddPicture addComponent={addComponent} setShowModal={setShowComponentChooser} />);
+  };
 
   return (
     <div className="toolbar">
@@ -20,7 +28,7 @@ const Toolbar = ({ addComponent, children }) => {
           <div className="toolbar-icon">T</div>
           <div className="toolbar-label">Text</div>
         </div>
-        <div className="toolbar-item" onClick={() => setShowAddPicture(true)}>  
+        <div className="toolbar-item" onClick={addPicture}>  
           <div className="toolbar-icon">🖼️</div>
           <div className="toolbar-label">Picture</div>
         </div>
@@ -30,7 +38,7 @@ const Toolbar = ({ addComponent, children }) => {
         </div>
       </div>
       {showChooseBackground && <ChooseBackground setShowModal={setShowChooseBackground} />}
-      {showAddPicture && <AddPicture addComponent={addComponent} setShowModal={setShowAddPicture} />} 
+      {showComponentChooser && <ComponentChooserModal setShowModal={setShowComponentChooser} addComponent={addComponent} component={componentToAdd} />}
       <div> 
         {children}
       </div>
