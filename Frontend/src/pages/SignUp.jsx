@@ -66,7 +66,7 @@ function SignUpPage() {
         <h2 className="sub-header"><i></i></h2>
 
         <form onSubmit={performSignup} className="login-form">
-          <div className="input-group">
+          <div className="input-group-sign">
             <h2 className="sign-title"> Sign Up</h2>
           </div>
 
@@ -81,9 +81,9 @@ function SignUpPage() {
    
           <div className="name-container">
             {["firstName", "lastName"].map((field) => (
-              <div className="input-group" key={field}>
+              <div className="input-group-sign" key={field}>
                 <input
-                  className="input-field"
+                  className="input-field-sign"
                   placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)} *`}
                   type="text"
                   required
@@ -97,9 +97,9 @@ function SignUpPage() {
           
           {/* Email field */}
 
-          <div className="input-group">
+          <div className="input-group-sign">
             <input
-              className="input-field"
+              className="input-field-sign"
               placeholder="Email *"
               type="email"
               required
@@ -112,9 +112,9 @@ function SignUpPage() {
 
           {/* Password field */}
 
-          <div className="input-group">
+          <div className="input-group-sign">
             <input
-              className="input-field"
+              className="input-field-sign"
               placeholder="Password *"
               type="password"
               required
@@ -131,7 +131,7 @@ function SignUpPage() {
 
           <div className="input-group">
             <input
-              className="input-field"
+              className="input-field-sign"
               placeholder="Confirm Password *"
               type="password"
               required

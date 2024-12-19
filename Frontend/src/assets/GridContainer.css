@@ -10,6 +10,8 @@
     flex-direction: row;
 }
 
+
+
 .GridColumn{
     /*
     margin: 2.5vh 2.5vw;
@@ -59,6 +61,24 @@
     overflow-x: hidden;
     scrollbar-width:thin;
 }
+
+
+.image-container {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+    width: 100%;
+}
+
+.image-container img {
+    height: 68%;
+    width: 68%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    object-fit: contain;
+}
+
 
 .GridDeleteZone{
     --border-width: 0.2em;

@@ -35,6 +35,9 @@ public class UserController {
 
     public void register(Context ctx) throws ApiException, AuthorizationException {
         String[] userInfos = getUserInfos(ctx, false);
+        if (userInfos[1].length() < 8) {
+            throw new ApiException(400, "Password must be at least 8 characters long");
+        }
         User user = getVerfiedOrRegisterUser(userInfos[0], userInfos[1], userInfos[2], true);
         String token = getToken(userInfos[0], user.getRolesAsStrings());
 
