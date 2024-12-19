@@ -198,31 +198,6 @@
 
 
 
-
-.remember-label {
-    font-size: 15px;
-    color: #000000;
- 
-}
-
-/* login button */
-.button {
-    width: 100%;
-    padding: 0.8em;
-    margin-top: 2em;
-    font-size: 1em;
-    color: white;
-    background-color: #0000009e;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #0d46cb;
-}
-
-
 /* Link group to arrange links side by side */
 .link-group {
   display: flex;
