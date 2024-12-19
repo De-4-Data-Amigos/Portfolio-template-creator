@@ -7,13 +7,19 @@ const AddPicture = ({ addComponent, setShowModal }) => {
 
   const handleAddPicture = () => {
     if (url.trim()) {
-      addComponent(<img src={url} alt="Dynamic" />, "body");
+      const imageComponent = (
+        <div className="image-container">
+          <img src={url} alt="Dynamic" />
+        </div>
+      );
+      addComponent(imageComponent, "body");
       setUrl('');
       setShowModal(false);  // Luk modalen efter tilføjelsen
     } else {
       alert("Please enter a valid URL.");
     }
   };
+  
 
   return (
     <div className="modal-overlay" onClick={() => setShowModal(false)}>
