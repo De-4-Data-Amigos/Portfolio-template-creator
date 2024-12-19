@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import "../assets/Toolbar.css";
 import ChooseBackground from './ChooseBackground';
 import EditableTextInputField from './EditableTextInputField';
+import AddPicture from './AddPicture';
 
-const Toolbar = ({addComponent, children }) => {
+const Toolbar = ({ addComponent, children }) => {
   const [showChooseBackground, setShowChooseBackground] = useState(false);
+  const [showAddPicture, setShowAddPicture] = useState(false);  // Tilføj en state for at vise/hide AddPicture modal
 
   function addText() {
     let gridName = "body";
@@ -18,7 +20,7 @@ const Toolbar = ({addComponent, children }) => {
           <div className="toolbar-icon">T</div>
           <div className="toolbar-label">Text</div>
         </div>
-        <div className="toolbar-item" onClick={() => alert("Picture functionality not implemented yet!")}>
+        <div className="toolbar-item" onClick={() => setShowAddPicture(true)}>  
           <div className="toolbar-icon">🖼️</div>
           <div className="toolbar-label">Picture</div>
         </div>
@@ -28,6 +30,7 @@ const Toolbar = ({addComponent, children }) => {
         </div>
       </div>
       {showChooseBackground && <ChooseBackground setShowModal={setShowChooseBackground} />}
+      {showAddPicture && <AddPicture addComponent={addComponent} setShowModal={setShowAddPicture} />} 
       <div> 
         {children}
       </div>
