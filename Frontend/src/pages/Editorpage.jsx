@@ -239,7 +239,21 @@ function EditorPage() {
                     </div>
                 </div>
             </div>
-    
+
+            <div style={{ paddingTop: "10vh"}} ></div>
+
+            <FooterContainer linkMap={footerLinks} onUpdatelinks={updateFooterLinks}>
+                <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}} name={"footer"}
+            
+                onUpdate={changePositionOfElementInNavbarGrid}>
+                    {Array.from(footerGridChildren.values())}
+                </GridContainer>
+            </FooterContainer>
+            <div>
+                    <button onClick={handleAddFooterLink}>Tilføj footer-link</button>
+                </div>
+
+
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
     
