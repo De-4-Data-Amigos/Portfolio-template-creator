@@ -10,7 +10,10 @@ import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 class UserControllerTest {
 
@@ -111,4 +114,69 @@ class UserControllerTest {
                 .then()
                 .statusCode(400);
     }
+
+    @Test
+    void registerInvalidRole() {
+        String invalidRolePayload = "{\"username\":\"newuser@gmail.com\",\"password\":\"newpassword\",\"role\":\"invalid_role\"}";
+
+        given()
+                .contentType("application/json")
+                .body(invalidRolePayload)
+                .when()
+                .post(BASE_URL + "/register")
+                .then()
+                .statusCode(400); // Forventet fejlkode
+    }
+    @Test
+    void registerWithSpecialCharacterUsername() {
+        String payload = "{\"username\":\"test_user!@gmail.com\",\"password\":\"validPassword123\",\"role\":\"user\"}";
+
+        given()
+                .contentType("application/json")
+                .body(payload)
+                .when()
+                .post(BASE_URL + "/register")
+                .then()
+                .statusCode(201)
+                .body("username", equalTo("test_user!@gmail.com"));
+
+    }
+    @Test
+    void registerWithShortPassword() {
+        String payload = "{\"username\":\"shortpassuser@gmail.com\",\"password\":\"123\",\"role\":\"user\"}";
+
+        given()
+                .contentType("application/json")
+                .body(payload)
+                .when()
+                .post(BASE_URL + "/register")
+                .then()
+                .statusCode(400) // Forventet fejl for ikke at opfylde krav
+                .body("message", containsString("Password must be at least 8 characters long"));
+    }
+
+
+
+    @Test
+    void verifyUserIsPersistedInDatabaseAfterRegistration() {
+        String payload = "{\"username\":\"newuser@gmail.com\",\"password\":\"newpassword\",\"role\":\"user\"}";
+
+        given()
+                .contentType("application/json")
+                .body(payload)
+                .when()
+                .post(BASE_URL + "/register")
+                .then()
+                .statusCode(201);
+
+        try (var em = emfTest.createEntityManager()) {
+            User user = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                    .setParameter("username", "newuser@gmail.com")
+                    .getSingleResult();
+            assertNotNull(user);
+            assertEquals("newuser@gmail.com", user.getUsername());
+        }
+    }
+
+
 }
