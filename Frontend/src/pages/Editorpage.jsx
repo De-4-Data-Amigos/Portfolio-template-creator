@@ -26,18 +26,21 @@ function EditorPage() {
     const [navbarGridChildren, setNavbarGridChildren] = useState([]);
     const [bodyGridChildren, setBodyGridChildren] = useState([]);
     const [footerGridChildren, setFooterGridChildren] = useState([]);
+    const stateHistory = [];
 
     useEffect(() => {
-        console.log("updated navbarGridChildren", navbarGridChildren);        
+        console.log("updated navbarGridChildren", navbarGridChildren);
+        stateHistory.push(saveState());       
     }, [navbarGridChildren])
     useEffect(() => {
         console.log("updated bodyGridChildren", bodyGridChildren);
+        stateHistory.push(saveState());
     }, [bodyGridChildren])
     useEffect(() => {
         console.log("updated footerGridChildren", footerGridChildren);
+        stateHistory.push(saveState());
     }, [footerGridChildren])
     
-    let currentState = [];
 
     const saveState = () => {
         const state = [];
@@ -48,12 +51,12 @@ function EditorPage() {
             let data = {};
             let component = value;
             let typeName = component.type.name;
-            key = value.props["datapos"];
+            let key = value.props["datapos"];
             
             componentState["componentName"] = typeName;
             
             data["pos"] = key;
-            data["gridName"] = "body";
+            data["gridName"] = grid;
 
             componentData = component.props;
  
@@ -62,20 +65,23 @@ function EditorPage() {
             //console.log("Adding Component: ", componentState);
             state.push(componentState);
         }
+        let grid = "navbar";
         navbarGridChildren.forEach(saveStateFn);
+        grid = "body";
         bodyGridChildren.forEach(saveStateFn);
+        grid = "footer";
         footerGridChildren.forEach(saveStateFn);
         console.log("State: ", state);
-        alert(JSON.stringify(state));
+        //alert(JSON.stringify(state));
         return state;
     };
 
     const restoreStateFn = (jsonState) =>{
         const state = JSON.parse(jsonState);       
         console.log("Restoring state: ", state);
-        let tempMapNavbar = new Map();
-        let tempMapBody = new Map();
-        let tempMapFooter = new Map();
+        const tempArrayNavbar = [];
+        const tempArrayBody = [];
+        const tempArrayFooter = [];
         for (let i = 0; i < state.length; i++) {
             const element = state[i];
             let comp;
@@ -93,22 +99,22 @@ function EditorPage() {
             }
             switch (element.data.gridName) {
                 case "navbar":
-                    tempMapNavbar.set(element.data.pos, comp);
+                    tempArrayNavbar.push(comp);
                     break;
                 case "body":
-                    tempMapBody.set(element.data.pos, comp);
+                    tempArrayBody.push(comp);
                     break;
                 case "footer":
-                    tempMapFooter.set(element.data.pos, comp);
+                    tempArrayFooter.push(comp);
                     break;
             
                 default:
                     break;
             }
         }
-        setNavbarGridChildren(tempMapFooter);
-        setBodyGridChildren(tempMapBody);
-        setFooterGridChildren(tempMapFooter);
+        setNavbarGridChildren(tempArrayNavbar);
+        setBodyGridChildren(tempArrayBody);
+        setFooterGridChildren(tempArrayFooter);
     };
 
     const updateEditableText = (input, datapos, grid) =>{
@@ -121,51 +127,43 @@ function EditorPage() {
         // but a gaffer tape solution....
         // This 100% needs to be refactored.
         // TODO: clean this mess up.
-        updateElement((<EditableTextInputField onUpdate={updateEditableText} datapos={datapos} grid={grid} key={`gridComponent-${datapos}`}>{input}</EditableTextInputField>), grid, datapos);        
+        updateElement(
+            (<EditableTextInputField 
+                onUpdate={updateEditableText} 
+                datapos={datapos} 
+                grid={grid} 
+                key={`gridComponent-${datapos}`}>
+                    {input}
+            </EditableTextInputField>)
+            , grid, datapos);        
     };
 
     const updateElement = (element, grid, pos) => {
-        let tempMap;
+        let array;
+        let index = -1;
         switch (grid) {
             case "navbar":
-                //tempMap = new Map(navbarGridChildren);
-                //tempMap.delete(pos);
-                //tempMap.set(pos, element);
-                setNavbarGridChildren(navbarGridChildren.map((child) => {
-                    if(child.props["datapos"] === pos){
-                        return element;
-                    }
-                    else{
-                        return child;
-                    }
-                }));
+                array = [...navbarGridChildren];
+                index = findInArray(array, pos);
+                array.splice(index, 1);
+                array.push(element);
+                setNavbarGridChildren(array);
                 break;
+
             case "body":
-                //tempMap = new Map(bodyGridChildren);
-                //DeleteUsingObjectKey()
-                //tempMap.delete(pos);
-                //tempMap.set(pos, element);
-                setBodyGridChildren(bodyGridChildren.map((child) => {
-                    if(child.props["datapos"] === pos){
-                        return element;
-                    }
-                    else{
-                        return child;
-                    }
-                }));
+                array = [...bodyGridChildren];
+                index = findInArray(array, pos);
+                array.splice(index, 1);
+                array.push(element);
+                setBodyGridChildren(array);
                 break;
+
             case "footer":
-                //tempMap = new Map(footerGridChildren);
-                //tempMap.delete(pos);
-                //tempMap.set(pos, element);
-                setFooterGridChildren(footerGridChildren.map((child) => {
-                    if(child.props["datapos"] === pos){
-                        return element;
-                    }
-                    else{
-                        return child;
-                    }
-                }));
+                array = [...footerGridChildren];
+                index = findInArray(array, pos);
+                array.splice(index, 1);
+                array.push(element);
+                setFooterGridChildren(array);
                 break;
         
             default:
@@ -188,7 +186,7 @@ function EditorPage() {
     };
   
     const addNavbarLink = (text, href) => {
-        addComponent(<EditorLink text={text} href={href} />, "body");        
+        addComponent(<EditorLink text={text} href={href} />, "navbar");        
     };
 
     const addFooterLinks = (text, href) => {
@@ -196,75 +194,83 @@ function EditorPage() {
     };
 
     const addComponent = (comp, parentGridName) => {
-        const updateMap = (map, columns, rows) => {
-            addloop: {
-                for (let i = 0; i < columns; i++) {
-                    for (let j = 0; j < rows; j++) {
-                        const position = `${i},${j}`;
-                        if (!map.has(position) || !map.get(position)) {
-                            //const _comp = cloneElement(comp, { "datapos": position});
-                            const newComp = cloneElement(comp, { "datapos": position, key: `gridComponent-${position}` });
-                            map.set(position, newComp);
-                            //setComponentAmount((prev) => prev + 1);
-                            break addloop;
+        const updateArray = (array, columns, rows, setFn) => {
+            for (let x = 0; x < columns; x++) {
+                for (let y = 0; y < rows; y++) {
+                    const position = `${x},${y}`;
+                    let exists = false;
+                    array.forEach((element)=>{
+                        if(element.props["datapos"] == position){
+                            exists = true;
+                            return;
                         }
+                    });
+                    if(exists){
+                        continue;
                     }
-                }
+                    const newComp = cloneElement(comp, { "datapos": position, key: `gridComponent-${position}` });
+                    //array.push(newComp);
+                    setFn(prev => [...prev, newComp]);
+                    return;
+                }                    
             }
-            return map;
         };
-       let tempMap;
         switch (parentGridName) {
             case "navbar":
-                tempMap = new Map(navbarGridChildren);
-                tempMap = updateMap(tempMap, navbarColumns, navbarRows);
-                setNavbarGridChildren(tempMap);
+                updateArray(navbarGridChildren, navbarColumns, navbarRows, setNavbarGridChildren);
                 break;
                 
             case "body":
-                tempMap = new Map(bodyGridChildren);
-                tempMap = updateMap(tempMap, bodyColumns, bodyRows);
-                setBodyGridChildren(tempMap);
+                updateArray(bodyGridChildren, bodyColumns, bodyRows, setBodyGridChildren);
                 break;
             case "footer":
-                tempMap = new Map(footerGridChildren);
-                tempMap = updateMap(tempMap, footerColums, footerRows);
-                setFooterGridChildren(tempMap);
+                updateArray(footerGridChildren, footerColums, footerRows, setFooterGridChildren);
                 break;
         
             default:
-                console.log("Invalid grid name: ", parentGridName);
-                
+                console.log("Invalid grid name: ", parentGridName);                
                 break;
         }
     };
    
     const removeComponent = (removedPos, parentGridName) => {
-        console.log("removedPos:", removedPos, "parentGridName:", parentGridName);
-        
-        
-        let tempMap; 
-        
+        console.log("removedPos:", removedPos, "parentGridName:", parentGridName);        
+        let tempArray;
         switch (parentGridName) {
             case "navbar":
-                tempMap = new Map(navbarGridChildren);
-                if (tempMap.delete(removedPos)) {
-                    setNavbarGridChildren(tempMap);
+                tempArray = [...navbarGridChildren];
+                for (let i = 0; i < tempArray.length; i++) {
+                    const element = tempArray[i];
+                    if(element.props["datapos"] == removedPos){
+                        tempArray.splice(i, 1);
+                        break;
+                    }
                 }
+                setNavbarGridChildren(tempArray);
                 break;
                 
             case "body":
-                tempMap = new Map(bodyGridChildren);
-                if (tempMap.delete(removedPos)) {
-                    setBodyGridChildren(tempMap);
+                tempArray = [...bodyGridChildren];
+                for (let i = 0; i < tempArray.length; i++) {
+                    const element = tempArray[i];
+                    if(element.props["datapos"] == removedPos){
+                        tempArray.splice(i, 1);
+                        break;
+                    }
                 }
+                setBodyGridChildren(tempArray);
                 break;
 
             case "footer":
-                tempMap = new Map(footerGridChildren)
-                if (tempMap.delete(removedPos)) {
-                    setFooterGridChildren(tempMap);
+                tempArray = [...footerGridChildren];
+                for (let i = 0; i < tempArray.length; i++) {
+                    const element = tempArray[i];
+                    if(element.props["datapos"] == removedPos){
+                        tempArray.splice(i, 1);
+                        break;
+                    }
                 }
+                setFooterGridChildren(tempArray);
                 break;
                 
             default:
@@ -314,44 +320,106 @@ function EditorPage() {
         removeComponent(position, data[1]); 
     };
 
+    const findInArray = (array, pos) => {
+        for (let i = 0; i < array.length; i++) {
+            const element = array[i];
+            if(element.props["datapos"] == pos){
+                return i;
+            }
+        }
+        return -1;
+    };
+
+    const indexOfPosistion = (pos, grid) => {
+        switch (grid) {
+            case "navbar":
+                return findInArray(navbarGridChildren, pos);
+
+            case "body":
+                return findInArray(bodyGridChildren, pos);
+                
+            case "footer":
+                return findInArray(footerGridChildren, pos);
+
+            default:
+                break;
+        }
+    };
+
     const changePositionOfElementInBodyGrid = (oldPos, newPos) => {
-        //console.log("Changing from", oldPos, "to", newPos);
-
-        let tempMap = new Map(bodyGridChildren);
+        let tempArray = [...bodyGridChildren];
+        const oldIndex = indexOfPosistion(oldPos, "body");        
+        const newIndex = indexOfPosistion(newPos, "body");
         
-        let oldElement = tempMap.get(oldPos);
-        let newElement = tempMap.get(newPos);
+        let oldElement = tempArray[oldIndex];
+        let newElement = tempArray[newIndex];
+        if(oldIndex == newIndex){
+            return;
+        }
 
-        tempMap.delete(newPos);
-
-        tempMap.set(newPos, cloneElement(oldElement, {"datapos" : newPos, "key": `gridComponent-${newPos}`}));
+        if(newPos > -1){
+            tempArray.splice(newPos, 1);
+        }
+        tempArray.push(cloneElement(oldElement, {"datapos" : newPos, "key": `gridComponent-${newPos}`}));
         if(newElement){
-            tempMap.set(oldPos, cloneElement(newElement, {"datapos" : oldPos, "key": `gridComponent-${oldPos}`}));
+
+            tempArray.push(cloneElement(newElement, {"datapos" : oldPos, "key": `gridComponent-${oldPos}`}));
         }
         else{
-            tempMap.delete(oldPos);
+            tempArray.splice(oldPos, 1);
         }
-        setBodyGridChildren(tempMap);
+        setBodyGridChildren(tempArray);
     };
 
     const changePositionOfElementInNavbarGrid = (oldPos, newPos) => {
-        console.log("Changing from", oldPos, "to", newPos);
-        let tempMap = new Map(navbarGridChildren);
+        let tempArray = [...navbarGridChildren];
+        const oldIndex = indexOfPosistion(oldPos, "navbar");        
+        const newIndex = indexOfPosistion(newPos, "navbar");
         
-        let oldElement = tempMap.get(oldPos);
-        let newElement = tempMap.get(newPos);
+        let oldElement = tempArray[oldIndex];
+        let newElement = tempArray[newIndex];
+        if(oldIndex == newIndex){
+            return;
+        }
 
-        tempMap.set(newPos, cloneElement(oldElement, {"datapos" : newPos, "key": `gridComponent-${newPos}`}));
+        if(newPos > -1){
+            tempArray.splice(newPos, 1);
+        }
+        tempArray.push(cloneElement(oldElement, {"datapos" : newPos, "key": `gridComponent-${newPos}`}));
         if(newElement){
-            tempMap.set(oldPos, cloneElement(newElement, {"datapos" : oldPos, "key": `gridComponent-${oldPos}`}));
+
+            tempArray.push(cloneElement(newElement, {"datapos" : oldPos, "key": `gridComponent-${oldPos}`}));
         }
         else{
-            tempMap.set(oldPos, undefined);
+            tempArray.splice(oldPos, 1);
         }
-        setNavbarGridChildren(tempMap);
+        setNavbarGridChildren(tempArray);
     };
-    //setFooterGridChildren(tempMap);
 
+    const changePositionOfElementInFooterGrid = (oldPos, newPos) => {
+        let tempArray = [...footerGridChildren];
+        const oldIndex = indexOfPosistion(oldPos, "footer");        
+        const newIndex = indexOfPosistion(newPos, "footer");
+        
+        let oldElement = tempArray[oldIndex];
+        let newElement = tempArray[newIndex];
+        if(oldIndex == newIndex){
+            return;
+        }
+
+        if(newPos > -1){
+            tempArray.splice(newPos, 1);
+        }
+        tempArray.push(cloneElement(oldElement, {"datapos" : newPos, "key": `gridComponent-${newPos}`}));
+        if(newElement){
+
+            tempArray.push(cloneElement(newElement, {"datapos" : oldPos, "key": `gridComponent-${oldPos}`}));
+        }
+        else{
+            tempArray.splice(oldPos, 1);
+        }
+        setFooterGridChildren(tempArray);
+    };
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -359,11 +427,10 @@ function EditorPage() {
             <NavbarContainer linkMap={navbarLinks} onUpdateLinks={updateNavbarLinks}>
                 <GridContainer columns={navbarColumns} rows={navbarRows} style={{height: '100%', margin: 0}} name={"navbar"}
                 onUpdate={changePositionOfElementInNavbarGrid}>
-                    {Array.from(navbarGridChildren.values())}
+                    {navbarGridChildren}
                 </GridContainer>
             </NavbarContainer>
 
-            <button onClick={() => saveState()}>test state</button>
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
@@ -371,7 +438,7 @@ function EditorPage() {
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
                     <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
-                        {Array.from(bodyGridChildren.values())}
+                        {bodyGridChildren}
                     </GridContainer>
                 </div>
             </div>
@@ -381,7 +448,7 @@ function EditorPage() {
                 <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}}
                 
                 onUpdate={changePositionOfElementInNavbarGrid}>
-                    {Array.from(footerGridChildren.values())}
+                    {footerGridChildren}
                 </GridContainer>
             </FooterContainer>
             <div>
@@ -394,6 +461,9 @@ function EditorPage() {
             <div style={{ }}>                
                 <div style={{ display: "flex" }}>
                     <Toolbar addComponent={addComponent} onTextUpdate={updateEditableText}>
+                        <div className="toolbar-item" onClick={() => alert(JSON.stringify(stateHistory.at(-1)))}>
+                            <div className="toolbar-label">Save state</div>
+                        </div>
                         <RestoreState restoreStateFn={restoreStateFn}/>
                         <GridDeleteZone onDrop={onDropDeleteZone} />
                     </Toolbar>
