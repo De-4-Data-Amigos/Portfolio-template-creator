@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 
 const ComponentChooserModal = ({ setShowModal, addComponent, component }) => {
   const handlePlacement = (location) => {
-    addComponent(component, location);
+    addComponent(cloneElement(component, {"grid": location}), location);
     setShowModal(false);
   };
 
