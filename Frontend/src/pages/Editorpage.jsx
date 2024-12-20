@@ -6,6 +6,7 @@ import FooterContainer from "../components/FooterContainer";
 import Toolbar from "../components/Toolbar";
 import "../assets/GridContainer.css";
 import EditableTextInputField from "../components/EditableTextInputField";
+import { useBackground } from "../components/BackgroundContext";
 import EditorLink from "../components/EditorLink";
 import RestoreState from "../components/RestoreState";
 import { DeleteUsingObjectKey } from "../utils/arrayUtils";
@@ -28,6 +29,7 @@ function EditorPage() {
     const [footerGridChildren, setFooterGridChildren] = useState([]);
     const stateHistory = [];
 
+    const { background } = useBackground();
     useEffect(() => {
         console.log("updated navbarGridChildren", navbarGridChildren);
         stateHistory.push(saveState());       
@@ -157,7 +159,7 @@ function EditorPage() {
                 array.push(element);
                 setBodyGridChildren(array);
                 break;
-
+                
             case "footer":
                 array = [...footerGridChildren];
                 index = findInArray(array, pos);
@@ -396,6 +398,16 @@ function EditorPage() {
         setNavbarGridChildren(tempArray);
     };
 
+    function getBackgroundStyle() {
+        const { background } = useBackground();
+        if (background.type === 'image') {
+            return { backgroundImage: `url(${background.value})`, backgroundSize: 'cover', backgroundPosition: 'center' };
+        } else {
+            return { backgroundColor: background.value, backgroundSize: 'auto', backgroundPosition: 'initial' };
+        }
+    }
+    
+
     const changePositionOfElementInFooterGrid = (oldPos, newPos) => {
         let tempArray = [...footerGridChildren];
         const oldIndex = indexOfPosistion(oldPos, "footer");        
@@ -430,23 +442,25 @@ function EditorPage() {
                     {navbarGridChildren}
                 </GridContainer>
             </NavbarContainer>
-
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
                 <div>
                     <button onClick={handleAddLink}>Tilføj navbar-link</button>
                 </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
-                    <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
-                        {bodyGridChildren}
-                    </GridContainer>
+                    {/* Baggrundskontainer for grid */}
+                    <div style={getBackgroundStyle()}>
+                      <GridContainer columns={bodyColumns} rows={bodyRows} name={"body"} onUpdate={changePositionOfElementInBodyGrid}>
+                          {bodyGridChildren}
+                      </GridContainer>
+                    </div> 
                 </div>
             </div>
+
             <div style={{ paddingTop: "10vh"}} ></div>
 
             <FooterContainer linkMap={footerLinks} onUpdatelinks={updateFooterLinks}>
-                <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}}
-                
+                <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}}              
                 onUpdate={changePositionOfElementInNavbarGrid}>
                     {footerGridChildren}
                 </GridContainer>
@@ -455,10 +469,12 @@ function EditorPage() {
                     <button onClick={handleAddFooterLink}>Tilføj footer-link</button>
                 </div>
 
+
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
+    
             {/* Footer */}
-            <div style={{ }}>                
+            <div>                
                 <div style={{ display: "flex" }}>
                     <Toolbar addComponent={addComponent} onTextUpdate={updateEditableText}>
                         <div className="toolbar-item" onClick={() => alert(JSON.stringify(stateHistory.at(-1)))}>
