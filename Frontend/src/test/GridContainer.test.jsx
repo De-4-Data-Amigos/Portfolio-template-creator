@@ -26,7 +26,7 @@ describe(GridContainer, () => {
         
         const { getAllByTestId } = render(
             <GridContainer columns={columns} rows={rows}>
-                <p data-pos='1,1'>{testValue}</p>
+                <p datapos='1,1'>{testValue}</p>
             </GridContainer>
         );
         const actuallyPositionValue = getAllByTestId("GridColumn")[1].children[1].textContent;
@@ -47,13 +47,13 @@ describe(GridContainer, () => {
         expect(invaliddata).toThrow(Error);
     });
 
-    it("grid throws if data-pos is invalid", () => {
+    it("grid throws if datapos is invalid", () => {
         const columns = 1;
         const rows = 1;
 
         const invaliddata = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='00'></p>
+                    <p datapos='00'></p>
                 </GridContainer>
             );
         };
@@ -66,8 +66,8 @@ describe(GridContainer, () => {
 
         const invaliddata = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='0,0'></p>
-                    <p data-pos='1,1'></p>
+                    <p datapos='0,0'></p>
+                    <p datapos='1,1'></p>
                 </GridContainer>
             );
         };
@@ -80,8 +80,8 @@ describe(GridContainer, () => {
 
         const invaliddata = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='0,0'></p>
-                    <p data-pos='0,0'></p>
+                    <p datapos='0,0'></p>
+                    <p datapos='0,0'></p>
                 </GridContainer>
             );
         };
@@ -94,7 +94,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='-1,0'></p>
+                    <p datapos='-1,0'></p>
                 </GridContainer>
             );
         };
@@ -107,7 +107,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='0,-1'></p>
+                    <p datapos='0,-1'></p>
                 </GridContainer>
             );
         };
@@ -120,7 +120,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos={`${columns},0`}></p>
+                    <p datapos={`${columns},0`}></p>
                 </GridContainer>
             );
         };
@@ -133,7 +133,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos={`0,${rows}`}></p>
+                    <p datapos={`0,${rows}`}></p>
                 </GridContainer>
             );
         };
@@ -153,16 +153,16 @@ describe(GridContainer, () => {
             return(<p>test</p>);
         };
 
-        //data-pos={`${num},${num}`} data-testid={`component${num}`}
+        //datapos={`${num},${num}`} data-testid={`component${num}`}
         const changePositionOfElement = (oldPos, newPos) => {
             console.log("Changing from", oldPos, "to", newPos);
             
             let oldElement = bodyGridChildren.get(oldPos);
             let newElement = bodyGridChildren.get(newPos);
     
-            bodyGridChildren.set(newPos, React.cloneElement((<div>{oldElement}</div>), {"data-pos" : newPos}));
+            bodyGridChildren.set(newPos, React.cloneElement((<div>{oldElement}</div>), {"datapos" : newPos}));
             if(newElement){
-                bodyGridChildren.set(oldPos, React.cloneElement((<div>{newElement}</div>), {"data-pos" : oldPos}));
+                bodyGridChildren.set(oldPos, React.cloneElement((<div>{newElement}</div>), {"datapos" : oldPos}));
             }
             else{
                 bodyGridChildren.set(oldPos, undefined);
@@ -170,8 +170,8 @@ describe(GridContainer, () => {
         };
 
 
-        bodyGridChildren.set('0,0', React.cloneElement(<div><TestComp/></div>, { "data-pos" : '0,0', "data-testid": "component0" }));
-        bodyGridChildren.set('1,1', React.cloneElement(<div><TestComp/></div>, { "data-pos" : '1,1', "data-testid": "component1" }));
+        bodyGridChildren.set('0,0', React.cloneElement(<div><TestComp/></div>, { "datapos" : '0,0', "data-testid": "component0" }));
+        bodyGridChildren.set('1,1', React.cloneElement(<div><TestComp/></div>, { "datapos" : '1,1', "data-testid": "component1" }));
 
         
         const { getAllByTestId, getByTestId } = render(
@@ -206,6 +206,6 @@ describe(GridContainer, () => {
         expect(fireEvent.dragStart(comp1Parent, testEventDrag)).toEqual(true);
         expect(fireEvent.drop(comp2Parent, testEventDrop)).toEqual(true);
         const movedComponet = getByTestId("component1");
-        expect(movedComponet).toHaveAttribute('data-pos', '1,1');
+        expect(movedComponet).toHaveAttribute('datapos', '1,1');
     });
 });
