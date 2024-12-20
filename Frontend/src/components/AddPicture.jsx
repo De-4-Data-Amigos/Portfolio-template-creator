@@ -14,7 +14,7 @@ const AddPicture = ({ addComponent, setShowModal }) => {
       );
       addComponent(imageComponent, "body");
       setUrl('');
-      setShowModal(false);  // Luk modalen efter tilføjelsen
+      setShowModal(false);
     } else {
       alert("Please enter a valid URL.");
     }
