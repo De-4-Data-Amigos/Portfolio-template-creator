@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 
-const EditableTextInputField = ({ text, dataPos }) => {
+const EditableTextInputField = ({ children, grid, onUpdate, datapos}) => { 
   const [isEditing, setIsEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(text);
+  const [inputValue, setInputValue] = useState(children);
+  const [text, setText] = useState(children);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-
+  
   const handleSaveClick = () => {
     setIsEditing(false);
+    setText(inputValue);
+    onUpdate(inputValue, datapos, grid);
+    //_text = inputValue;
+    //children = inputValue;
   };
 
   const handleCancelClick = () => {
-    setIsEditing(false);
-    setInputValue(text); 
+    setIsEditing(false); 
   };
 
   const handlePenClick = () => {
@@ -22,7 +26,7 @@ const EditableTextInputField = ({ text, dataPos }) => {
   };
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }} data-pos={dataPos}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }} datapos={datapos}>
       {isEditing ? (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
           <input
@@ -59,7 +63,7 @@ const EditableTextInputField = ({ text, dataPos }) => {
         </div>
       ) : (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-          <span>{inputValue}</span>
+          <span>{text}</span>
           <span
             style={{
               cursor: 'pointer',
@@ -78,6 +82,6 @@ const EditableTextInputField = ({ text, dataPos }) => {
 };
 
 {/* Add below in EditorPage.jsx, below {childrenArray} to test:
-   <EditableTextInputField text="Test input if save" data-pos= "0,0"/> */}
+   <EditableTextInputField text="Test input if save" datapos= "0,0"/> */}
 
 export default EditableTextInputField;
