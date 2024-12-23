@@ -1,6 +1,6 @@
 ## 1
 #### Test navn
-Register med kort password
+registerWithShortPassword
 #### Beskrivelse
 Forsøger at registrere en bruger med en adgangskode på mindre end 8 tegn
 #### Forventet Resultat
@@ -11,7 +11,7 @@ HTTP 400 med beskeden "Password must be at least 8 characters long".
 Bestået
 ## 2 
 #### Test navn
-Login med ugyldigt password
+Login (invalidPayload)
 #### Beskrivelse
 Forsøger at logge ind med forkert adgangskode for en eksisterende bruger.
 #### Forventet Resultat
@@ -23,7 +23,7 @@ Bestået
 
 ## 3
 #### Test navn
-Register med korrekt input
+registerInvalidRole
 #### Beskrivelse
 Forsøger at registrere en bruger uden at inkludere en rolle i payload.
 #### Forventet Resultat
@@ -49,22 +49,10 @@ Bestået
 
 ## Fundne fejl og rettelser:
 
-### Fejl 1:
+- Den første fejl opstod i testen “registerWithShortPassword”. Her fejlede testen, JSON-responsen ikke indeholdt nøglen “error”, som forventet, men i stedet brugte nøglen “message”. Denne fejl skyldtes en misforståelse af backend-resonsens JSON-struktur. For at løse problemet blev testkoden opdateret, så den matchede den korrekte nøgle “message”.
 
-#### Beskrivelse:
-Testen for "Register med kort password" fejlede, da JSON-responsen ikke indeholdt nøglen "error", men i stedet "message".
-#### Årsag:
-Misforståelse af backend-responsens JSON-struktur.
-#### Rettelse:
-Testkoden blev opdateret til at matche den korrekte nøgle "message".
+- Den anden fejl blev fundet i testen “registerInvalidRole”. Her returnerede systemet en generisk fejlmeddelelse i stedet for den specifikke besked. “Role is required”. Årsagen til denne fejl var, at backend ikke validerede eksplicit, om rollen var inkluderet i payloaden. Løsningen var at opdatere backend, så den nu validerer, om rollen er angivet og returnerer en passende fejlmeddelelse, hvis den mangler
 
-### Fejl 2:
-#### Beskrivelse:
-Testen for "Register uden rolle" returnerede en generisk fejlmeddelelse i stedet for den specifikke besked "Role is required".
-#### Årsag:
-Backend validerede ikke eksplicit, om rollen var inkluderet.
-#### Rettelse:
-Backend blev opdateret til at inkludere validering for rollen med en passende fejlmeddelelse.
 
 Eksempel på Testkode for "verifyUserIsPersistedInDatabaseAfterRegistration"
 
