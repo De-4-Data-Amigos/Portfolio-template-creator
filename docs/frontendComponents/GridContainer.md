@@ -9,11 +9,11 @@ To create a grid, you will need to give it a columns and rows amount.
 
 ```
 
-All children needs to have the attribute `data-pos` with the format `x,y` where x and y is numbers and 1 less than the column and row amount, since the are indexes.
+All children needs to have the attribute `datapos` with the format `x,y` where x and y is numbers and 1 less than the column and row amount, since the are indexes.
 
 ```jsx
 <GridContainer columns={3} rows={3}>
-    <SomeComponent data-pos='0,2'/>
+    <SomeComponent datapos='0,2'/>
 </GridContainer>
 
 ```

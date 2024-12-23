@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { render, fireEvent } from '@testing-library/react';
 import GridContainer from '../components/GridContainer';
-
+import { spyOn } from 'jest'
 
 describe(GridContainer, () => {
     it("grid gets created correctly", () => {
@@ -26,7 +26,7 @@ describe(GridContainer, () => {
         
         const { getAllByTestId } = render(
             <GridContainer columns={columns} rows={rows}>
-                <p data-pos='1,1'>{testValue}</p>
+                <p datapos='1,1'>{testValue}</p>
             </GridContainer>
         );
         const actuallyPositionValue = getAllByTestId("GridColumn")[1].children[1].textContent;
@@ -47,13 +47,13 @@ describe(GridContainer, () => {
         expect(invaliddata).toThrow(Error);
     });
 
-    it("grid throws if data-pos is invalid", () => {
+    it("grid throws if datapos is invalid", () => {
         const columns = 1;
         const rows = 1;
 
         const invaliddata = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='00'></p>
+                    <p datapos='00'></p>
                 </GridContainer>
             );
         };
@@ -66,8 +66,8 @@ describe(GridContainer, () => {
 
         const invaliddata = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='0,0'></p>
-                    <p data-pos='1,1'></p>
+                    <p datapos='0,0'></p>
+                    <p datapos='1,1'></p>
                 </GridContainer>
             );
         };
@@ -80,8 +80,8 @@ describe(GridContainer, () => {
 
         const invaliddata = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='0,0'></p>
-                    <p data-pos='0,0'></p>
+                    <p datapos='0,0'></p>
+                    <p datapos='0,0'></p>
                 </GridContainer>
             );
         };
@@ -94,7 +94,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='-1,0'></p>
+                    <p datapos='-1,0'></p>
                 </GridContainer>
             );
         };
@@ -107,7 +107,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos='0,-1'></p>
+                    <p datapos='0,-1'></p>
                 </GridContainer>
             );
         };
@@ -120,7 +120,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos={`${columns},0`}></p>
+                    <p datapos={`${columns},0`}></p>
                 </GridContainer>
             );
         };
@@ -133,7 +133,7 @@ describe(GridContainer, () => {
 
         const invalidposition = () =>{ render(
                 <GridContainer columns={columns} rows={rows}>
-                    <p data-pos={`0,${rows}`}></p>
+                    <p datapos={`0,${rows}`}></p>
                 </GridContainer>
             );
         };
@@ -143,18 +143,69 @@ describe(GridContainer, () => {
     it("grid item gets moved correctly", () => {
         const columns = 3;
         const rows = 3;
+        // Map as storage place
+        const testStorageDrag = new Map();
+        const testStorageDrop = new Map();
+        //const [bodyGridChildren, setBodyGridChildren] = React.useState(new Map());
+        const bodyGridChildren = new Map();
 
+        const TestComp = () => {
+            return(<p>test</p>);
+        };
+
+        //datapos={`${num},${num}`} data-testid={`component${num}`}
+        const changePositionOfElement = (oldPos, newPos) => {
+            console.log("Changing from", oldPos, "to", newPos);
+            
+            let oldElement = bodyGridChildren.get(oldPos);
+            let newElement = bodyGridChildren.get(newPos);
+    
+            bodyGridChildren.set(newPos, React.cloneElement((<div>{oldElement}</div>), {"datapos" : newPos}));
+            if(newElement){
+                bodyGridChildren.set(oldPos, React.cloneElement((<div>{newElement}</div>), {"datapos" : oldPos}));
+            }
+            else{
+                bodyGridChildren.set(oldPos, undefined);
+            }
+        };
+
+
+        bodyGridChildren.set('0,0', React.cloneElement(<div><TestComp/></div>, { "datapos" : '0,0', "data-testid": "component0" }));
+        bodyGridChildren.set('1,1', React.cloneElement(<div><TestComp/></div>, { "datapos" : '1,1', "data-testid": "component1" }));
+
+        
         const { getAllByTestId, getByTestId } = render(
-            <GridContainer columns={columns} rows={rows}>
-                <p data-pos='0,0' data-testid='component1'></p>
-                <p data-pos='1,1' data-testid='component2'></p>
+            <GridContainer columns={columns} rows={rows} onUpdate={changePositionOfElement}>
+                {Array.from(bodyGridChildren.values())}
             </GridContainer>
         );
-        const comp1Parent = getByTestId("component1").parentElement;
-        const comp2Parent = getByTestId("component2").parentElement;
-        expect(fireEvent.dragStart(comp1Parent, { target: comp1Parent })).toEqual(true);
-        expect(fireEvent.drop(comp2Parent, { target: comp2Parent })).toEqual(true);
+        const comp1Parent = getByTestId("component0").parentElement;
+        const comp2Parent = getByTestId("component1").parentElement;
+        
+        // https://stackoverflow.com/questions/54864280/how-to-mock-datatransfer-with-jest
+        // Mock of the drop Event
+        const testEventDrag = {
+            dataTransfer: {
+                setData: (key, value) => testStorageDrag.set(key, value),
+                getData: (key) => testStorageDrag.get(key),
+                clearData: () => testStorageDrag.clear()
+            },
+            target: comp1Parent
+        };
+        const testEventDrop = {
+            dataTransfer: {
+                setData: (key, value) => testStorageDrop.set(key, value),
+                getData: (key) => testStorageDrop.get(key),
+                clearData: () => testStorageDrop.clear()
+            },
+            target: comp2Parent
+        };
+        // remmeber to have 'and.callTrough()' to allow go trough the method
+        //jest.spyOn(testEventDrag.dataTransfer, 'getData').and.callThrough();
+        //spyOn(testEventDrop.dataTransfer, 'getData').and.callThrough();
+        expect(fireEvent.dragStart(comp1Parent, testEventDrag)).toEqual(true);
+        expect(fireEvent.drop(comp2Parent, testEventDrop)).toEqual(true);
         const movedComponet = getByTestId("component1");
-        expect(movedComponet).toHaveAttribute('data-pos', '1,1');
+        expect(movedComponet).toHaveAttribute('datapos', '1,1');
     });
 });

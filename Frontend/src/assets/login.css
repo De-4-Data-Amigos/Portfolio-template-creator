@@ -51,7 +51,7 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-
+    
     color: #ffffff;
     font-family: "JetBrainsMono Bold", monospace;
     text-transform: uppercase; 
@@ -59,16 +59,17 @@
 
 
 /* Styling for input fields */
-.input-field {
+.input-field-login {
   width: 100%;
-  padding: 2px;
-  margin: 2px 0;
+  padding: 15px;
+  margin: 6px 0;
   border: 1px solid #000000;
   border-radius: 100px;
+  font-family: "JetBrainsMono Bold", monospace;
   box-sizing: border-box;
-  font-size: 15px;
+  font-size: 18px;
   color: #000000;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255); 
 }
 
 /* Input group container */
@@ -93,6 +94,7 @@
 .checkbox-container {
   display: flex;
   align-items: center;
+  font-family: "JetBrainsMono Bold", monospace;
 }
 /* Checkbox and label group */
 .checkbox-group {
@@ -128,8 +130,9 @@
   align-items: center;
   border-radius: 5px;
   background: #183153;
-  font-family: "Montserrat", sans-serif;
+  font-family: "JetBrainsMono Bold", monospace;
   box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+  font-size: 15px;
   overflow: hidden;
   cursor: pointer;
   border: none;
@@ -196,31 +199,6 @@
   margin: 10px 0;
 }
 
-
-
-
-.remember-label {
-    font-size: 15px;
-    color: #000000;
- 
-}
-
-/* login button */
-.button {
-    width: 100%;
-    padding: 0.8em;
-    margin-top: 2em;
-    font-size: 1em;
-    color: white;
-    background-color: #0000009e;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #0d46cb;
-}
 
 
 /* Link group to arrange links side by side */

@@ -10,6 +10,9 @@ import EditorPage from './pages/Editorpage';
 import EditorLayout from './layouts/EditorLayout';
 import ContactPage from './pages/ContactPage';
 import PrivateRoute from './components/PrivateRoute';
+import { BackgroundProvider } from './components/BackgroundContext'; // Sørg for at stien er korrekt
+
+
 
 
 
@@ -51,7 +54,13 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route index element={<EditorPage />} />
+          <Route index element={
+            <BackgroundProvider>
+              <EditorPage />
+            </BackgroundProvider>
+                              
+            } />
+
         </Route>
       </>
     )
