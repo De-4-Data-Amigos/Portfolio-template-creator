@@ -14,7 +14,7 @@ function ContactPage() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (id === "email" && !emailPattern.test(value)) {
-      setErrors({ ...errors, email: "Email skal være gyldig" });
+      setErrors({ ...errors, email: "Email must be valid" });
     } else {
       setErrors({ ...errors, email: "" });
     }

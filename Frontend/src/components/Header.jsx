@@ -14,7 +14,7 @@ function Header({ loggedIn, logout }) {
       <nav className="NavBar">
         {/* Navigation links */}
         <a onClick={() => clickHandler("/")}>Home</a>
-        <a onClick={() => clickHandler("/editor")}>Editor</a>
+         {loggedIn && <a onClick={() => clickHandler("/editor")}>Editor</a>}
         {loggedIn ? (
           <a onClick={logout}>Logout</a>
         ) : (
