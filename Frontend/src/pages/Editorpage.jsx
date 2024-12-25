@@ -461,7 +461,7 @@ function EditorPage() {
 
             <FooterContainer linkMap={footerLinks} onUpdatelinks={updateFooterLinks}>
                 <GridContainer columns={footerColums} rows={footerRows} name={"footer"} style={{height: '100%', margin: 0}}              
-                onUpdate={changePositionOfElementInNavbarGrid}>
+                onUpdate={changePositionOfElementInFooterGrid}>
                     {footerGridChildren}
                 </GridContainer>
             </FooterContainer>
