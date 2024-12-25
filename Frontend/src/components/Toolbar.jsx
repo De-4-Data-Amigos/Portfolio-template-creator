@@ -4,6 +4,7 @@ import ChooseBackground from './ChooseBackground';
 import EditableTextInputField from './EditableTextInputField';
 import AddPicture from './AddPicture';
 import ComponentChooserModal from './ComponentChooserModal';
+import EditorLink from './EditorLink';
 
 
 function Toolbar({addComponent, onTextUpdate, children }){
@@ -14,6 +15,14 @@ function Toolbar({addComponent, onTextUpdate, children }){
   const addText = () => {
     const textComponent = <EditableTextInputField onUpdate={onTextUpdate}>New Text</EditableTextInputField>;
     setComponentToAdd(textComponent);
+    setShowComponentChooser(true);
+  };
+
+  const addLink = () =>{
+    const text = prompt("Write the text to be shown:");
+    const href = prompt("Write the link/href (URL), that it will it link to:");
+    const linkComponent = <EditorLink text={text} href={href} />;
+    setComponentToAdd(linkComponent);
     setShowComponentChooser(true);
   };
 
@@ -35,6 +44,10 @@ function Toolbar({addComponent, onTextUpdate, children }){
         <div className="toolbar-item" onClick={addText}>
           <div className="toolbar-icon">T</div>
           <div className="toolbar-label">Text</div>
+        </div>
+        <div className="toolbar-item" onClick={addLink}>
+          <div className="toolbar-icon">A</div>
+          <div className="toolbar-label">Link</div>
         </div>
         <div className="toolbar-item" onClick={addPicture}>  
           <div className="toolbar-icon">🖼️</div>
