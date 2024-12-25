@@ -444,9 +444,6 @@ function EditorPage() {
             </NavbarContainer>
             {/* Grid-container sektion */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column", marginTop: "30px" }}>
-                <div>
-                    <button onClick={handleAddLink}>Tilføj navbar-link</button>
-                </div>
                 <div style={{ marginTop: "20px", flex: 1 }}>
                     {/* Baggrundskontainer for grid */}
                     <div style={getBackgroundStyle()}>
@@ -465,10 +462,6 @@ function EditorPage() {
                     {footerGridChildren}
                 </GridContainer>
             </FooterContainer>
-            <div>
-                    <button onClick={handleAddFooterLink}>Tilføj footer-link</button>
-                </div>
-
 
             {/* Divider / Space */}
             <div style={{ paddingTop: "20vh"}} ></div>
