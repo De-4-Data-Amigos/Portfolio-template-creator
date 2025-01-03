@@ -51,3 +51,21 @@ As a user, I want the flexibility to easily update my portfolio when I want to c
 - Given I want flexibility in updating my portfolio,
 - When I open the editor,
 -Then I should be able to easily update or change content on my portfolio at any time, or alternatively, choose a static version of my portfolio that rarely needs updating, based on my needs.
+
+## 7.	User Story: 
+As a user, I want to be able to create an account on the platform, so that I can access personalized features and save my progress and preferences.
+
+### Acceptance criteria
+#### Register User
+- Given I am a visitor on the platform,
+- When I navigate to the "Sign Up" section,
+- Then I should be able to enter my details (such as email, username, and password) and create an account.
+
+## 8.	User Story: 
+As a user, I want to be able to easily contact support from within the platform, so that I can get help with any issues or questions I have quickly.
+
+### Acceptance criteria
+#### Contact Support
+- Given I am a user experiencing issues or having questions,
+- When I navigate to the "Contact" section in the platform,
+- Then I should be able to access a form to send a message directly to support.
