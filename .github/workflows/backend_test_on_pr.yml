@@ -1,0 +1,30 @@
+name: Maven Backend Test on PR
+
+on: [pull_request]
+
+jobs: 
+    test:
+        runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:latest
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: test_db
+                ports:
+                    - 5234:5234
+                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Setup JDK
+              uses: actions/setup-java@v4
+              with:
+                java-version: "17"
+                distribution: "temurin"
+            
+            - name: Build and run tests
+              run: mvn -B clean install --file Backend/pom.xml

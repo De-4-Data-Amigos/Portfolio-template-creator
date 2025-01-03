@@ -1,0 +1,78 @@
+#root {
+  /*
+  max-width: 1280px;
+  margin: 0 auto;
+  */
+  margin: var(--margin-height) var(--margin-width);
+
+  --margin-height:  2.5vh;
+  --margin-width:  2.5vw;
+
+  --max-width: calc(100vw - calc(var(--margin-width) * 2));
+  --max-height: calc(100vh - calc(var(--margin-height) * 2));
+
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+@font-face {
+  font-family: "JetBrainsMono";
+  src: local("JetBrainsMono"), url(https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "JetBrainsMono Bold";
+  src: local("JetBrainsMono Bold"), url(https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts/patched-fonts/JetBrainsMono/Ligatures/Bold/JetBrainsMonoNerdFont-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "JetBrainsMono Italic";
+  src: local("JetBrainsMono Italic"), url(https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts/patched-fonts/JetBrainsMono/Ligatures/Italic/JetBrainsMonoNerdFont-Italic.ttf) format("truetype");
+}
+
+.MainLayout {
+  min-height: 97.5vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  justify-content: space-between;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+

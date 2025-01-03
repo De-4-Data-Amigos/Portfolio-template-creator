@@ -1,0 +1,1 @@
+This folder is meant to contain all documentation for, both frontend and backend, and different models and diagrams.

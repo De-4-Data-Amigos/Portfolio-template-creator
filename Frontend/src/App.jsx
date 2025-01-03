@@ -1,35 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './assets/App.css'
+import MainLayout from './layouts/MainLayout';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import Frontpage from './pages/Frontpage';
+import TemplateSuggestion from './pages/TemplateSuggestion';
+import { useState } from 'react';
+import Login from './pages/Login';
+import SignUpPage from './pages/SignUp';
+import EditorPage from './pages/Editorpage';
+import EditorLayout from './layouts/EditorLayout';
+import ContactPage from './pages/ContactPage';
+import PrivateRoute from './components/PrivateRoute';
+import { BackgroundProvider } from './components/BackgroundContext'; // Sørg for at stien er korrekt
+
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const logout = () => {
+    setLoggedIn(false);  // Sætter loggedIn til false
+  }
+
+  const login = () => {
+    setLoggedIn(true);  // Sætter loggedIn til true efter succesfuldt login
+  }
+  const routes = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+         <Route path="/" element={<MainLayout loggedIn={loggedIn} logout={logout} />}>
+          <Route index element= {<Frontpage/>} />
+          <Route path="template-suggestion" element={<PrivateRoute loggedIn={loggedIn}>
+            <TemplateSuggestion />
+            </PrivateRoute>} />
+          <Route path="*" element={<p>Page Not Found</p>} /> 
+          <Route path="login" element={<Login onLogin={login} />} />
+          <Route path="registration" element={<SignUpPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          
+
+          { 
+            /* Leave for now, to see how to do different routing things
+            <Route path="about" element={<About/>}/>
+            Remember to add links to navbar as well
+            */
+          }
+        </Route>
+        <Route
+          path="/editor"element={
+            <PrivateRoute loggedIn={loggedIn}>
+            <EditorLayout loggedIn={loggedIn} logout={logout} />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={
+            <BackgroundProvider>
+              <EditorPage />
+            </BackgroundProvider>
+                              
+            } />
+
+        </Route>
+      </>
+    )
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <RouterProvider router={routes} />
+  );
 }
 
 export default App
