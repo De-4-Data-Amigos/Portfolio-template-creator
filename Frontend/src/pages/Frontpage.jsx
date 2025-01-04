@@ -9,25 +9,25 @@ const Frontpage = () => {
   return (
     <div className="frontpage" style={{ backgroundImage: `url(${dameImage})` }}>
       <div className="content-box">
-        <h1 className="main-header">Lav nemt din egen professionelle hjemmeside</h1>
+        <h1 className="main-header">Easily create your own professional website</h1>
         
         <div className="section">
-          <h2 className="sub-header">Nemt træk og placer overalt!</h2>
-          <p>Tilpas din hjemmeside med lige præcis hvad DU vil!</p>
+          <h2 className="sub-header">Easy drag-and-drop anywhere!</h2>
+          <p>Customize your website with exactly what YOU want!</p>
         </div>
         
         <div className="section">
-          <h2 className="sub-header">Dit eget domæne</h2>
-          <p>Du får dit helt eget personlige domæne, så din hjemmeside tilhører 100% dig!</p>
+          <h2 className="sub-header">Your own domain</h2>
+          <p>You get your very own personal domain, making your website 100% yours!</p>
         </div>
         
         <div className="section">
-          <h2 className="sub-header">Sikker hosting</h2>
-          <p>Som kunde hos os er du garanteret at din personlige hjemmeside altid er tilgængelig!</p>
+          <h2 className="sub-header">Secure hosting</h2>
+          <p>As our customer, you are guaranteed that your personal website is always available!</p>
         </div>
         
         <Link to="/editor" className="frontpage-button">
-          <span>Kom i gang!</span>
+          <span>Get started!</span>
         </Link>
       </div>
     </div>
@@ -35,3 +35,4 @@ const Frontpage = () => {
 };
 
 export default Frontpage;
+
