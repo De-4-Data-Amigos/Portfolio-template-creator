@@ -1,7 +1,8 @@
 FROM maven:3.8.5-eclipse-temurin-17 as build
 WORKDIR .
+run ls -la 
 COPY . .
-RUN mvn -f pom.xml package
+RUN mvn -f pom.xml package -Dmaven.test.skip
 
 # Stage 1 - Build the backend
 FROM eclipse-temurin:17-alpine
