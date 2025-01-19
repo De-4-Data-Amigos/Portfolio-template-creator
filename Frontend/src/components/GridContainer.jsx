@@ -8,15 +8,15 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
     //console.log('columns: ', columns, 'rows: ',  rows, 'children: ', children);   
     const amountOfColumns = columns;
     const amountOfRows = rows;
-    const emptyElement = (<div data-grid-empty={true}></div>);
+    const emptyElement = (<div data-grid-empty={true}></div>); //checks if a element that has this attribute is empty
 
     const [childrenArray, setChildrenArray] = useState(React.Children.toArray(children));
 
     const amountOfChildren = childrenArray.length;
     const maxAmountOfChildren = amountOfColumns * amountOfRows;
     
-    const [selectedGridPos, setSelectedGridPos] = useState(null);
-    const [targetGridPos, setTargetGridPos] = useState(null);
+    const [selectedGridPos, setSelectedGridPos] = useState(null); //when dragging a element
+    const [targetGridPos, setTargetGridPos] = useState(null); //when drag and dropping a element
 
     useEffect(() => {
         setChildrenArray(React.Children.toArray(children));
@@ -59,16 +59,16 @@ function GridContainer({columns, rows, name, onUpdate, children, style}) {
     
     const onDragStart = (e) => {
         //console.log("onDragStart", e);
-        const dragElement = e.target.children[0];
-        const isEmpty = !!dragElement.attributes["data-grid-empty"] && Boolean(dragElement.attributes["data-grid-empty"].value);
+        const dragElement = e.target.children[0]; // find the element that is being dragged
+        const isEmpty = !!dragElement.attributes["data-grid-empty"] && Boolean(dragElement.attributes["data-grid-empty"].value);  // check if the element is empty
         if(isEmpty){
             e.preventDefault();
             return;
         }
-        const startDragPos = dragElement.attributes["datapos"].value;
+        const startDragPos = dragElement.attributes["datapos"].value;  // get the position of the element
         //setSelectedGridPos(startDragPos);
-        e.dataTransfer.clearData();
-        e.dataTransfer.setData("text/plain", `${startDragPos}-${name}`);
+        e.dataTransfer.clearData();  // clear the data
+        e.dataTransfer.setData("text/plain", `${startDragPos}-${name}`);  // set the data
     };
     const onDrop = (e) => {
         //console.log("onDrop", e);
